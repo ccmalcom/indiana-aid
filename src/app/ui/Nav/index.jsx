@@ -21,6 +21,8 @@ export default function Nav() {
                     <a href="/donate" className="p-4">Donate</a>
                     <a href="/resources" className="p-4">Resources</a>
                     <a href="/contact" className="p-4">Contact</a>
+                    {/* translate button */}
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Translate</button>
                 </div>
             </nav>
 
