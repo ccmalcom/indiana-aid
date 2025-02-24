@@ -3,9 +3,9 @@ import Hero from "./ui/Hero";
 
 export default function Home() {
   return (
-    <div id='fullView' className="h-screen bg-blue-500" >
+    <div id='fullView' className="h-screen bg-sky-500" >
 
-      <Nav />
+      {/* <Nav /> */}
       <Hero />
       <h1 >cards</h1>
       <h1 >about and updates </h1>
