@@ -13,9 +13,9 @@ import Image from 'next/image'
 export default function Nav() {
     return (
         <div>
-            <nav className="flex justify-between items-center h-16 bg-blue text-white relative shadow-sm font-mono" role="navigation">
+            <nav className="flex justify-between items-center h-20 bg-blue text-white relative shadow-sm font-mono" role="navigation">
                 {/* logo png */}
-                <Image src="/logo_white.png" alt="logo" width={100} height={100} />
+                <Image src="/logo_white.png" alt="logo" width={150} height={150} className='ml-12'/>
                 <div className="px-4 cursor-pointer md:hidden">Menu</div>
                 <div className="pr-8 md:block hidden">
                     <a href="/" className="p-4">Home</a>
