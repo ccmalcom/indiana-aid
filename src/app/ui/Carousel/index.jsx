@@ -20,7 +20,7 @@ export default function Carousel({images}) {
                     {/* Map through the images and create a slide for each */}
                     {images.map((image, index) => (
                         <div key={index} className="embla__slide">
-                            <img src={image.src} alt={`Slide ${index + 1}`} />
+                            <img className="" src={image.src} alt={`Slide ${index + 1}`} />
                         </div>
                     ))}
                 </div>
