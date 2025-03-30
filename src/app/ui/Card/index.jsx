@@ -8,7 +8,7 @@ export default function Card(input) {
 
 
         return (
-            <div id='card-container' className={`w-${width} h-${height} bg-blue m-4 p-4 text-white flex flex-col items-center justify-center`}>
+            <div id='card-container' className={`w-${width} h-${height} bg-blue m-4 p-4 text-white text-center`}>
                 <h1 className='text-2xl'>{title}</h1>
                 <br />
                 <p>{text}</p>

@@ -3,7 +3,7 @@ import Card from "./ui/Card";
 
 export default function Home() {
   return (
-    <div id='fullView' className="h-screen" >
+    <div id='fullView' className="h-screen w-[90vw] md:w-[80vw] m-auto" >
 
       <Hero />
 
@@ -13,7 +13,7 @@ export default function Home() {
             <Card title='Stay in the Know' width='1/3' height='1/3'/>
       </div>
 
-      <div className="flex justify-center align-center">
+      <div className="grid grid-cols-2 gap-4">
           <Card title='At A Glance' width='1/2' height='1/2'
         text='Indiana AID (Assistance to Immigrants in Detention) is a volunteer group that supports individuals detained by ICE in Indiana by bearing witness to their experiences through visits, offering information, and providing resources to them and their families.
         
