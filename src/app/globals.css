@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.clip-path-triangle {
+  clip-path: polygon(0 100%, 100% 0, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+.hero {
+  background-image: linear-gradient(rgba(79, 74, 81, 0.9), rgba(79, 74, 81, 0.9)), url(/sampleBg.jpeg)
+}
