@@ -1,4 +1,4 @@
-
+//contact form should be email to the organization
 
 export default function Contact() {
     return (
