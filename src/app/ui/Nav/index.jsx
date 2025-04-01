@@ -13,7 +13,7 @@ import Image from 'next/image'
 export default function Nav() {
     return (
         <div>
-            <nav className="flex justify-between items-center h-20 bg-blue text-white relative shadow-sm font-mono" role="navigation">
+            <nav className="flex justify-between items-center h-20 bg-blue text-white text-lg relative shadow-sm font-mono" role="navigation">
                 {/* logo png */}
                 <Image src="/logo_white.png" alt="logo" width={150} height={150} className='ml-12'/>
                 <div className="px-4 cursor-pointer md:hidden">Menu</div>
