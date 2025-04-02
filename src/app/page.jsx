@@ -1,5 +1,4 @@
 import Hero from "./ui/Hero";
-import Card from "./ui/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
@@ -50,14 +49,20 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-          <Card title='At A Glance' width='1/2' height='1/2'
-        text='Indiana AID (Assistance to Immigrants in Detention) is a volunteer group that supports individuals detained by ICE in Indiana by bearing witness to their experiences through visits, offering information, and providing resources to them and their families.
-        
-        We have a group that travels to the Clay County jail once per month for spiritual care, as well as a virtual visitation program through which we offer to pair every immigrant who arrives there with a visitation partner. 
-        
-        We also facilitate connections between immigrants and various service providers in our region, provide commissary support so that the people can buy food and medicine, and offer general updates to the public about developments in immigration detention in our state. '
-          />
-          <Card title='Recent Updates' width='1/2' height='1/2'/>
+        <div className=" bg-blue m-4 p-4 text-white text-center">
+          <h1 className="text-3xl pb-4">At A Glance</h1>
+          <p>Indiana AID (Assistance to Immigrants in Detention) is a volunteer group that supports individuals detained by ICE in Indiana by bearing witness to their experiences through visits, offering information, and providing resources to them and their families.</p>
+          <br />
+          <p>We have a group that travels to the Clay County jail once per month for spiritual care, as well as a virtual visitation program through which we offer to pair every immigrant who arrives there with a visitation partner. </p>
+          <br />
+          <p>We also facilitate connections between immigrants and various service providers in our region, provide commissary support so that the people can buy food and medicine, and offer general updates to the public about developments in immigration detention in our state. </p>
+          <br />
+          <p>For more information, please click <a href="/about">here</a></p>
+        </div>
+          
+        <div className=" bg-blue m-4 p-4 text-white text-center">
+          <h1>Recent Updates</h1>
+          </div>
       </div>
     </div>
   );
