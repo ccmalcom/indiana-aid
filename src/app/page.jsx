@@ -7,7 +7,7 @@ export default function Home() {
   const currentIssue = 'Current Issue: September 2023';
 
   return (
-    <div id='fullView' className="h-screen w-[90vw] md:w-[80vw] m-auto" >
+    <div id='fullView' className="min-h-screen w-[90vw] md:w-[80vw] m-auto" >
 
       <Hero />
 

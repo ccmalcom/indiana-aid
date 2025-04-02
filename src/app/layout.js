@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./ui/Nav";
+import Footer from "./ui/Footer";
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -27,10 +28,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100vh] flex flex-col`}
       >
         <Nav />
-        {children}
+        <main className="flex-grow">
+
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
