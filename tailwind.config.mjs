@@ -13,7 +13,9 @@ export default {
         foreground: "var(--foreground)",
         'blue': '#0D1D4F',
         'yellow': '#FFC857',
-        'yellow-dark': '#FF9A00',
+        'yellow-dark': '#E7AE00',
+        'red': '#C33149',
+        'red-dark': '#8C2234',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],

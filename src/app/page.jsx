@@ -19,7 +19,7 @@ export default function Home() {
           </div>
           <div className="card-buttons flex flex-col items-center justify-center mb-4">
             <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 my-4  rounded ">Read Latest Release</button>
-            <a href="" className="hover:text-yellow">Subscribe</a>
+            <a href="/resources/newsletter" className="hover:text-yellow">Subscribe</a>
           </div>
         </div>
         <div id='connect-card' className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
@@ -42,7 +42,7 @@ export default function Home() {
           <h1 className='text-2xl'>Stay in the Know</h1>
           <div className="flex flex-col items-center justify-center">
 
-            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 mt-4 mx-2 rounded ">Find Help</button>
+            <a href="https://www.immigrationadvocates.org/legaldirectory/" target="_blank" rel="noopener noreferrer"><button className="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 mt-4 mx-2 rounded ">Find Help</button></a>
             <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 mt-4 mx-2  rounded ">Know Your Rights</button>
           </div>
         </div>
