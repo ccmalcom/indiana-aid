@@ -1,16 +1,52 @@
 import Hero from "./ui/Hero";
 import Card from "./ui/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 export default function Home() {
+
+  const currentIssue = 'Current Issue: September 2023';
+
   return (
     <div id='fullView' className="h-screen w-[90vw] md:w-[80vw] m-auto" >
 
       <Hero />
 
       <div className='flex align-center justify-center '>
-            <Card title='Monthly Newsletter' width='1/3' height='1/3'/>
-            <Card title='Connect with Us' width='1/3' height='1/3'/>
-            <Card title='Stay in the Know' width='1/3' height='1/3'/>
+        <div id='newsletter-card' className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+          <div className="card-header">
+            <h1 className='text-2xl'>Monthly Newsletter</h1>
+          </div>
+          <div className="card-buttons flex flex-col items-center justify-center mb-4">
+            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 my-4  rounded ">Read Latest Release</button>
+            <a href="" className="hover:text-yellow">Subscribe</a>
+          </div>
+        </div>
+        <div id='connect-card' className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+          <div className="card-header">
+            <h1 className='text-2xl'>Connect with Us</h1>
+          </div>
+          <div className="card-buttons flex flex-col items-center justify-center">
+              <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 my-4 mx-2  rounded ">Join Mailing List</button>
+            <div className="social-links flex flex-row mb-4">
+              <a href="https://www.instagram.com/indianaaid/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-yellow">
+              <FontAwesomeIcon icon={faInstagram} />
+              </a>
+              <a href="https://www.facebook.com/indianaAID1" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-yellow">
+              <FontAwesomeIcon icon={faFacebook} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id='knowledge-card' className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+          <h1 className='text-2xl'>Stay in the Know</h1>
+          <div className="flex flex-col items-center justify-center">
+
+            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 mt-4 mx-2 rounded ">Find Help</button>
+            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 mt-4 mx-2  rounded ">Know Your Rights</button>
+          </div>
+        </div>
+            
       </div>
 
       <div className="grid grid-cols-2 gap-4">
