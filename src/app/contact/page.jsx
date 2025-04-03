@@ -1,31 +1,33 @@
 'use client';
-import React, { use, useRef } from 'react';
-import emailjs from '@emailjs/browser';
-
-
-
 
 export default function Contact() {
 
-    const serviceKey = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_KEY;
-    const templateKey = process.env.NEXT_PUBLIC_EMAIL_JS_CONTACT_TEMPLATE_KEY;
-    const publicKey = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
-    console.log(serviceKey, templateKey, publicKey);
 
-    const form = useRef();
     
-    const sendEmail = (e) => {
+    const sendEmail = async (e) => {
         e.preventDefault();
 
-        emailjs.sendForm(serviceKey, templateKey, form.current, publicKey)
-            .then((result) => {
-                console.log(result.message);
-                alert('Message sent successfully!');
-                form.current.reset(); // Reset the form after successful submission
-            }, (error) => {
-                console.log(error.message);
-                alert('Failed to send message. Please try again later.');
-            });
+    const formData ={
+        name: e.target.name.value,
+        email: e.target.email.value,
+        message: e.target.message.value
+    }
+    const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    });
+    
+    const result = await res.json();
+    
+    if (result.success) {
+        alert('Message sent successfully!');
+        e.target.reset();
+    } else {
+        alert('Oops! Failed to send message.');
+    }
     }
 
     return (
@@ -35,7 +37,7 @@ export default function Contact() {
                     <h1 className='text-2xl'>Contact Us</h1>
                     <p>Have a question? Want to get involved? Send us a message!</p>
                 </div>
-                <form ref={form} onSubmit={sendEmail}>
+                <form onSubmit={sendEmail}>
                     <div className="form-group flex w-full gap-4 mb-4">
                         <div className="flex flex-col flex-1">
                             <label htmlFor='name' className="mb-2 font-semibold">Name:</label>
