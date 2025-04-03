@@ -1,4 +1,4 @@
-const sampleBg = 'sampleBg.jpg'; // Placeholder for the background image
+import Link from "next/link";
 
 export default function Hero() {
     return (
@@ -8,12 +8,12 @@ export default function Hero() {
                 <p className="text-3xl text-white ">Providing Advocacy, Resources, and Direct Aid to Immigrants and their families impacted by ICE detention in Indiana.</p>
             </div>
             <div id='right-hero' className="relative z-10 col-span-1 flex flex-col items-center justify-center">
-                <a href="/donate">
+                <Link href="/donate">
                 <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 rounded">Donate</button>
-                </a>
-                <a href="/volunteer">
+                </Link>
+                <Link href="/volunteer">
                 <button className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 my-4  rounded">Volunteer</button>
-                </a>
+                </Link>
             </div>
         </div>
     );

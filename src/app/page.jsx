@@ -1,6 +1,8 @@
 import Hero from "./ui/Hero";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import Updates from "./ui/Updates";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -16,8 +18,8 @@ export default function Home() {
             <h1 className='text-2xl'>Monthly Newsletter</h1>
           </div>
           <div className="card-buttons flex flex-col items-center justify-center mb-4">
-            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 my-4  rounded ">Read Latest Release</button>
-            <a href="/resources/newsletter" className="hover:text-yellow">Subscribe</a>
+            <button className="bg-yellow hover:bg-yellow-dark text-black font-bold py-2 px-4 my-4  rounded ">Read Latest Release</button>
+            <Link href="/resources/newsletter" className="hover:text-yellow">Subscribe</Link>
           </div>
         </div>
         <div id='connect-card' className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
@@ -25,7 +27,7 @@ export default function Home() {
             <h1 className='text-2xl'>Connect with Us</h1>
           </div>
           <div className="card-buttons flex flex-col items-center justify-center">
-              <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 my-4 mx-2  rounded ">Join Mailing List</button>
+              <button className="bg-yellow hover:bg-yellow-dark text-black font-bold py-2 px-4 my-4 mx-2  rounded ">Join Mailing List</button>
             <div className="social-links flex flex-row mb-4">
               <a href="https://www.instagram.com/indianaaid/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-yellow">
               <FontAwesomeIcon icon={faInstagram} />
@@ -41,7 +43,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center">
 
             <a href="https://www.immigrationadvocates.org/legaldirectory/" target="_blank" rel="noopener noreferrer"><button className="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 mt-4 mx-2 rounded ">Find Help</button></a>
-            <button className="bg-yellow hover:bg-yellow-dark text-white font-bold py-2 px-4 mt-4 mx-2  rounded ">Know Your Rights</button>
+            <button className="bg-yellow hover:bg-yellow-dark text-black font-bold py-2 px-4 mt-4 mx-2  rounded ">Know Your Rights</button>
           </div>
         </div>
             
@@ -56,13 +58,13 @@ export default function Home() {
           <br />
           <p>We also facilitate connections between immigrants and various service providers in our region, provide commissary support so that the people can buy food and medicine, and offer general updates to the public about developments in immigration detention in our state. </p>
           <br />
-          <p>For more information, please click <a href="/about">here</a></p>
+          <p>For more information, please click <Link href="/about">here</Link></p>
         </div>
           
         <div className=" bg-blue m-4 p-4 text-white text-center">
-          <h1>Recent Updates</h1>
+          <h1 className="text-3xl mb-4">Recent Updates</h1>
           {/* eventually, this will integrate with scraper to pull posts from instagram & facebook as links: title | date */}
-          <p>Indiana AID is currently working on a new website to better serve our community. Stay tuned for updates!</p>
+          <Updates />
           </div>
       </div>
     </div>
