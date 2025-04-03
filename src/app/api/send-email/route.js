@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import EmailTemplate from '@/app/components/email-template';
+import ContactEmailTemplate from '@/app/components/contact-email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -12,7 +12,7 @@ export async function POST(request) {
             to: 'chasecmalcom@gmail.com',
             subject: `New Contact Form Submission - ${name}`,
             reply_to: email,
-            react: EmailTemplate({ name, email, message }),
+            react: ContactEmailTemplate({ name, email, message }),
         }
         return Response.json({ success: true, testData });
     }
@@ -23,7 +23,7 @@ export async function POST(request) {
             to: 'chasecmalcom@gmail.com',
             subject: `New Contact Form Submission - ${name}`,
             reply_to: email,
-            react: EmailTemplate({ name, email, message }),
+            react: ContactEmailTemplate({ name, email, message }),
         });
 
         return Response.json({ success: true, data });
