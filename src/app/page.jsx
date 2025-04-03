@@ -62,6 +62,8 @@ export default function Home() {
           
         <div className=" bg-blue m-4 p-4 text-white text-center">
           <h1>Recent Updates</h1>
+          {/* eventually, this will integrate with scraper to pull posts from instagram & facebook as links: title | date */}
+          <p>Indiana AID is currently working on a new website to better serve our community. Stay tuned for updates!</p>
           </div>
       </div>
     </div>
