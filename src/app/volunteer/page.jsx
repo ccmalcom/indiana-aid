@@ -1,4 +1,42 @@
+'use client';
+
 export default function Volunteer() {
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const formData = {
+			name: e.target.name.value,
+			email: e.target.email.value,
+			phone: e.target.phone.value,
+			areasOfInterest: Array.from(
+				e.target.querySelectorAll('input[name="interest"]:checked')
+			).map((checkbox) => checkbox.value),
+			additionalInfo: e.target.additional_info.value,
+		};
+
+		try {
+			const res = await fetch('/api/volunteer-signup', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const result = await res.json();
+
+			if (result.success) {
+				alert('Thank you for signing up to volunteer!');
+				e.target.reset();
+			} else {
+				alert(result.error || 'Unknown error occurred.');
+			}
+		} catch (error) {
+			console.error(error);
+			alert('Network error. Please try again later.');
+		}
+	};
+
 	return (
 		<div className="viewport ">
 			<div className="header w-[80vw] mx-auto flex flex-col items-center">
@@ -26,7 +64,7 @@ export default function Volunteer() {
 					possible.
 				</p>
 				{/* name, email, phone (opt), areas of interest (multi picklist), Additional info (text area) */}
-				<form className="w-full max-w-lg mt-4">
+				<form className="w-full max-w-lg mt-4" onSubmit={handleSubmit}>
 					<div className="form-group mb-4">
 						<label htmlFor="name" className="block text-sm font-semibold mb-2">
 							Name: <span className="text-red">*</span>
