@@ -66,7 +66,7 @@ export default function Contact() {
 				</div>
 			) : success ? (
 				<div className="flex flex-col items-center justify-center bg-blue text-white p-4 w-[66%] m-auto mt-4 rounded-lg shadow-lg min-h-[50vh] text-center">
-					<h2 className="text-xl text-yellow font-semibold">
+					<h2 className="text-xl text-yellow font-heading">
 						🎉 Message sent successfully!
 					</h2>
 					<p>Thanks for reaching out. We'll get back to you soon.</p>
