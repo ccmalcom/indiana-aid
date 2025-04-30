@@ -12,3 +12,14 @@
 --(maybe) brevo
 
 -Suuprabase (postgres + auth)
+
+notes:
+virtual weekly visits
+monthly in-person jail visits
+administrative tasks
+social media
+partner family support
+court observation/court accompaniment
+transportation
+fundraising
+advocacy/legislative/mezz-macro focus
