@@ -39,24 +39,68 @@ export default function Volunteer() {
 
 	return (
 		<div className="viewport ">
-			<div className="header w-[80vw] mx-auto flex flex-col items-center">
-				<h1 className="text-4xl font-bold mt-4">Make a difference</h1>
-				<br />
-				<p>
-					Indiana AID (Assistance to Immigrants in Detention) is a volunteer
-					group that supports individuals detained by ICE in Indiana by bearing
-					witness to their experiences through visits, offering information, and
-					providing resources to them and their families. We have a group that
-					travels to the Clay County jail once per month for spiritual care, as
-					well as a virtual visitation program through which we offer to pair
-					every immigrant who arrives there with a visitation partner. We also
-					facilitate connections between immigrants and various service
-					providers in our region, provide commissary support so that the people
-					can buy food and medicine, and offer general updates to the public
-					about developments in immigration detention in our state.
-				</p>
+			<div className="header w-[80vw] mx-auto flex flex-col items-center py-12">
+				<h1 className="text-3xl text-center mb-4">
+					Indiana AID is a volunteer group that supports individuals detained by
+					ICE in Indiana by bearing witness to their experiences through visits,
+					offering information, and providing resources to them and their
+					families. 
+				</h1>
 			</div>
-			<div className="volunteer-form w-[66vw] mx-auto flex flex-col items-center bg-blue rounded-2xl shadow-lg p-8 m-4 text-white">
+			<div className="volunteer-info my-12 text-center px-4">
+				<h2 className="text-2xl font-bold text-blue-900 mb-2">
+					Volunteer with Us
+				</h2>
+				<p className="mb-6">
+					If you are interested in volunteering with Indiana AID, please fill
+					out our{' '}
+					<a href="#volunteer-form" className="text-blue-700 underline">
+						volunteer sign-up form
+					</a>
+					.
+				</p>
+				<div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+					{[
+						{
+							title: 'Virtual Visitation',
+							img: '/virtual-visitation.jpg',
+							alt: 'Virtual Visitation',
+						},
+						{
+							title: 'Transportation & Translation',
+							img: '/transport-translate.jpg',
+							alt: 'Transportation and Translation',
+						},
+						{
+							title: 'In-Person Visitation',
+							img: '/circle-placeholder.svg',
+							alt: 'In-Person Visitation',
+						},
+						{
+							title: 'Community Integration Partnerships',
+							img: '/circle-placeholder.svg',
+							alt: 'Community Integration',
+						},
+					].map(({ title, img, alt }) => (
+						<div key={title} className="flex flex-col items-center space-y-2">
+							<div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+								<img
+									src={img}
+									alt={alt}
+									className="object-cover w-full h-full"
+								/>
+							</div>
+							<h3 className="font-semibold text-black text-center">{title}</h3>
+							<button className="text-blue-700 text-sm hover:underline">
+								+ Learn More
+							</button>
+						</div>
+					))}
+				</div>
+			</div>
+			<div
+				id="volunteer-form"
+				className="volunteer-form w-[66vw] mx-auto flex flex-col items-center bg-blue rounded-2xl shadow-lg p-8 m-4 text-white">
 				<h2 className="text-2xl font-semibold">Sign Up to Volunteer</h2>
 				<p className="m-2 text-center">
 					Please fill out the form below to express your interest in
