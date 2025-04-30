@@ -47,10 +47,8 @@ export default function Volunteer() {
 					families. 
 				</h1>
 			</div>
-			<div className="volunteer-info my-12 text-center px-4">
-				<h2 className="text-2xl font-bold text-blue-900 mb-2">
-					Volunteer with Us
-				</h2>
+			<div className="volunteer-info mb-20 text-center px-4">
+				<h2 className="text-3xl font-bold text-blue mb-2">Volunteer with Us</h2>
 				<p className="mb-6">
 					If you are interested in volunteering with Indiana AID, please fill
 					out our{' '}
@@ -108,46 +106,54 @@ export default function Volunteer() {
 					possible.
 				</p>
 				{/* name, email, phone (opt), areas of interest (multi picklist), Additional info (text area) */}
-				<form className="w-full max-w-lg mt-4" onSubmit={handleSubmit}>
-					<div className="form-group mb-4">
-						<label htmlFor="name" className="block text-sm font-semibold mb-2">
-							Name: <span className="text-red">*</span>
-						</label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							required
-							className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
-							placeholder="Your name"
-						/>
-					</div>
+				<form className="w-full px-8 mt-4" onSubmit={handleSubmit}>
+					<div className="flex flex-col md:flex-row gap-4 mb-4">
+						<div className="form-group w-full md:w-1/3">
+							<label
+								htmlFor="name"
+								className="block text-sm font-semibold mb-2">
+								Name: <span className="text-red">*</span>
+							</label>
+							<input
+								type="text"
+								id="name"
+								name="name"
+								required
+								className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+								placeholder="Your name"
+							/>
+						</div>
 
-					<div className="form-group mb-4">
-						<label htmlFor="email" className="block text-sm font-semibold mb-2">
-							Email: <span className="text-red">*</span>
-						</label>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							required
-							className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
-							placeholder="yourname@email.com"
-						/>
-					</div>
+						<div className="form-group w-full md:w-1/3">
+							<label
+								htmlFor="email"
+								className="block text-sm font-semibold mb-2">
+								Email: <span className="text-red">*</span>
+							</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								required
+								className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+								placeholder="yourname@email.com"
+							/>
+						</div>
 
-					<div className="form-group mb-4">
-						<label htmlFor="phone" className="block text-sm font-semibold mb-2">
-							Phone: <span className="text-gray">(optional)</span>
-						</label>
-						<input
-							type="tel"
-							id="phone"
-							name="phone"
-							className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
-							placeholder="(123) 456-7890"
-						/>
+						<div className="form-group w-full md:w-1/3">
+							<label
+								htmlFor="phone"
+								className="block text-sm font-semibold mb-2">
+								Phone: <span className="text-gray">(optional)</span>
+							</label>
+							<input
+								type="tel"
+								id="phone"
+								name="phone"
+								className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+								placeholder="(123) 456-7890"
+							/>
+						</div>
 					</div>
 
 					<fieldset className="form-group mb-4 border rounded-lg p-4 border-gray-300">
