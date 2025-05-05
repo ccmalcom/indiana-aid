@@ -37,6 +37,18 @@ export default function Volunteer() {
 		}
 	};
 
+	const areasOfInterest = [
+		'virtual weekly visits',
+		'monthly in-person jail visits',
+		'administrative tasks',
+		'social media',
+		'partner family support',
+		'court observation/court accompaniment',
+		'transportation',
+		'fundraising',
+		'advocacy/legislative/mezz-macro focus',
+	];
+
 	return (
 		<div className="viewport ">
 			<div className="header w-[80vw] mx-auto flex flex-col items-center py-12">
@@ -160,45 +172,27 @@ export default function Volunteer() {
 						<legend className="block text-sm font-semibold mb-2">
 							Area(s) of Interest: <span className="text-red">*</span>
 						</legend>
-
-						<div className="flex flex-col gap-2">
-							<label className="inline-flex items-center">
-								<input
-									type="checkbox"
-									name="interest"
-									value="visitation"
-									className="mr-2"
-								/>
-								Visitation
-							</label>
-							<label className="inline-flex items-center">
-								<input
-									type="checkbox"
-									name="interest"
-									value="spiritual_care"
-									className="mr-2"
-								/>
-								Spiritual Care
-							</label>
-							<label className="inline-flex items-center">
-								<input
-									type="checkbox"
-									name="interest"
-									value="commissary_support"
-									className="mr-2"
-								/>
-								Commissary Support
-							</label>
-							<label className="inline-flex items-center">
-								<input
-									type="checkbox"
-									name="interest"
-									value="community_outreach"
-									className="mr-2"
-								/>
-								Community Outreach
-							</label>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+							{areasOfInterest.map((interest) => (
+								<div key={interest} className="flex items-center">
+									<input
+										type="checkbox"
+										id={interest}
+										name="interest"
+										value={interest}
+										className="mr-2"
+									/>
+									<label
+										htmlFor={interest}
+										className="text-sm font-semibold text-white">
+										{interest}
+									</label>
+								</div>
+							))}
 						</div>
+						<p className="text-sm text-gray mt-2">
+							Please select all that apply.
+						</p>
 					</fieldset>
 
 					<div className="form-group mb-4">
