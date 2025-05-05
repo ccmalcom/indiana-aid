@@ -13,13 +13,12 @@
 
 -Suuprabase (postgres + auth)
 
-notes:
-virtual weekly visits
-monthly in-person jail visits
-administrative tasks
-social media
-partner family support
-court observation/court accompaniment
-transportation
-fundraising
-advocacy/legislative/mezz-macro focus
+Here is that list of our collaborators for the Indiana AID website:)
+
+Mariposa Legal
+Indiana Undocumented Youth Alliance
+Cosecha Indiana
+National Immigrant Justice Center
+Indy Liberation Center
+Coalition for Our Immigrant Neighbors
+Freedom for Immigrants

@@ -73,31 +73,63 @@ export default function About() {
 
 				{/* Affiliations Section */}
 				<div className="w-full">
-					<h2 className="text-3xl font-bold mb-4">Affiliations & Values</h2>
+					<h2 className="text-3xl font-bold mb-4">Affiliations</h2>
 					<div className="bg-blue-100 border border-blue-300 rounded p-4 w-full max-w-[935px]">
 						<ul className="list-disc list-inside space-y-2">
+							<li>
+								<Link
+									href="https://mariposalegal.org/"
+									target="_blank"
+									className="text-blue-700 underline">
+									Mariposa Legal
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="https://www.iuya.org/"
+									target="_blank"
+									className="text-blue-700 underline">
+									Indiana Undocumented Youth Alliance (IUYA)
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="https://www.lahuelga.com/"
+									target="_blank"
+									className="text-blue-700 underline">
+									Cosecha Indiana
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="https://immigrantjustice.org/"
+									target="_blank"
+									className="text-blue-700 underline">
+									National Immigrant Justice Center
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="https://indyliberationcenter.org/"
+									target="_blank"
+									className="text-blue-700 underline">
+									Indy Liberation Center
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="https://www.coalitionforourimmigrantneighbors.org/"
+									target="_blank"
+									className="text-blue-700 underline">
+									Coalition for Our Immigrant Neighbors
+								</Link>
+							</li>
 							<li>
 								<Link
 									href="https://www.freedomforimmigrants.org/"
 									target="_blank"
 									className="text-blue-700 underline">
 									Freedom for Immigrants
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="https://www.shalommennonite.com/"
-									target="_blank"
-									className="text-blue-700 underline">
-									Shalom Mennonite Church of Indianapolis
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="https://icdichicago.org/"
-									target="_blank"
-									className="text-blue-700 underline">
-									Interfaith Coalition for Detained Immigrants (ICDI)
 								</Link>
 							</li>
 						</ul>
