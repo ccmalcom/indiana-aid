@@ -8,7 +8,7 @@ export default function About() {
 				{/* Hero Image */}
 				<div className=" mx-auto">
 					<Image
-						src="/Dove_Chain_Image.jpg"
+						src="/Dove_Chains.png"
 						alt="Indiana AID Dove Chain Logo"
 						width={1200}
 						height={200}

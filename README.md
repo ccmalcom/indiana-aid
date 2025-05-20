@@ -13,12 +13,4 @@
 
 -Suuprabase (postgres + auth)
 
-Here is that list of our collaborators for the Indiana AID website:)
-
-Mariposa Legal
-Indiana Undocumented Youth Alliance
-Cosecha Indiana
-National Immigrant Justice Center
-Indy Liberation Center
-Coalition for Our Immigrant Neighbors
-Freedom for Immigrants
+-The Noun Project (icons)
