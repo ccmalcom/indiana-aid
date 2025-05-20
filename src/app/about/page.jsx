@@ -37,20 +37,15 @@ export default function About() {
 
 				{/* Our Story Section */}
 				<div className="flex flex-col md:flex-row items-start w-full gap-6">
-					{/* Left image box */}
+					{/* Left image box
 					<div className="w-full md:w-2/5 flex justify-center">
 						<div className="w-[186px] h-[186px] bg-blue-900 flex items-center justify-center">
-							<Image
-								src="/globe.svg"
-								height={100}
-								width={100}
-								alt="Globe Icon"
-							/>
+							
 						</div>
-					</div>
+					</div> */}
 
 					{/* Right text */}
-					<div className="w-full md:w-3/4 pl-4">
+					<div className="w-full pl-4">
 						<h2 className="text-3xl font-bold mb-4">Our Story</h2>
 						<p>
 							Indiana AID was formed in 2019 when three individuals - a lawyer,
