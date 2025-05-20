@@ -1,8 +1,9 @@
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Donate() {
 	return (
-        // donation header
+		// donation header
 		<div className="px-4 py-12 max-w-6xl mx-auto">
 			<div className="text-center mb-6">
 				<h1 className="text-3xl font-bold mb-2">Donate</h1>
@@ -18,7 +19,7 @@ export default function Donate() {
 			</div>
 
 			<div className="grid md:grid-cols-2 gap-6 mb-12">
-            {/* Donate Online */}
+				{/* Donate Online */}
 				<div className="bg-blue text-white p-6 rounded shadow text-sm">
 					<h2 className="text-lg font-bold text-orange-300 mb-2">
 						Donate Online
@@ -31,21 +32,26 @@ export default function Donate() {
 						</li>
 					</ol>
 					<div className="flex justify-start mt-4">
-						<Link href="https://www.givelify.com/donate/shalom-mennonite-church-indianapolis-in-2j7wy5NTc3NDQ=/donation/amount" target="_blank" rel="noopener noreferrer">
-                        <button className="bg-yellow text-white font-semibold px-4 py-2 rounded hover:bg-orange-500 transition">
-							Donate
-						</button>
-                        </Link>
+						<Link
+							href="https://www.givelify.com/donate/shalom-mennonite-church-indianapolis-in-2j7wy5NTc3NDQ=/donation/amount"
+							target="_blank"
+							rel="noopener noreferrer">
+							<button className="bg-yellow text-white font-semibold px-4 py-2 rounded hover:bg-orange-500 transition">
+								Donate
+							</button>
+						</Link>
 					</div>
 					<div className="mt-4">
-						<img
+						<Image
 							src="/donationFundList.png"
 							alt="Fund Selection"
 							className="rounded-md"
+							width={500}
+							height={500}
 						/>
 					</div>
 				</div>
-        {/* Donate by check */}
+				{/* Donate by check */}
 				<div className="bg-blue text-white p-6 rounded shadow text-sm">
 					<h2 className="text-lg font-bold text-orange-300 mb-2">
 						Donate by Check
@@ -57,30 +63,34 @@ export default function Donate() {
 						<br />
 						<strong>Mail to:</strong> 6100 E 32nd Street, Indianapolis, IN 46226
 					</p>
-					<div className="mt-4">
-						<img
-							src="/checkExample.png"
+					<div className="mt-16">
+						<Image
+							src="/donate/check.png"
 							alt="Check Example"
 							className="rounded-md"
+							width={500}
+							height={500}
 						/>
 					</div>
 				</div>
 			</div>
 
-            {/* where the money goes */}
+			{/* where the money goes */}
 			<div className="text-center mb-4">
-				<h2 className="text-2xl font-bold">Where the Money Goes</h2>
+				<h2 className="text-3xl font-bold">Where the Money Goes</h2>
 			</div>
 
-			<div className="grid md:grid-cols-3 gap-6 text-center text-white">
-				<div className="bg-blue p-4 rounded shadow">
-					<img
-						src="/commissaryIcon.png"
+			<div className="bg-blue text-white p-6 rounded shadow flex flex-col md:flex-row items-start justify-between gap-6 text-md text-center ">
+				<div className="flex flex-col items-center w-1/3">
+					<Image
+						src="/donate/Hygiene-Kit.png"
 						alt="Commissary"
-						className="w-16 h-16 mx-auto mb-2"
+						className="w-36 h-36 mb-3 rounded-full object-cover"
+						width={96}
+						height={96}
 					/>
-					<h3 className="font-semibold text-lg mb-1">Commissary Support</h3>
-					<p className="text-sm">
+					<h3 className="font-semibold text-xl mb-1">Commissary Support</h3>
+					<p>
 						Donations fund the purchase of food, medicine, & hygiene items
 						through the jail’s commissary. These items are essential to our
 						immigrant partners as these items are often lacking in the jail.
@@ -92,28 +102,32 @@ export default function Donate() {
 					</p>
 				</div>
 
-				<div className="bg-blue p-4 rounded shadow">
-					<img
-						src="/visitIcon.png"
+				<div className="flex flex-col items-center w-1/3">
+					<Image
+						src="/donate/Inmate-Sales-Icon.png"
 						alt="Virtual Visits"
-						className="w-16 h-16 mx-auto mb-2"
+						className="w-36 h-36 mb-3 rounded-full object-cover"
+						width={96}
+						height={96}
 					/>
-					<h3 className="font-semibold text-lg mb-1">Virtual Visits</h3>
-					<p className="text-sm">
+					<h3 className="font-semibold text-xl mb-1">Virtual Visits</h3>
+					<p>
 						Donations support weekly virtual visits between our volunteers & our
 						immigrant partners through the jail’s for-profit technology
 						platform.
 					</p>
 				</div>
 
-				<div className="bg-blue p-4 rounded shadow">
-					<img
-						src="/booksIcon.png"
+				<div className="flex flex-col items-center w-1/3">
+					<Image
+						src="/donate/Crossword.jpg"
 						alt="Books & Puzzles"
-						className="w-16 h-16 mx-auto mb-2"
+						className="w-36 h-36 mb-3 rounded-full object-cover"
+						width={96}
+						height={96}
 					/>
-					<h3 className="font-semibold text-lg mb-1">Books & Puzzles</h3>
-					<p className="text-sm">
+					<h3 className="font-semibold text-xl mb-1">Books & Puzzles</h3>
+					<p>
 						Books & puzzles are purchased for our detained partners who have no
 						access to programming or recreation. They provide a healthy source
 						of escapism, personal development, & community building.
@@ -121,7 +135,7 @@ export default function Donate() {
 				</div>
 			</div>
 
-			<p className="text-center text-sm text-gray-600 mt-6 max-w-2xl mx-auto">
+			<p className="text-center text-md text-gray-600 mt-6 max-w-2xl mx-auto">
 				Your donations will be tax deductible and you will get a receipt of your
 				donation from Shalom at the beginning of the next fiscal year.
 			</p>
