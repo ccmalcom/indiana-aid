@@ -8,7 +8,7 @@ export default function Hero() {
 				id="left-hero"
 				className="relative z-10 col-span-2 flex flex-col items-center justify-center text-center md:mx-20">
 				<p className="text-3xl text-white font-heading">
-					Providing Advocacy, Resources, and Direct Aid to Immigrants and their
+					Providing resources, direct aid, and friendship to immigrants and their
 					families impacted by ICE detention in Indiana.
 				</p>
 			</div>
