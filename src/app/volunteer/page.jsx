@@ -1,6 +1,52 @@
 'use client';
+import { useState } from 'react';
+import Image from 'next/image';
+
+const opportunities = [
+  {
+    title: 'Virtual Visitation',
+    description:
+      'Virtual volunteers coordinate and conduct video visits with detainees, offering companionship and support.',
+  },
+  {
+    title: 'In-Person Visitation',
+    description:
+      'Visit detainees at designated facilities to provide in-person support and bear witness to their experiences.',
+  },
+  {
+    title: 'Grant Writing',
+    description:
+      'Help us secure funding by researching and writing grant proposals for our programs and support efforts.',
+  },
+  {
+    title: 'Translation',
+    description:
+      'Assist with translating documents and communication for non-English-speaking detainees and families.',
+  },
+  {
+    title: 'Administrative Assistance',
+    description:
+      'Support with data entry, organization, and communication tasks that keep our programs running.',
+  },
+  {
+    title: 'Fundraising',
+    description:
+      'Fundraiser volunteers will collaborate to plan and implement fundraiser events to raise money for our costs associated with supporting our detained immigrant partners – commissary, virtual visits, books/puzzles.',
+  },
+];
+
+	const areasOfInterest = [
+	'Virtual Visitation',
+	'In-Person Visitation',
+	'Grant Writing',
+	'Translation',
+	'Administrative Assistance',
+	'Fundraising',
+	'Other',
+	];
 
 export default function Volunteer() {
+	const [open, setOpen] = useState(null);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -37,17 +83,6 @@ export default function Volunteer() {
 		}
 	};
 
-	const areasOfInterest = [
-		'virtual weekly visits',
-		'monthly in-person jail visits',
-		'administrative tasks',
-		'social media',
-		'partner family support',
-		'court observation/court accompaniment',
-		'transportation',
-		'fundraising',
-		'advocacy/legislative/mezz-macro focus',
-	];
 
 	return (
 		<div className="viewport ">
@@ -69,44 +104,41 @@ export default function Volunteer() {
 					</a>
 					.
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-					{[
-						{
-							title: 'Virtual Visitation',
-							img: '/virtual-visitation.jpg',
-							alt: 'Virtual Visitation',
-						},
-						{
-							title: 'Transportation & Translation',
-							img: '/transport-translate.jpg',
-							alt: 'Transportation and Translation',
-						},
-						{
-							title: 'In-Person Visitation',
-							img: '/circle-placeholder.svg',
-							alt: 'In-Person Visitation',
-						},
-						{
-							title: 'Community Integration Partnerships',
-							img: '/circle-placeholder.svg',
-							alt: 'Community Integration',
-						},
-					].map(({ title, img, alt }) => (
-						<div key={title} className="flex flex-col items-center space-y-2">
-							<div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-								<img
-									src={img}
-									alt={alt}
-									className="object-cover w-full h-full"
-								/>
-							</div>
-							<h3 className="font-semibold text-black text-center">{title}</h3>
-							<button className="text-blue-700 text-sm hover:underline">
-								+ Learn More
-							</button>
+			</div>
+			{/* todo: volunteer-related images */}
+			<div className='flex flex-row items-center mb-12'>
+			 <Image src='/inPersonVisitIcon.png' alt='In Person Visit' width={200} height={200} className='mx-auto'/>
+			 <Image src='/virtualVisitIcon.jpg' alt='Virtual Visit' width={200} height={200} className='mx-auto'/>
+			 <Image src='/grantIcon.png' alt='Grant Writing' width={200} height={200} className='mx-auto'/>
+			 <Image src='/translationIcon.png' alt='Translation Icon' width={200} height={200}  className='mx-auto'/>
+			 <Image src='/adminIcon.png' alt='Administration Icon' width={200} height={200}  className='mx-auto'/>
+			 <Image src='/fundraisingIcon.png' alt='Fundraising Icon' width={200} height={200} className='mx-auto'/>
+			</div>
+			<div className="volunteer-opportunities w-[80vw] mx-auto flex flex-col items-center mb-12">
+				<h2 className="text-3xl font-bold text-blue mb-4">
+					Current Volunteer Opportunities
+				</h2>
+				<p className="mb-4">
+					We are currently looking for volunteers to help with the following
+					opportunities:
+				</p>
+				{opportunities.map((item, idx) => (
+					<div
+						key={idx}
+						className="w-full border-t border-gray-300 py-2 cursor-pointer"
+						onClick={() => setOpen(open === idx ? null : idx)}
+					>
+						<div className="flex justify-between items-center text-lg font-semibold text-green-700 hover:text-green-900">
+							<span>{item.title}</span>
+							<span className="text-xl">{open === idx ? '−' : '+'}</span>
 						</div>
-					))}
-				</div>
+						{open === idx && (
+							<div className="mt-2 text-sm text-black">
+								<p>{item.description}</p>
+							</div>
+						)}
+					</div>
+				))}
 			</div>
 			<div
 				id="volunteer-form"
