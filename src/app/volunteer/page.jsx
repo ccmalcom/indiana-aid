@@ -2,38 +2,38 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const opportunities = [
-	{
-		title: 'Virtual Visitation',
-		description:
-			'Virtual volunteers coordinate and conduct video visits with detainees, offering companionship and support.',
-	},
-	{
-		title: 'In-Person Visitation',
-		description:
-			'Visit detainees at designated facilities to provide in-person support and bear witness to their experiences.',
-	},
-	{
-		title: 'Grant Writing',
-		description:
-			'Help us secure funding by researching and writing grant proposals for our programs and support efforts.',
-	},
-	{
-		title: 'Translation',
-		description:
-			'Assist with translating documents and communication for non-English-speaking detainees and families.',
-	},
-	{
-		title: 'Administrative Assistance',
-		description:
-			'Support with data entry, organization, and communication tasks that keep our programs running.',
-	},
-	{
-		title: 'Fundraising',
-		description:
-			'Fundraiser volunteers will collaborate to plan and implement fundraiser events to raise money for our costs associated with supporting our detained immigrant partners – commissary, virtual visits, books/puzzles.',
-	},
-];
+// const opportunities = [
+// 	{
+// 		title: 'Virtual Visitation',
+// 		description:
+// 			'Virtual volunteers coordinate and conduct video visits with detainees, offering companionship and support.',
+// 	},
+// 	{
+// 		title: 'In-Person Visitation',
+// 		description:
+// 			'Visit detainees at designated facilities to provide in-person support and bear witness to their experiences.',
+// 	},
+// 	{
+// 		title: 'Grant Writing',
+// 		description:
+// 			'Help us secure funding by researching and writing grant proposals for our programs and support efforts.',
+// 	},
+// 	{
+// 		title: 'Translation',
+// 		description:
+// 			'Assist with translating documents and communication for non-English-speaking detainees and families.',
+// 	},
+// 	{
+// 		title: 'Administrative Assistance',
+// 		description:
+// 			'Support with data entry, organization, and communication tasks that keep our programs running.',
+// 	},
+// 	{
+// 		title: 'Fundraising',
+// 		description:
+// 			'Fundraiser volunteers will collaborate to plan and implement fundraiser events to raise money for our costs associated with supporting our detained immigrant partners – commissary, virtual visits, books/puzzles.',
+// 	},
+// ];
 
 const imageDescriptions = [
 	{
@@ -41,28 +41,28 @@ const imageDescriptions = [
 		src: '/inPersonVisitIcon.png',
 		alt: 'In Person Visit',
 		description:
-			'Visit detainees to offer direct support and build human connection with those inside detention centers.',
+			'Visit detainees to offer direct support, bear witness, and build human connection with those inside detention centers.',
 	},
 	{
 		title: 'Virtual Visitation',
 		src: '/virtualVisitIcon.jpg',
 		alt: 'Virtual Visit',
 		description:
-			'Video call detainees from home to provide companionship and social contact in isolated environments.',
+			'Virtual volunteers coordinate and conduct video visits with detainees, offering companionship and support.',
 	},
 	{
 		title: 'Grant Writing',
 		src: '/grantIcon.png',
 		alt: 'Grant Writing',
 		description:
-			'Research and write grant proposals to secure funding for our support programs.',
+			'Help us secure funding by researching and writing grant proposals for our programs and support efforts.',
 	},
 	{
 		title: 'Translation',
 		src: '/translationIcon.png',
 		alt: 'Translation Icon',
 		description:
-			'Translate letters and documents to ensure equitable access to resources and communication.',
+			'Assist with translating documents and communication for non-English-speaking detainees and families.',
 	},
 	{
 		title: 'Administrative Assistance',
