@@ -65,7 +65,7 @@ export default function Donate() {
 					</p>
 					<div className="mt-16">
 						<Image
-							src="/donate/check.png"
+							src="/donate/Check.png"
 							alt="Check Example"
 							className="rounded-md"
 							width={500}

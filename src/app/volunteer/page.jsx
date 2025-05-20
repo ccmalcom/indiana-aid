@@ -34,7 +34,7 @@ const imageDescriptions = [
 	},
 	{
 		title: 'Administrative Assistance',
-		src: '/adminIcon.png',
+		src: '/administrationIcon.png',
 		alt: 'Administration Icon',
 		description:
 			'Help with data entry, organization, and behind-the-scenes tasks that keep our work running.',
