@@ -8,6 +8,10 @@ export default function Footer() {
                 <div className="flex justify-center space-x-4 mt-2">
                     <Link href="/privacy" className="text-white hover:text-yellow">Privacy Policy</Link>
                     <Link href="/terms" className="text-white hover:text-yellow">Terms of Service</Link>
+                    <Link href="https://www.flaticon.com/free-icons/" title="icon attribution" className="text-white hover:text-yellow" target="_blank">
+                        Icons created by Freepik - Flaticon
+                    </Link>
+                    {/* <a href="https://www.flaticon.com/free-icons/" title="icon attribution">Icons created by Freepik - Flaticon</a> */}
                 </div>
             </div>
         </footer>
