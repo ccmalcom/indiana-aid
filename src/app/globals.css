@@ -17,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  /* font-family:  */
+  font-family: var(--font-urbanist);
 }
 
 .clip-path-triangle {
@@ -41,3 +41,4 @@ body {
   flex: 0 0 100%;
   min-width: 0;
 }
+

@@ -17,13 +17,11 @@ export default {
         'red': '#C33149',
         'red-dark': '#8C2234',
       },
-      fontFamily: {
-        sans: ['var(--font-sentinel)', 'sans-serif'],
-        serif: ['var(--font-sentinel)', 'serif'],
-        mono: ['var(--font-sentinel)', 'monospace'],
-        body: ['var(--font-sentinel)', 'sans-serif'],
-        heading: ['var(--font-franklin-gothic)', 'sans-serif'],
-      },
+      // fontFamily: {
+      //   urbanist: ['var(--font-urbanist)', 'sans-serif'],
+      //   heading: ['var(--font-urbanist)', 'sans-serif'],
+      //   body: ['var(--font-urbanist)', 'sans-serif'],
+      // },
     },
   },
   plugins: [],

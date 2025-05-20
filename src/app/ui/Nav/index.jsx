@@ -15,7 +15,7 @@ export default function Nav() {
 	return (
 		<div>
 			<nav
-				className="flex justify-between items-center h-20 bg-blue text-white text-xl relative shadow-sm font-mono"
+				className="flex justify-between items-center h-20 bg-blue text-white text-xl relative shadow-sm "
 				role="navigation">
 				{/* logo png */}
 				<Image
@@ -26,7 +26,7 @@ export default function Nav() {
 					className="ml-12"
 				/>
 				<div className="px-4 cursor-pointer md:hidden">Menu</div>
-				<div className="pr-8 md:block hidden text-2xl font-body">
+				<div className="pr-8 md:block hidden text-xl">
 					<Link href="/" className="p-4">
 						Home
 					</Link>

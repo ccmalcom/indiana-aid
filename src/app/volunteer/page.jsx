@@ -2,38 +2,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-// const opportunities = [
-// 	{
-// 		title: 'Virtual Visitation',
-// 		description:
-// 			'Virtual volunteers coordinate and conduct video visits with detainees, offering companionship and support.',
-// 	},
-// 	{
-// 		title: 'In-Person Visitation',
-// 		description:
-// 			'Visit detainees at designated facilities to provide in-person support and bear witness to their experiences.',
-// 	},
-// 	{
-// 		title: 'Grant Writing',
-// 		description:
-// 			'Help us secure funding by researching and writing grant proposals for our programs and support efforts.',
-// 	},
-// 	{
-// 		title: 'Translation',
-// 		description:
-// 			'Assist with translating documents and communication for non-English-speaking detainees and families.',
-// 	},
-// 	{
-// 		title: 'Administrative Assistance',
-// 		description:
-// 			'Support with data entry, organization, and communication tasks that keep our programs running.',
-// 	},
-// 	{
-// 		title: 'Fundraising',
-// 		description:
-// 			'Fundraiser volunteers will collaborate to plan and implement fundraiser events to raise money for our costs associated with supporting our detained immigrant partners – commissary, virtual visits, books/puzzles.',
-// 	},
-// ];
 
 const imageDescriptions = [
 	{
@@ -99,6 +67,7 @@ export default function Volunteer() {
 			name: e.target.name.value,
 			email: e.target.email.value,
 			phone: e.target.phone.value,
+			languages: Array.from(e.target.languages.selectedOptions).map(option => option.value),
 			areasOfInterest: Array.from(
 				e.target.querySelectorAll('input[name="interest"]:checked')
 			).map((checkbox) => checkbox.value),
@@ -130,17 +99,10 @@ export default function Volunteer() {
 
 	return (
 		<div className="viewport ">
-			{/* <div className="header w-[80vw] mx-auto flex flex-col items-center py-12">
-				<h1 className="text-3xl text-center mb-4">
-					Indiana AID is a volunteer group that supports individuals detained by
-					ICE in Indiana by bearing witness to their experiences through visits,
-					offering information, and providing resources to them and their
-					families. 
-				</h1>
-			</div> */}
+
 			<div className="volunteer-info my-20 text-center px-4">
-				<h2 className="text-4xl font-bold text-blue mb-2">Volunteer with Us!</h2>
-				<p className="mb-6">
+				<h2 className="text-4xl font-heading font-bold text-blue mb-2">Volunteer with Us!</h2>
+				<p className="mb-6 font-body text-lg">
 					If you are interested in volunteering with Indiana AID, please fill
 					out our{' '}
 					<a href="#volunteer-form" className="text-blue-700 underline">
@@ -164,55 +126,29 @@ export default function Volunteer() {
 							className="mx-auto mb-2"
 						/>
 						<div
-							className="flex items-center justify-center gap-2 text-green-800 font-semibold text-lg cursor-pointer"
+							className="flex items-center justify-center gap-2 text-green-800 font-heading -semibold text-lg cursor-pointer"
 							onClick={() => setOpen(open === idx + 100 ? null : idx + 100)}
 						>
 							<span>{item.title}</span>
 							<span className="text-xl">{open === idx + 100 ? '−' : '+'}</span>
 						</div>
 						{open === idx + 100 && (
-							<div className="mt-2 text-sm text-black">
+							<div className="mt-2 text-md text-black font-body">
 								<p>{item.description}</p>
 							</div>
 						)}
 					</div>
 				))}
-				<div className="col-span-full text-center text-sm text-gray-700 mt-4">
+				<div className="col-span-full text-center text-md font-body text-gray-700 mt-4">
 					Don’t see your skill listed? We still welcome other talents like web development, art, organizing, and more!
 				</div>
 			</div>
-			{/* oppty grid
-			<div className="volunteer-opportunities w-[80vw] mx-auto flex flex-col items-center mb-12">
-				<h2 className="text-3xl font-bold text-blue mb-4">
-					Current Volunteer Opportunities
-				</h2>
-				<p className="mb-4">
-					We are currently looking for volunteers to help with the following
-					opportunities:
-				</p>
-				{opportunities.map((item, idx) => (
-					<div
-						key={idx}
-						className="w-full border-t border-gray-300 py-2 cursor-pointer"
-						onClick={() => setOpen(open === idx ? null : idx)}>
-						<div className="flex justify-between items-center text-lg font-semibold text-green-700 hover:text-green-900">
-							<span>{item.title}</span>
-							<span className="text-xl">{open === idx ? '−' : '+'}</span>
-						</div>
-						{open === idx && (
-							<div className="mt-2 text-sm text-black">
-								<p>{item.description}</p>
-							</div>
-						)}
-					</div>
-				))}
-			</div> */}
 			{/* volunteer form */}
 			<div
 				id="volunteer-form"
 				className="volunteer-form w-[66vw] mx-auto flex flex-col items-center bg-blue rounded-2xl shadow-lg p-8 m-4 text-white">
-				<h2 className="text-2xl font-semibold">Sign Up to Volunteer</h2>
-				<p className="m-2 text-center">
+				<h2 className="text-2xl font-heading">Sign Up to Volunteer</h2>
+				<p className="m-2 text-center font-body text-lg">
 					Please fill out the form below to express your interest in
 					volunteering with Indiana AID. We will get back to you as soon as
 					possible.
@@ -224,14 +160,14 @@ export default function Volunteer() {
 							<label
 								htmlFor="name"
 								className="block text-sm font-semibold mb-2">
-								Name: <span className="text-red">*</span>
+								Name: <span className="text-red font-heading">*</span>
 							</label>
 							<input
 								type="text"
 								id="name"
 								name="name"
 								required
-								className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+								className="rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body"
 								placeholder="Your name"
 							/>
 						</div>
@@ -266,6 +202,29 @@ export default function Volunteer() {
 								placeholder="(123) 456-7890"
 							/>
 						</div>
+					</div>
+
+					<div className="form-group mb-4">
+						<label
+							htmlFor="languages"
+							className="block text-sm font-semibold mb-2">
+							Languages Spoken: <span className="text-gray">(optional)</span>
+						</label>
+						<select
+							id="languages"
+							name="languages"
+							multiple
+							className="rounded-lg p-2 border-2 border-gray-300 text-black w-full h-32"
+						>
+							<option value="Spanish">Spanish</option>
+							<option value="French">French</option>
+							<option value="Arabic">Arabic</option>
+							<option value="Mandarin">Mandarin</option>
+							<option value="Russian">Russian</option>
+							<option value="English">English</option>
+							<option value="Other">Other</option>
+						</select>
+						<p className="text-sm text-gray mt-1">Hold Ctrl (Windows) or Command (Mac) to select multiple languages.</p>
 					</div>
 
 					<fieldset className="form-group mb-4 border rounded-lg p-4 border-gray-300">
