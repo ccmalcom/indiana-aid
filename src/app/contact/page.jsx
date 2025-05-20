@@ -54,6 +54,28 @@ export default function Contact() {
 
 	return (
 		<div className="viewport min-h-[66vh]">
+			<div className='w-[50%] m-auto mt-4 text-center text-blue'>
+				<h1 className="text-3xl font-bold text-center my-4">Contact Indiana Aid</h1>
+				<p>
+					If you are an immigrant in need of assistance or are reaching out on
+					behalf of one, you can call us at (317) 721-4044 and leave a voicemail
+					or fill out the contact form below in English or Spanish. We will do our best to 
+					contact you within three days. 
+				</p>
+				{/* *We cannot provide legal assistance, if you are in need of a lawyer */}
+				<br />
+				<p className='text-sm italic'>
+					We are not lawyers and cannot provide legal assistance. If you are in
+					need of a lawyer, please contact the{' '}
+					<a
+						href="https://www.immigrantjustice.org/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-blue-700 underline ">
+						National Immigrant Justice Center
+						</a>
+					</p>
+			</div>
 			{isLoading ? (
 				<div className="flex items-center justify-center bg-blue text-white p-4 w-[66%] m-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
 					<PuffLoader
@@ -72,10 +94,9 @@ export default function Contact() {
 					<p>Thanks for reaching out. We'll get back to you soon.</p>
 				</div>
 			) : (
-				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 w-[66%] m-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
+				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 px-16 w-fit mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
 					<div className="form-header flex flex-col items-center justify-center mb-4">
-						<h1 className="text-2xl">Contact Us</h1>
-						<p>Have a question? Want to get involved? Send us a message!</p>
+						<h1 className="text-2xl">Contact Form</h1>
 					</div>
 
 					{error && (
@@ -92,7 +113,7 @@ export default function Contact() {
 					)}
 
 					<form onSubmit={sendEmail}>
-						<div className="form-group flex w-full gap-4 mb-4">
+						<div className="form-group flex w-full gap-4 mb-4 i">
 							<div className="flex flex-col flex-1">
 								<label htmlFor="name" className="mb-2 font-semibold">
 									Name:

@@ -6,7 +6,7 @@ export default function Donate() {
 		// donation header
 		<div className="px-4 py-12 max-w-6xl mx-auto">
 			<div className="text-center mb-6">
-				<h1 className="text-3xl font-bold mb-2">Donate</h1>
+				<h1 className="text-4xl text-blue font-bold mb-2">Donate</h1>
 				<p className="text-lg font-semibold text-gray-800">
 					Your donations go directly toward supporting the immigrants we serve
 					in the Clay County Jail*
@@ -20,8 +20,8 @@ export default function Donate() {
 
 			<div className="grid md:grid-cols-2 gap-6 mb-12">
 				{/* Donate Online */}
-				<div className="bg-blue text-white p-6 rounded shadow text-sm">
-					<h2 className="text-lg font-bold text-orange-300 mb-2">
+				<div className="bg-blue text-white p-6 rounded shadow text-md">
+					<h2 className="text-2xl font-bold text-orange-300 mb-2">
 						Donate Online
 					</h2>
 					<ol className="list-decimal pl-5 space-y-1">
@@ -52,8 +52,8 @@ export default function Donate() {
 					</div>
 				</div>
 				{/* Donate by check */}
-				<div className="bg-blue text-white p-6 rounded shadow text-sm">
-					<h2 className="text-lg font-bold text-orange-300 mb-2">
+				<div className="bg-blue text-white p-6 rounded shadow text-md">
+					<h2 className="text-2xl font-bold text-orange-300 mb-2">
 						Donate by Check
 					</h2>
 					<p>
