@@ -77,8 +77,8 @@ export default function Home() {
 			</div>
 
 			<div className="grid grid-cols-2 gap-4">
-				<div className=" bg-blue m-4 p-4 text-white text-center">
-					<h1 className="text-3xl pb-4 font-heading">At A Glance</h1>
+				<div className=" bg-blue m-4 p-12 text-white">
+					<h1 className="text-3xl pb-8 font-heading text-center">At A Glance...</h1>
 					<p className="text-lg font-body">
 						Indiana AID (Assistance to Immigrants in Detention) is a volunteer
 						group that supports individuals detained by ICE in Indiana by
@@ -99,8 +99,8 @@ export default function Home() {
 					</p>
 				</div>
 
-				<div className=" bg-blue m-4 p-4 text-white text-center">
-					<h1 className="text-3xl mb-4 font-heading">Recent Updates</h1>
+				<div className=" bg-blue m-4 p-12 text-white text-center">
+					<h1 className="text-3xl mb-8 font-heading">Recent Updates</h1>
 					{/* eventually, this will integrate with scraper to pull posts from instagram & facebook as links: title | date */}
 					<Updates />
 				</div>
