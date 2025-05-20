@@ -95,7 +95,7 @@ export default function Donate() {
 						through the jail’s commissary. These items are essential to our
 						immigrant partners as these items are often lacking in the jail.
 						View some commissary examples{' '}
-						<a href="#" className="underline text-orange-200">
+						<a href="https://en.wikipedia.org/wiki/Prison_commissary" target='_blank' className="underline text-orange-200">
 							here
 						</a>
 						.
