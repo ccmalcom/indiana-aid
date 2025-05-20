@@ -27,6 +27,25 @@ export default function Home() {
 						</Link>
 					</div>
 				</div>
+				
+				<div
+					id="knowledge-card"
+					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+					<h1 className="text-2xl font-heading">Quick Links</h1>
+					<div className="flex flex-col items-center justify-center">
+						<a
+							href="https://www.immigrationadvocates.org/legaldirectory/"
+							target="_blank"
+							rel="noopener noreferrer">
+							<button className="bg-red hover:bg-red-dark text-white text-xl font-body py-2 px-4 mt-4 mx-2 rounded ">
+								Find Help
+							</button>
+						</a>
+						<button className="bg-yellow hover:bg-yellow-dark text-black text-xl font-body py-2 px-4 mt-4 mx-2  rounded ">
+							Know Your Rights
+						</button>
+					</div>
+				</div>
 				<div
 					id="connect-card"
 					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
@@ -53,24 +72,6 @@ export default function Home() {
 								<FontAwesomeIcon icon={faFacebook} />
 							</a>
 						</div>
-					</div>
-				</div>
-				<div
-					id="knowledge-card"
-					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
-					<h1 className="text-2xl font-heading">Stay in the Know</h1>
-					<div className="flex flex-col items-center justify-center">
-						<a
-							href="https://www.immigrationadvocates.org/legaldirectory/"
-							target="_blank"
-							rel="noopener noreferrer">
-							<button className="bg-red hover:bg-red-dark text-white text-xl font-body py-2 px-4 mt-4 mx-2 rounded ">
-								Find Help
-							</button>
-						</a>
-						<button className="bg-yellow hover:bg-yellow-dark text-black text-xl font-body py-2 px-4 mt-4 mx-2  rounded ">
-							Know Your Rights
-						</button>
 					</div>
 				</div>
 			</div>
