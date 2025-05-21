@@ -29,16 +29,3 @@ body {
   background-image: linear-gradient(rgba(79, 74, 81, 0.8), rgba(79, 74, 81, 0.8)), url(/hero_bg.jpg)
 }
 
-.embla {
-  overflow: hidden;
-}
-
-.embla__container {
-  display: flex;
-}
-
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-

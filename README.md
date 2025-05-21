@@ -4,8 +4,6 @@
 
 -next.js
 
--Embla Carousel
-
 -FontAwesome (free)
 
 -resend (email service)

@@ -18,8 +18,9 @@ export default function About() {
 
 				{/* We Are Indiana AID Section */}
 				<div className="text-center flex flex-col items-center ">
-					<h1 className="text-4xl font-bold mb-4">We Are Indiana Aid</h1>
-					<p className="mb-8">
+<h1 className="text-4xl font-bold mb-4 text-blue">
+  We Are <span className="text-yellow">Indiana{' '}AID</span>
+</h1>					<p className="mb-8">
 						Indiana AID (Assistance to Immigrants in Detention) is a volunteer
 						group that supports individuals detained by ICE in Indiana by
 						bearing witness to their experiences through visits, offering
@@ -37,16 +38,10 @@ export default function About() {
 
 				{/* Our Story Section */}
 				<div className="flex flex-col md:flex-row items-start w-full gap-6">
-					{/* Left image box
-					<div className="w-full md:w-2/5 flex justify-center">
-						<div className="w-[186px] h-[186px] bg-blue-900 flex items-center justify-center">
-							
-						</div>
-					</div> */}
-
+					
 					{/* Right text */}
 					<div className="w-full pl-4">
-						<h2 className="text-3xl font-bold mb-4">Our Story</h2>
+						<h2 className="text-3xl font-bold mb-4 text-blue">Our Story</h2>
 						<p>
 							Indiana AID was formed in 2019 when three individuals - a lawyer,
 							a grad student, and a pastor - came together out of our mutual
@@ -116,7 +111,7 @@ export default function About() {
 
 				{/* Affiliations Section */}
 				<div className="w-full">
-					<h2 className="text-3xl font-bold mb-4">Affiliations</h2>
+					<h2 className="text-3xl font-bold mb-4 text-blue">Affiliations</h2>
 					<div className="bg-blue-100 border border-blue-300 rounded p-4 w-full max-w-[935px]">
 						<ul className="list-disc list-inside space-y-2">
 							<li>
