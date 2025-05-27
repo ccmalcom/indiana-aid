@@ -14,10 +14,10 @@ export default function AdminDashboard() {
           View Profile
         </Link>
         <Link
-          href="/admin/volunteer-signups"
+          href="/admin/volunteer-applications"
           className="text-blue-600 hover:underline text-lg"
         >
-          Manage Volunteer Signups
+          Manage Volunteer Applications
         </Link>
       </div>
     </div>
