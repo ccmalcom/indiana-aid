@@ -16,12 +16,18 @@ export async function POST(request) {
         areas_of_interest: ['Visitation', 'Food Pantry'],
         notes: 'This is a test submission.',
     }
-    // const { name, email, phone, interests, additionalInfo } = await request.json();
+    const { name, email, phone,languages, areasOfInterest, additionalInfo } = await request.json();
 
     const { data, error } = await supabase
-        .from('volunteers')
-        .insert([testData])
-        .select();
+        .from('volunteer-applications')
+        .insert({
+            name: name,
+            email: email,
+            phone: phone,
+            languages: languages,
+            interest_areas: areasOfInterest,
+            additional_info: additionalInfo,
+        });
 
     if (error) {
         return Response.json({ success: false, error });
