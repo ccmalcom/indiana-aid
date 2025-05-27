@@ -12,7 +12,7 @@ export default function LoginPage() {
 			if (u) {
 				setUser(u);
 				setTimeout(() => {
-					window.location.href = '/admin/profile';
+					window.location.href = '/admin';
 				}, 2000);
 			}
 		}
