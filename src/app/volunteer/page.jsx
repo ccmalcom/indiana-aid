@@ -138,7 +138,7 @@ export default function Volunteer() {
 
 	return (
 		<div className="viewport ">
-			<div className="volunteer-info my-20 text-center px-4">
+			<div className="volunteer-info my-12 text-center px-4">
 				<h2 className="text-4xl font-heading font-bold text-blue mb-2">
 					Volunteer with Us!
 				</h2>
