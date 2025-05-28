@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Newsletter() {
@@ -38,7 +39,7 @@ export default function Newsletter() {
 					immigration policy and Indiana AID’s work, and to read stories
 					submitted by the immigrants held in the Clay County jail.
 				</p>
-			<form onSubmit={handleSubmit} className="flex flex-row items-center mb-8">
+			<form onSubmit={handleSubmit} className="flex flex-row items-center mb-4">
                 <label htmlFor="email">Enter your email:</label>
 				<input
 					type="email"
@@ -57,6 +58,9 @@ export default function Newsletter() {
 					<p className="text-green-600 mt-2">Thanks for subscribing!</p>
 				)}
 			</form>
+            <p className="text-sm text-gray-600">
+                We will never share your email with anyone else. Click <Link href='/resources/newsletter/unsubscribe' className='underline'>here</Link> to unsubscribe at any time.
+            </p>
 			</div>
             
             <div className='NewsletterList mx-auto w-full'>
