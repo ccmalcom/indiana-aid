@@ -17,9 +17,11 @@ export default function Home() {
 						<h1 className="text-2xl ">Monthly Newsletter</h1>
 					</div>
 					<div className="card-buttons flex flex-col items-center justify-center mb-4">
+						<Link href="/resources/newsletter">
 						<button className="bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 my-4  rounded ">
 							Read Latest Release
 						</button>
+						</Link>
 						<Link
 							href="/resources/newsletter"
 							className="hover:text-yellow text-xl ">
