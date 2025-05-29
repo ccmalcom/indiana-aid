@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { subscribe } from './actions';
+import { useState, useEffect } from 'react';
+import { subscribe, getNewsletters } from './actions';
 
 export default function Newsletter() {
+
+    const bucketUrl = process.env.NEXT_PUBLIC_NEWSLETTER_BASE_URL;
 	const [email, setEmail] = useState('');
 	const [submitted, setSubmitted] = useState(false);
+    const [newsletters, setNewsletters] = useState([]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -26,21 +29,19 @@ export default function Newsletter() {
 		setSubmitted(true);
 	};
 
-	const newsletters = [
-		{
-			volume: 12,
-			date: 'Jan 2025',
-			url: '/pdfs/newsletter-vol12.pdf',
-			image: '/images/vol12-thumbnail.jpg',
-		},
-		{
-			volume: 11,
-			date: 'Oct 2024',
-			url: '/pdfs/newsletter-vol11.pdf',
-			image: '/images/vol11-thumbnail.jpg',
-		},
-		// more items...
-	];
+    useEffect(() => {
+        const fetchNewsletters = async () => {
+            try {
+                const issues = await getNewsletters();
+                if (issues) {
+                    setNewsletters(issues);
+                }
+            } catch (error) {
+                console.error('Error fetching newsletters:', error);
+            }
+        };
+        fetchNewsletters();
+    }, []);
 
 	return (
 		<div className="w-[80vw] h-full flex flex-col justify-center items-center px-4 md:px-12 my-12 mx-auto">
@@ -77,13 +78,13 @@ export default function Newsletter() {
 			</div>
             
             <div className='NewsletterList mx-auto w-full'>
-            <h2 className="text-2xl text-center font-semibold mb-4">Past Newsletters</h2>
+            <h2 className="text-2xl text-center font-semibold mt-8 mb-4">Past Newsletters</h2>
 
             
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 				{newsletters.map((n) => (
 					<a
-						key={n.volume}
+						key={n.id}
 						href={n.url}
 						target="_blank"
 						rel="noopener noreferrer"

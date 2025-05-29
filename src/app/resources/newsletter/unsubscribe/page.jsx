@@ -12,7 +12,6 @@ export default function Unsubscribe() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       //todo: actions file that unsubscribes the user
     try {
             const { error } = await unsubscribe(email);
             if (error) {
