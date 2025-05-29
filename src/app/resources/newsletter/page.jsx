@@ -11,6 +11,7 @@ export default function Newsletter() {
 	const [newsletters, setNewsletters] = useState([]);
 	const [language, setLanguage] = useState('en');
 	const [currentPage, setCurrentPage] = useState(1);
+	const [loading, setLoading] = useState(true);
 	const itemsPerPage = 6;
 
 	const handleSubmit = async (e) => {
@@ -32,6 +33,7 @@ export default function Newsletter() {
 
 	useEffect(() => {
 		setCurrentPage(1);
+		setLoading(true);
 		const fetchNewsletters = async () => {
 			try {
 				const issues = await getNewsletters();
@@ -44,6 +46,7 @@ export default function Newsletter() {
 			} catch (error) {
 				console.error('Error fetching newsletters:', error);
 			}
+			setLoading(false);
 		};
 		fetchNewsletters();
 	}, [language]);
@@ -110,26 +113,30 @@ export default function Newsletter() {
 					</select>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-					{currentNewsletters.map((n) => (
-						<a
-							key={n.id}
-							href={n.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-center">
-							<img
-								src={n.image}
-								alt={`Volume ${n.volume}`}
-								className="w-full h-auto rounded border"
-							/>
-							<p className="font-semibold mt-2">
-								{language == 'en' ? 'Volume ' : 'Volumen'} {n.volume}
-							</p>
-							<p className="text-sm">{n.date}</p>
-						</a>
-					))}
-				</div>
+				{loading ? (
+					<div className="text-center text-gray-600 py-12">Loading newsletters...</div>
+				) : (
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+						{currentNewsletters.map((n) => (
+							<a
+								key={n.id}
+								href={n.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-center">
+								<img
+									src={n.image}
+									alt={`Volume ${n.volume}`}
+									className="w-full h-auto rounded border"
+								/>
+								<p className="font-semibold mt-2">
+									{language == 'en' ? 'Volume ' : 'Volumen'} {n.volume}
+								</p>
+								<p className="text-sm">{n.date}</p>
+							</a>
+						))}
+					</div>
+				)}
 				<div className="flex justify-center mt-6 space-x-2">
 					<button
 						onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
