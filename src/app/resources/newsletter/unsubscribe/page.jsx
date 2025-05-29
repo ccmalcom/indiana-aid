@@ -1,4 +1,6 @@
 'use client';
+
+import { unsubscribe } from '@/app/resources/newsletter/actions';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -11,14 +13,22 @@ export default function Unsubscribe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
        //todo: actions file that unsubscribes the user
-
-        if (error) {
-            console.error('Error unsubscribing:', error);
-        } else {
-            setSubmitted(true);
-            setEmail('');
-            router.push('/resources/newsletter');
+    try {
+            const { error } = await unsubscribe(email);
+            if (error) {
+                console.error('Error unsubscribing:', error);
+            } else {
+                setSubmitted(true);
+                setEmail('');
+                setTimeout(() => {
+                    router.push('/resources/newsletter');
+                }, 2000); // Redirect after 2 seconds
+            }
         }
+    catch (error) {
+            console.error('Error unsubscribing:', error);
+            return;
+    }
     };
 
     return (

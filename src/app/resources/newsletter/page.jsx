@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { subscribe } from './actions';
 
 export default function Newsletter() {
 	const [email, setEmail] = useState('');
@@ -10,6 +11,18 @@ export default function Newsletter() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// TODO: Send `email` to Supabase (via API or client SDK)
+        try {
+            const response = await subscribe(email);
+            if (response.error) {
+                console.error('Error subscribing:', response.error);
+            } else {
+                setSubmitted(true);
+                setEmail('');
+            }
+        }
+        catch (error) {
+            console.error('Error subscribing:', error);
+        }
 		setSubmitted(true);
 	};
 
