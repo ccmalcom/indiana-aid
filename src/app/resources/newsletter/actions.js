@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from "@/app/utils/server";
+import { createClient } from "@/app/utils/supabase/server";
 
 export async function subscribe(email) {
     const supabase = await createClient();
