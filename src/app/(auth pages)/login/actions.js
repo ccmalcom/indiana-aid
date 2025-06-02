@@ -44,9 +44,6 @@ export async function getUser() {
 
 	const { data, error } = await supabase.auth.getUser();
 
-	if (error) {
-		redirect('/error');
-	}
 
 	return data.user;
 }
