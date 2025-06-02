@@ -6,19 +6,15 @@ import VolunteerCard from './ui/Cards/VolunteerCard';
 import { getUserDetails, getPendingVolunteerApplications, getNewsletterInfo, getNewsletterSubscriberCount, getMailingListSubscribers } from './actions';
 import NewsletterCard from './ui/Cards/NewsletterCard';
 import EmailListCard from './ui/Cards/EmailListCard';
+//next/navigation is used for client-side navigation
+import { redirect } from 'next/navigation';
 
 export default async function Admin() {
 
     const user = await getUserDetails();
     if (!user) {
-        return (
-            <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="text-2xl font-bold mb-4">You must be logged in to access the admin dashboard.</h1>
-                <Link href="/auth/login" className="text-blue-500 hover:underline">
-                    Log in
-                </Link>
-            </div>
-        );
+       //redirect to login page if user is not logged in
+        redirect('/login');
     }
     const applications = await getPendingVolunteerApplications();
     const newsletters = await getNewsletterInfo();
