@@ -26,8 +26,6 @@ export default function ResourcesPage() {
 
         {/* Collapsible Resources */}
         <h2 className="text-2xl font-bold mb-4">Other Resources</h2>
-        <p className="italic text-sm mb-4">Same implementation as the + Learn More on the volunteer page</p>
-
         <ul className="space-y-2">
           {[
             'Legal Resources',
