@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Updates from './ui/Updates';
 import Link from 'next/link';
+import Calendar from './ui/Calendar';
 
 export default function Home() {
 	return (
@@ -78,8 +79,8 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-2 gap-4">
-				<div className=" bg-blue m-4 p-12 text-white">
+			<div className="grid grid-cols-2 grid-rows-2 gap-4">
+				<div className=" bg-blue m-4 p-12 text-white row-span-2">
 					<h1 className="text-3xl pb-8  text-center">At A Glance...</h1>
 					<p className="text-lg ">
 						Indiana AID (Assistance to Immigrants in Detention) is a volunteer
@@ -101,10 +102,15 @@ export default function Home() {
 					</p>
 				</div>
 
-				<div className=" bg-blue m-4 p-12 text-white text-center">
+				<div className=" bg-blue m-4 p-8 text-white text-center row-span-1">
 					<h1 className="text-3xl mb-8 ">Recent Updates</h1>
 					{/* eventually, this will integrate with scraper to pull posts from instagram & facebook as links: title | date */}
 					<Updates />
+				</div>
+
+				<div className=" bg-blue m-4 p-8 text-white text-center flex flex-col items-center justify-center row-span-1">
+					<h1 className="text-3xl mb-8 ">Calendar</h1>
+					<Calendar />
 				</div>
 			</div>
 		</div>

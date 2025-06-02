@@ -2,10 +2,6 @@ export default async function Updates() {
     const data = await fetch('https://api.vercel.app/blog')
     const posts = await data.json()
     return (
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <p>Coming soon</p>
     )
   }

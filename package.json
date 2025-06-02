@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^2.49.4",
     "next": "15.1.7",
     "react": "^19.0.0",
+    "react-calendar": "^6.0.0",
     "react-dom": "^19.0.0",
     "react-spinners": "^0.15.0",
     "resend": "^4.2.0"
