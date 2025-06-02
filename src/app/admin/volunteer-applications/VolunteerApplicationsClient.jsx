@@ -16,6 +16,12 @@ export default function VolunteerApplicationsClient({ applications: initialData 
             <tr>
               <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Name</th>
               <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Email</th>
+              <th className='px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700'>Phone</th>
+              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Languages</th>
+              {/* interest areas */}
+              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Interest Areas</th>
+              {/* additional info */}
+              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Additional Info</th>
               <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Status</th>
               <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Created At</th>
             </tr>
@@ -25,6 +31,16 @@ export default function VolunteerApplicationsClient({ applications: initialData 
               <tr key={app.id}>
                 <td className="px-6 py-4 border-b border-gray-200">{app.name}</td>
                 <td className="px-6 py-4 border-b border-gray-200">{app.email}</td>
+                <td className="px-6 py-4 border-b border-gray-200">{app.phone}</td>
+                <td className="px-6 py-4 border-b border-gray-200">
+                  {app.languages ? app.languages.join(', ') : 'N/A'}
+                </td>
+                <td className="px-6 py-4 border-b border-gray-200">
+                  {app.interest_areas ? app.interest_areas.join(', ') : 'N/A'}
+                </td>
+                <td className="px-6 py-4 border-b border-gray-200">
+                  {app.additional_info ? app.additional_info : 'N/A'}
+                </td>
                 <td className="px-6 py-4 border-b border-gray-200">{app.status}</td>
                 <td className="px-6 py-4 border-b border-gray-200">{new Date(app.created_at).toLocaleDateString()}</td>
               </tr>

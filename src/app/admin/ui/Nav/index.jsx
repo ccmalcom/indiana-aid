@@ -10,6 +10,9 @@ export default function Nav() {
 				<Link href="/admin/volunteer-applications" className="hover:underline">
 					Volunteer Apps
 				</Link>
+                <Link href="/admin/newsletters" className="hover:underline">
+                    Newsletters
+                </Link>
 				<Link href="/admin/profile" className="hover:underline">
 					Profile
 				</Link>
