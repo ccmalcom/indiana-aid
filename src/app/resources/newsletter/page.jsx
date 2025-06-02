@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { subscribe, getNewsletters } from './actions';
 
 export default function Newsletter() {
-	const bucketUrl = process.env.NEXT_PUBLIC_NEWSLETTER_BASE_URL;
 	const [email, setEmail] = useState('');
 	const [submitted, setSubmitted] = useState(false);
 	const [newsletters, setNewsletters] = useState([]);
@@ -16,7 +15,6 @@ export default function Newsletter() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// TODO: Send `email` to Supabase (via API or client SDK)
 		try {
 			const response = await subscribe(email);
 			if (response.error) {
