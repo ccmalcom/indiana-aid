@@ -1,6 +1,7 @@
 'use server';
 
 import { createClient } from "@/app/utils/supabase/server";
+import { cache } from "react";
 
 export async function subscribe(email) {
     const supabase = await createClient();
@@ -43,7 +44,7 @@ export async function unsubscribe(email) {
 
 //fetch newsletter_issues from supabase table, url is for storage bucket
 // returns [{id, volume, date, language, image_rul, created_at}, {...}]
-export async function getNewsletters(){
+export const getNewsletters = cache(async() => {
         const supabase = await createClient();
 
     const { data, error } = await supabase
@@ -67,7 +68,7 @@ export async function getNewsletters(){
             day: 'numeric',
         }),
     }));
-}
+});
 
 function getUrl(issue){
     const bucketUrl = process.env.NEXT_PUBLIC_NEWSLETTER_BASE_URL;
