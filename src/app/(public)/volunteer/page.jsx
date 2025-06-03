@@ -1,6 +1,4 @@
-import Image from 'next/image';
 import VolunteerForm from './VolunteerForm';
-import Link from 'next/link';
 import VolunteerOpportunities from './VolunteerOpportunities';
 
 

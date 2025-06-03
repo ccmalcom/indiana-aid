@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
   return (
     <main className="bg-white min-h-screen text-[#0a1744] px-6 py-12">
       <div className="max-w-5xl mx-auto">

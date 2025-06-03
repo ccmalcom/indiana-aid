@@ -1,7 +1,9 @@
+'use server';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Donate() {
+export default async function Donate() {
 	return (
 		// donation header
 		<div className="px-4 py-12 max-w-6xl mx-auto">

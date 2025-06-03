@@ -1,7 +1,9 @@
+'use server';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function About() {
+export default async function About() {
 	return (
 		<div className="viewport w-[80vw] mx-auto">
 			<div className=" mx-auto flex flex-col space-y-16 py-12">

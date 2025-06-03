@@ -1,3 +1,5 @@
+'use server';
+
 import Hero from './ui/Hero';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -5,7 +7,7 @@ import Updates from './ui/Updates';
 import Link from 'next/link';
 import Calendar from './ui/Calendar';
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<div id="fullView" className="min-h-screen w-[90vw] md:w-[80vw] m-auto">
 			<Hero />
