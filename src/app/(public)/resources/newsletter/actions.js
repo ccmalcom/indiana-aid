@@ -12,10 +12,9 @@ export async function subscribe(email) {
         throw new Error('Email must be a string');
     }
     //todo: validate email
-    const { data, error } = await supabase.functions.invoke('subscriber', {
-        body: JSON.stringify({ email: email.trim().toLowerCase() }),
-    });
-    console.log('Supabase function result:', { data, error });
+    const { data, error } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{ email: email.trim().toLowerCase() }]);
 
     if (error) {
         throw new Error('Failed to subscribe to newsletter');
@@ -24,17 +23,16 @@ export async function subscribe(email) {
     return { success: true, message: 'Subscription successful' };
 }
 
+
 export async function unsubscribe(email) {
-        const supabase = await createClient();
+    const supabase = await createClient();
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    console.log('Attempting to unsubscribe:', normalizedEmail);
-
-    const { data, error } = await supabase.functions.invoke('unsubscriber',{
-        body: JSON.stringify({ email: normalizedEmail }),
-    })
-    console.log('Supabase delete result:', { data, error });
+    const { data, error } = await supabase
+        .from('newsletter_subscribers')
+        .delete()
+        .eq('email', normalizedEmail);
 
     if (error) {
         throw new Error('Failed to unsubscribe from newsletter');

@@ -1,6 +1,6 @@
 'use client';
 
-import { unsubscribe } from '@/app/resources/newsletter/actions';
+import { unsubscribe } from '../actions';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
