@@ -16,3 +16,5 @@
   ??? commisary and inmate sales
 
 -change languages section on vol form
+
+-server side rendering/caching for newseletters
