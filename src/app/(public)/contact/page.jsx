@@ -155,7 +155,7 @@ export default function Contact() {
 						</div>
 						<button
 							type="submit"
-							className="bg-yellow text-white px-4 py-2 rounded-lg hover:bg-yellow-dark transition-colors duration-200"
+							className="bg-yellow text-black px-4 py-2 rounded-lg hover:bg-yellow-dark transition-colors duration-200"
 							disabled={isLoading}>
 							Submit
 						</button>

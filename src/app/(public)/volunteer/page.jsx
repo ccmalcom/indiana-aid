@@ -58,6 +58,15 @@ const areasOfInterest = [
 	'Other (please specify below)',
 ];
 
+const languages = [
+	'English',
+	'Spanish',
+	'French',
+	'Haitian Creole',
+	'Mandarin',
+	'Other (please specify below)',
+];
+
 export default function Volunteer() {
 	const [countryCode, setCountryCode] = useState('+1'); // Default to US country code\
 	const [phoneNumber, setPhoneNumber] = useState('');
@@ -65,6 +74,9 @@ export default function Volunteer() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' | 'error'
 	const [submissionMessage, setSubmissionMessage] = useState('');
+	const [isLanguagesFilled, setIsLanguagesFilled] = useState(false);
+	const [isInterestsFilled, setIsInterestsFilled] = useState(false);
+	const [additionalInfo, setAdditionalInfo] = useState('');
 
 	const formatPhoneNumber = (value) => {
 		const digits = value.replace(/\D/g, '').substring(0, 10);
@@ -82,6 +94,29 @@ export default function Volunteer() {
 		setPhoneNumber(formattedNumber);
 	};
 
+	const handleLanguagesChange = (e) => {
+		const checkboxes = e.currentTarget.querySelectorAll('input[name="languages"]');
+		const anyChecked = Array.from(checkboxes).some((checkbox) => checkbox.checked);
+		setIsLanguagesFilled(anyChecked);
+	};
+
+	const handleInterestsChange = (e) => {
+		const checkboxes = e.currentTarget.querySelectorAll('input[name="interest"]');
+		const anyChecked = Array.from(checkboxes).some((checkbox) => checkbox.checked);
+		setIsInterestsFilled(anyChecked);
+	};
+
+	const handleAdditionalInfoChange = (e) => {
+		setAdditionalInfo(e.target.value);
+	};
+
+	const isFormValid =
+		!!document?.getElementById('firstName')?.value &&
+		!!document?.getElementById('lastName')?.value &&
+		!!document?.getElementById('email')?.value &&
+		isLanguagesFilled &&
+		isInterestsFilled;
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -89,8 +124,8 @@ export default function Volunteer() {
 			name: `${e.target.firstName.value} ${e.target.lastName.value}`,
 			email: e.target.email.value,
 			phone: countryCode + '-' + phoneNumber,
-			languages: Array.from(e.target.languages.selectedOptions).map(
-				(option) => option.value
+			languages: Array.from(e.target.querySelectorAll('input[name="language"]:checked')).map(
+				(checkbox) => checkbox.value
 			),
 			areasOfInterest: Array.from(
 				e.target.querySelectorAll('input[name="interest"]:checked')
@@ -117,6 +152,9 @@ export default function Volunteer() {
 				setSubmissionStatus('success');
 				setSubmissionMessage('Thank you for signing up to volunteer!');
 				e.target.reset();
+				setIsLanguagesFilled(false);
+				setIsInterestsFilled(false);
+				setAdditionalInfo('');
 			} else if ((result.error.code = '23505')) {
 				setSubmissionStatus('error');
 				setSubmissionMessage(
@@ -199,27 +237,20 @@ export default function Volunteer() {
 						<p>
 							We will review your application and get back to you as soon as
 							possible. If you have any questions, please{' '}
-							<Link href="/contact" className="underline">
+							<Link href="/contact" className="underline text-yellow">
 								contact us
 							</Link>
 						</p>
-						{/* <p className="mt-4">
-							In the meantime, feel free to check out our{' '}
-							<Link href="/events" className="underline">
-								events page
-							</Link>{' '}
-							to see how you can get involved right away!
-						</p> */}
 					</div>
 				) : submissionStatus === 'error' ? (
 					<div className="my-20 text-center">
-						<h2 className="text-red text-xl">
+						<h2 className="text-red text-xl text-semibold">
 							Oops! It looks like you have already signed up to volunteer.
 						</h2>
 						<br />
 						<p>
 							If you need to update your information, please{' '}
-							<Link href="/contact" className="underline">
+							<Link href="/contact" className="underline text-yellow">
 								contact us
 							</Link>{' '}
 						</p>
@@ -245,7 +276,8 @@ export default function Volunteer() {
 										id="firstName"
 										name="firstName"
 										required
-										className="rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body"
+										onChange={(e) => e.target.className = `rounded-lg p-2 border-2 ${e.target.value ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
+										className={`rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body`}
 										placeholder="First name"
 									/>
 								</div>
@@ -261,7 +293,8 @@ export default function Volunteer() {
 										id="lastName"
 										name="lastName"
 										required
-										className="rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body"
+										onChange={(e) => e.target.className = `rounded-lg p-2 border-2 ${e.target.value ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
+										className={`rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body`}
 										placeholder="Last name"
 									/>
 								</div>
@@ -277,7 +310,8 @@ export default function Volunteer() {
 										id="email"
 										name="email"
 										required
-										className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+										onChange={(e) => e.target.className = `rounded-lg p-2 border-2 ${e.target.value ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
+										className={`rounded-lg p-2 border-2 border-gray-300 text-black w-full font-body`}
 										placeholder="yourname@email.com"
 									/>
 								</div>
@@ -289,54 +323,54 @@ export default function Volunteer() {
 									</label>
 									<div className="flex gap-2">
 										<input
-											type="text"
-											id="countryCode"
-											name="countryCode"
-											value={countryCode}
-											onChange={(e) => setCountryCode(e.target.value)}
-											className="rounded-lg p-2 border-2 border-gray-300 text-black w-1/5"
-											placeholder="+1"
-										/>
-										<input
 											type="tel"
 											id="phone"
 											name="phone"
 											value={phoneNumber}
-											onChange={handlePhoneChange}
-											className="rounded-lg p-2 border-2 border-gray-300 text-black w-4/5"
+											onChange={(e) => {
+												handlePhoneChange(e);
+												e.target.className = `rounded-lg p-2 border-2 ${e.target.value ? 'border-yellow' : 'border-gray-300'} text-black w-4/5 font-body`;
+											}}
+											className={`rounded-lg p-2 border-2 border-gray-300 text-black w-4/5 font-body`}
 											placeholder="123-456-7890"
 										/>
 									</div>
 								</div>
 							</div>
 
-							<div className="form-group mb-4">
-								<label
-									htmlFor="languages"
-									className="block text-sm font-semibold mb-2">
-									Languages Spoken:{' '}
-									<span className="text-gray">(optional)</span>
-								</label>
-								<select
-									id="languages"
-									name="languages"
-									multiple
-									className="rounded-lg p-2 border-2 border-gray-300 text-black w-full h-32">
-									<option value="English">English</option>
-									<option value="Spanish">Spanish</option>
-									<option value="Arabic">Arabic</option>
-									<option value="French">French</option>
-									<option value="Mandarin">Mandarin</option>
-									<option value="Russian">Russian</option>
-									<option value="Other">Other</option>
-								</select>
-								<p className="text-sm text-gray mt-1">
-									Hold Ctrl (Windows) or Command (Mac) to select multiple
-									languages.
-								</p>
-							</div>
+							{/* languages fieldset */}
+							<fieldset className={`form-group mb-4 border rounded-lg p-4 ${isLanguagesFilled ? 'border-yellow' : 'border-gray-300'}`} onChange={handleLanguagesChange} >
+								<legend className="block text-sm font-semibold mb-2">
+									Language(s) Spoken: <span className="text-red">*</span>
+								</legend>
+								<div>
+									{languages.map((language) => (
+										<div key={language} className="flex items-center mb-2">
+											<input
+												type="checkbox"
+												id={language}
+												name="languages"
+												value={language}
+												className="mr-2"
+											/>
+											<label
+												htmlFor={language}
+												className="text-sm font-semibold text-white">
+												{language}
+											</label>
+										</div>
+									))}
+								</div>
 
-							<fieldset className="form-group mb-4 border rounded-lg p-4 border-gray-300">
+								<p className="text-sm text-gray mt-2">
+									Please select all that apply. If you speak a language not
+									listed, please specify in the additional information field
+									below.
+								</p>
+							</fieldset>
+
+							{/* interest fieldset */}
+							<fieldset className={`form-group mb-4 border rounded-lg p-4 ${isInterestsFilled ? 'border-yellow' : 'border-gray-300'}`} onChange={handleInterestsChange}>
 								<legend className="block text-sm font-semibold mb-2">
 									Area(s) of Interest: <span className="text-red">*</span>
 								</legend>
@@ -362,7 +396,7 @@ export default function Volunteer() {
 									Please select all that apply.
 								</p>
 							</fieldset>
-
+							{/* additional info */}
 							<div className="form-group mb-4">
 								<label
 									htmlFor="additional_info"
@@ -375,15 +409,17 @@ export default function Volunteer() {
 								<textarea
 									id="additional_info"
 									name="additional_info"
-									className="rounded-lg p-2 border-2 border-gray-300 text-black w-full"
+									value={additionalInfo}
+									onChange={handleAdditionalInfoChange}
+									className={`rounded-lg p-2 border-2 ${additionalInfo ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
 									rows="4"
 									placeholder="Tell us about any other skills, experience, or roles you're interested in..."></textarea>
 							</div>
 
 							<button
 								type="submit"
-								className="bg-yellow text-black font-semibold px-4 py-2 rounded-lg hover:bg-yellow-dark transition-colors duration-200"
-								disabled={isSubmitting}>
+								className={`font-semibold px-4 py-2 rounded-lg transition-colors duration-200 ${isFormValid ? 'bg-yellow text-black hover:bg-yellow-dark' : 'bg-gray-300 text-gray-700'}`}
+								disabled={isSubmitting || !isFormValid}>
 								Submit
 							</button>
 						</form>
