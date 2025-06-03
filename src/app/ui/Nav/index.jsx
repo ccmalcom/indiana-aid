@@ -11,23 +11,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Nav() {
-	const [scrolled, setScrolled] = useState(false);
+	// const [scrolled, setScrolled] = useState(false);
+	const currentRoute = usePathname();
+	// console.log('Current Route:', currentRoute);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 0);
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+
+	// useEffect(() => {
+
+	// 	const handleScroll = () => {
+	// 		setScrolled(window.scrollY > 0);
+	// 	};
+	// 	window.addEventListener('scroll', handleScroll);
+	// 	return () => window.removeEventListener('scroll', handleScroll);
+	// }, []);
 
 	return (
 		<nav
-			className={`sticky top-0 z-50 bg-blue text-white text-xl flex justify-between items-center h-20 transition-shadow ${
-				scrolled ? 'shadow-lg' : ''
-			}`}
+			className={`sticky top-0 z-50 bg-blue text-white text-xl flex justify-between items-center h-20 transition-shadow shadow-lg`}
 			role="navigation"
 		>
 			<Image
@@ -39,22 +42,22 @@ export default function Nav() {
 			/>
 			<div className="px-4 cursor-pointer md:hidden">Menu</div>
 			<div className="pr-8 md:block hidden text-xl">
-				<Link href="/" className="p-4">
+				<Link href="/" className={`p-4 ${currentRoute === '/' ? 'text-yellow' : ''}`}>
 					Home
 				</Link>
-				<Link href="/about" className="p-4">
+				<Link href="/about" className={`p-4 ${currentRoute === '/about' ? 'text-yellow' : ''}`}>
 					About
 				</Link>
-				<Link href="/volunteer" className="p-4">
+				<Link href="/volunteer" className={`p-4 ${currentRoute === '/volunteer' ? 'text-yellow' : ''}`}>
 					Volunteer
 				</Link>
-				<Link href="/donate" className="p-4">
+				<Link href="/donate" className={`p-4 ${currentRoute === '/donate' ? 'text-yellow' : ''}`}>
 					Donate
 				</Link>
-				<Link href="/resources" className="p-4">
+				<Link href="/resources" className={`p-4 ${currentRoute.startsWith('/resources') ? 'text-yellow' : ''}`}>
 					Resources
 				</Link>
-				<Link href="/contact" className="p-4">
+				<Link href="/contact" className={`p-4 ${currentRoute === '/contact' ? 'text-yellow' : ''}`}>
 					Contact
 				</Link>
 				{/* translate dropdown */}
