@@ -7,7 +7,9 @@ export default function NewsletterGrid({ initialNewsletters }) {
 	const [language, setLanguage] = useState('en');
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const newsletters = initialNewsletters.filter(n => n.language === language).sort((a, b) => new Date(b.date) - new Date(a.date));
+	const newsletters = initialNewsletters
+	  .filter(n => n.language === language)
+	  .sort((a, b) => b.volume - a.volume);
 	const itemsPerPage = 6;
 
     const indexOfLast = currentPage * itemsPerPage;
