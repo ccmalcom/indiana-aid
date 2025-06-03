@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 
-export default function NewsletterGrid({ initialNewsletters, language, currentPage }) {
+export default function NewsletterGrid({ initialNewsletters }) {
 
-	const newsletters = initialNewsletters;
+	const [language, setLanguage] = useState('en');
+	const [currentPage, setCurrentPage] = useState(1);
+
+	const newsletters = initialNewsletters.filter(n => n.language === language).sort((a, b) => new Date(b.date) - new Date(a.date));
 	const itemsPerPage = 6;
 
     const indexOfLast = currentPage * itemsPerPage;
@@ -25,7 +28,10 @@ export default function NewsletterGrid({ initialNewsletters, language, currentPa
 				<select
 					id="language"
 					value={language}
-					disabled
+					onChange={(e) => {
+						setLanguage(e.target.value);
+						setCurrentPage(1);
+					}}
 					className="border px-2 py-1 rounded">
 					<option value="en">English</option>
 					<option value="es">Español</option>
@@ -55,6 +61,7 @@ export default function NewsletterGrid({ initialNewsletters, language, currentPa
 
 			<div className="flex justify-center mt-6 space-x-2">
 				<button
+					onClick={() => setCurrentPage(currentPage - 1)}
 					disabled={currentPage === 1}
 					className="px-3 py-1 border rounded disabled:opacity-50">
 					&lt;
@@ -62,6 +69,7 @@ export default function NewsletterGrid({ initialNewsletters, language, currentPa
 				{Array.from({ length: totalPages }, (_, i) => (
 					<button
 						key={i}
+						onClick={() => setCurrentPage(i + 1)}
 						className={`px-3 py-1 border rounded ${
 							currentPage === i + 1 ? 'bg-blue text-white' : 'bg-white'
 						}`}>
@@ -69,6 +77,7 @@ export default function NewsletterGrid({ initialNewsletters, language, currentPa
 					</button>
 				))}
 				<button
+					onClick={() => setCurrentPage(currentPage + 1)}
 					disabled={currentPage === totalPages}
 					className="px-3 py-1 border rounded disabled:opacity-50">
 					&gt;
