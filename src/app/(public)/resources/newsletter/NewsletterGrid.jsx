@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
+export const revalidate = 86400; // every 24h
 export default function NewsletterGrid({ initialNewsletters }) {
 
 	const [language, setLanguage] = useState('en');
