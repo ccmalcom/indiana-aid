@@ -6,9 +6,9 @@ import NewsletterGrid from './NewsletterGrid';
 
 
 
-export default async function Newsletter({ searchParams }) {
-	const language = searchParams?.language || 'en';
-	const currentPage = parseInt(searchParams?.page) || 1;
+export default async function Newsletter({  }) {
+	// const language = searchParams?.language || 'en';
+	// const currentPage =  parseInt( await searchParams?.page) || 1;
 
 	const allNewsletters = await getNewsletters();
 
@@ -17,8 +17,6 @@ export default async function Newsletter({ searchParams }) {
 			<NewsletterSubscription />
 			<NewsletterGrid
 				initialNewsletters={allNewsletters}
-				language={language}
-				currentPage={currentPage}
 			/>
 		</div>
 	);
