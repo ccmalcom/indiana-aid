@@ -1,5 +1,6 @@
 
 // https://www.facebook.com/IndianaAID1
+// https://www.instagram.com/indianaaid/
   const mockUpdates = [
   {
     platform: 'facebook',
