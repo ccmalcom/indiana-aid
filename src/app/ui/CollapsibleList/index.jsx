@@ -15,10 +15,10 @@ const CollapsibleItem = ({ title, content }) => {
 		<div className="mb-2 border-b pb-2">
 			<button
 				onClick={toggle}
-				className={`text-lg font-semibold w-full text-left flex justify-between items-center hover:text-yellow-dark`}
+				className={`text-lg font-semibold w-full text-left flex justify-start items-center hover:text-yellow-dark`}
 			>
-				<span className=''>{title}</span>
-				<span>{isOpen ? '▲' : '▼'}</span>
+				<span>{isOpen ? '-' : '+'}</span>
+				<span className='px-4'>{title}</span>
 			</button>
 			{isOpen && (
 				<div className="pl-4 mt-2">
