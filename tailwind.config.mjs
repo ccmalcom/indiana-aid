@@ -16,6 +16,7 @@ export default {
         'yellow-dark': '#E7AE00',
         'red': '#C33149',
         'red-dark': '#8C2234',
+        'green': '#80BC55',
       },
       // fontFamily: {
       //   urbanist: ['var(--font-urbanist)', 'sans-serif'],

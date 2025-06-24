@@ -121,7 +121,7 @@ const resourceHeadings = {
         url: 'https://docs.google.com/viewerng/viewer?url=https://files.elfsight.com/storage/7e2bd631-ad6f-4510-a965-36fc18fa339d/b898da54-331d-472d-a12b-bfba998add6d/Lyft-Grocery-Access-Flyer.pdf'
       }
     ],
-		Employment: [
+		'Employment': [
       {
         text: 'Project Azul',
         url: 'https://www.projectazul.org/',
@@ -135,7 +135,7 @@ const resourceHeadings = {
         url: 'https://indplsul.org/job-seekers/',
       }
     ],
-		Medical: [
+		'Medical': [
       {
         text: 'FREE Medical Clinics - Gennesaret',
         url: 'https://www.gennesaret.org/medical/',
@@ -259,7 +259,7 @@ export default async function ResourcesPage() {
 				<p className="italic mb-8 max-w-3xl">
 					Indiana AID is a volunteer group that is not associated with any
 					government organization. We cannot provide professional legal
-					advice... we do not sanction any kind of illegal activity, etc etc.
+					advice and we do not sanction any kind of illegal activity.
 				</p>
 
 				{/* Top Buttons */}
