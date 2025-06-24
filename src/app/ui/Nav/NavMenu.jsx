@@ -8,22 +8,22 @@ export default function NavMenu() {
 
     return (
         <div className="pr-8 md:block hidden text-xl">
-				<Link href="/" className={`p-4 ${currentRoute === '/' ? 'text-yellow' : ''}`}>
+				<Link href="/" className={`p-4 ${currentRoute === '/' ? 'text-yellow' : 'hover:text-yellow'}`}>
 					Home
 				</Link>
-				<Link href="/about" className={`p-4 ${currentRoute === '/about' ? 'text-yellow' : ''}`}>
+				<Link href="/about" className={`p-4 ${currentRoute === '/about' ? 'text-yellow' : 'hover:text-yellow'}`}>
 					About
 				</Link>
-				<Link href="/volunteer" className={`p-4 ${currentRoute === '/volunteer' ? 'text-yellow' : ''}`}>
+				<Link href="/volunteer" className={`p-4 ${currentRoute === '/volunteer' ? 'text-yellow' : 'hover:text-yellow'}`}>
 					Volunteer
 				</Link>
-				<Link href="/donate" className={`p-4 ${currentRoute === '/donate' ? 'text-yellow' : ''}`}>
+				<Link href="/donate" className={`p-4 ${currentRoute === '/donate' ? 'text-yellow' : 'hover:text-yellow'}`}>
 					Donate
 				</Link>
-				<Link href="/resources" className={`p-4 ${currentRoute.startsWith('/resources') ? 'text-yellow' : ''}`}>
+				<Link href="/resources" className={`p-4 ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
 					Resources
 				</Link>
-				<Link href="/contact" className={`p-4 ${currentRoute === '/contact' ? 'text-yellow' : ''}`}>
+				<Link href="/contact" className={`p-4 ${currentRoute === '/contact' ? 'text-yellow' : 'hover:text-yellow'}`}>
 					Contact
 				</Link>
 				{/* translate dropdown */}
