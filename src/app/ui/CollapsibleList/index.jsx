@@ -15,9 +15,9 @@ const CollapsibleItem = ({ title, content }) => {
 		<div className="mb-2 border-b pb-2">
 			<button
 				onClick={toggle}
-				className="text-lg font-semibold w-full text-left flex justify-between items-center hover:text-yellow-dark"
+				className={`text-lg font-semibold w-full text-left flex justify-between items-center hover:text-yellow-dark`}
 			>
-				<span>{title}</span>
+				<span className=''>{title}</span>
 				<span>{isOpen ? '▲' : '▼'}</span>
 			</button>
 			{isOpen && (
@@ -27,7 +27,7 @@ const CollapsibleItem = ({ title, content }) => {
 							{content.map((item, idx) => (
 								<li key={idx}>
 									{item.url ? (
-										<Link href={item.url} className="text-blue hover:text-yellow-dark hover:underline" target="_blank" rel="noopener noreferrer">
+										<Link href={item.url} className="text-blue hover:underline" target="_blank" rel="noopener noreferrer">
 											{item.text}
 										</Link>
 									) : (
