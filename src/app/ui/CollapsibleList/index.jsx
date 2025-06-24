@@ -39,12 +39,31 @@ export default async function CollapsibleList({ resourceHeadings }) {
                     <summary className="cursor-pointer text-lg font-semibold text-blue hover:text-yellow transition-colors mb-2">
                         {category}
                     </summary>
-                    {/* <h2 className="text-xl font-semibold mb-2">{category}</h2> */}
                     <ul className="list-disc pl-5 space-y-1">
+                        {/* if item */}
                         {items.map((item, index) => (
+                            // if item is a string, render it as a list item
+                            // if array, should be collapsable heading with items
+                            typeof item === 'string' ? (
                             <li key={index} className="text-gray-700">
                                 {item}
                             </li>
+                            ) : (
+                                <li key={index} className="text-gray-700">
+                                    <details>
+                                        <summary className="cursor-pointer text-blue hover:text-yellow transition-colors">
+                                            {item.heading}
+                                        </summary>
+                                        <ul className="list-disc pl-5 space-y-1">
+                                            {item.items.map((subItem, subIndex) => (
+                                                <li key={subIndex} className="text-gray-700">
+                                                    {subItem}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </details>
+                                </li>
+                            )
                         ))}
                     </ul>
                 </details>
