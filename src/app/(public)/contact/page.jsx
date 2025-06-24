@@ -53,7 +53,7 @@ export default function Contact() {
 	};
 
 	return (
-		<div className="viewport min-h-[66vh]">
+		<div className="viewport min-h-[66vh] max-h-[100vh]  py-8">
 			<div className='w-[50%] m-auto mt-4 text-center text-blue'>
 				<h1 className="text-3xl font-bold text-center my-4">Contact Indiana Aid</h1>
 				<p>
