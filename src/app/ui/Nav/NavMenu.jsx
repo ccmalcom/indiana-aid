@@ -4,12 +4,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function NavMenu() {
+export default function NavMenu({isMenuOpen}) {
 	const currentRoute = usePathname();
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	return (
-		<div className="pr-8 md:block hidden text-xl">
+    <div className={`pr-6 text-xl ${isMenuOpen ? 'flex flex-col bg-blue absolute top-20 right-0 w-full text-right' : 'hidden'} md:block`}>
 			<Link
 				href="/"
 				className={`p-4 ${currentRoute === '/' ? 'text-yellow' : 'hover:text-yellow'}`}>
@@ -41,7 +41,7 @@ export default function NavMenu() {
 				</Link>
 
 				{showDropdown && (
-					<div className="absolute top-full left-0 mt-1 bg-blue shadow rounded">
+					<div className="">
 						<Link
 							href="/resources/newsletter"
 							className="block px-4 py-2 hover:text-yellow">

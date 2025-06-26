@@ -7,12 +7,15 @@
 //   -Donate
 //   -Resources (will have sublinks)
 //   -Contact
-'use server';
+'use client';
 import Image from 'next/image';
 import NavMenu from './NavMenu';
 import Link from 'next/link';
+import { useState } from 'react';
 
-export default async function Nav() {
+export default  function Nav() {
+
+	const [isOpen, setIsOpen] = useState(false);
 
 
 	return (
@@ -29,8 +32,8 @@ export default async function Nav() {
 				className="ml-12"
 			/>
 			</Link>
-			<div className="px-4 cursor-pointer md:hidden">Menu</div>
-			<NavMenu />
+			<div className="px-4 cursor-pointer pr-8 md:hidden" onClick={()=>setIsOpen(!isOpen)}>Menu</div>
+			<NavMenu isMenuOpen={isOpen}/>
 			
 		</nav>
 	);
