@@ -33,7 +33,7 @@ export default  function Nav() {
 			/>
 			</Link>
 			<div className="px-4 cursor-pointer pr-8 md:hidden" onClick={()=>setIsOpen(!isOpen)}>Menu</div>
-			<NavMenu isMenuOpen={isOpen}/>
+			<NavMenu isMenuOpen={isOpen} setIsMenuOpen={setIsOpen}/>
 			
 		</nav>
 	);
