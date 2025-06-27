@@ -8,6 +8,8 @@ import Link from 'next/link';
 import Calendar from './ui/Calendar';
 
 export default async function Home() {
+	const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+	const CALENDAR_ID = process.env.CALENDAR_ID;
 	return (
 		<div id="fullView" className="min-h-screen w-[90vw] md:w-[80vw] m-auto">
 			<Hero />
@@ -112,7 +114,7 @@ export default async function Home() {
 
 				<div className=" bg-blue m-4 p-8 text-white text-center flex flex-col items-center justify-center row-span-1">
 					<h1 className="text-3xl mb-8 ">Calendar</h1>
-					<Calendar />
+					<Calendar apiKey={GOOGLE_API_KEY} calendarId={CALENDAR_ID}/>
 				</div>
 			</div>
 		</div>
