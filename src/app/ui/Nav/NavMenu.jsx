@@ -9,7 +9,7 @@ export default function NavMenu({isMenuOpen, setIsMenuOpen}) {
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	return (
-    <div className={`pr-6 text-xl ${isMenuOpen ? 'flex flex-col bg-blue absolute top-20 right-0 w-full text-right' : 'hidden'} md:block`}>
+    <div className={`pr-6 text-xl ${isMenuOpen ? 'flex flex-col bg-blue absolute top-full right-0 w-full text-right' : 'hidden'} md:block`}>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/"
@@ -46,7 +46,7 @@ export default function NavMenu({isMenuOpen, setIsMenuOpen}) {
 				</Link>
 
 				{showDropdown && (
-					<div className="">
+					<div className="absolute bg-blue text-white mt-1 right-0 shadow-lg rounded z-50">
 						<Link
 							onClick={() => setIsMenuOpen(false)}
 							href="/resources/newsletter"
