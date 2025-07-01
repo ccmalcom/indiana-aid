@@ -13,10 +13,10 @@ export default async function Home() {
 		<div id="fullView" className="min-h-screen w-[90vw] md:w-[80vw] m-auto">
 			<Hero />
 
-			<div className="flex align-center justify-center ">
+			<div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-1 gap-4 m-4">
 				<div
 					id="newsletter-card"
-					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+					className=' bg-blue m-4 p-4 text-white text-center'>
 					<div className="card-header">
 						<h1 className="text-2xl ">Monthly Newsletter</h1>
 					</div>
@@ -36,7 +36,7 @@ export default async function Home() {
 				
 				<div
 					id="knowledge-card"
-					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+					className=' bg-blue m-4 p-4 text-white text-center'>
 					<h1 className="text-2xl ">Quick Links</h1>
 					<div className="flex flex-col items-center justify-center">
 						<a
@@ -54,7 +54,7 @@ export default async function Home() {
 				</div>
 				<div
 					id="connect-card"
-					className={`w-1/3 h-1/3 bg-blue m-4 p-4 text-white text-center`}>
+					className=' bg-blue m-4 p-4 text-white text-center'>
 					<div className="card-header">
 						<h1 className="text-2xl ">Connect with Us</h1>
 					</div>
@@ -82,8 +82,8 @@ export default async function Home() {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-2 grid-rows-1 gap-4">
-				<div className=" bg-blue m-4 p-12 text-white row-span-2">
+			<div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-4">
+				<div className=" bg-blue m-4 p-12 text-white row-span-1">
 					<h1 className="text-3xl pb-8  text-center">At A Glance...</h1>
 					<p className="text-lg ">
 						Indiana AID (Assistance to Immigrants in Detention) is a volunteer

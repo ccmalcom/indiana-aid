@@ -20,6 +20,7 @@ export async function getCalendarEvents(apiKey, calendarId, date) {
         }
 
         const data = await response.json();
+        console.log('Fetched calendar events:', JSON.stringify(data));
         return data.items || [];
     } catch (error) {
         console.error('Failed to fetch calendar events:', error);
