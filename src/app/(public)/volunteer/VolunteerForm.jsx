@@ -135,7 +135,7 @@ export default function Volunteer() {
 
 			<div
 				id="volunteer-form"
-				className="volunteer-form w-[66vw] mx-auto flex flex-col items-center bg-blue rounded-2xl shadow-lg p-8 m-4 text-white ">
+				className="volunteer-form w-[90vw] lg:w-[70%] mx-auto flex flex-col items-center bg-blue rounded-2xl shadow-lg p-8 m-4 text-white ">
 				<h2 className="text-2xl font-heading font-bold">Volunteer Form</h2>
 				{isSubmitting ? (
 					<div className="h-6 mt-2 text-sm text-center font-body">

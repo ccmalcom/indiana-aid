@@ -87,7 +87,7 @@ export default async function About() {
 				</div>
 
 				{/* Get Involved! use yellow bg to pop*/}
-				<div className="w-[70%] mx-auto bg-yellow border border-yellow rounded-xl p-10 flex flex-col items-center text-blue">
+				<div className="w-[100%] lg:w-[70%] mx-auto bg-yellow border border-yellow rounded-xl p-10 flex flex-col items-center text-blue">
 					<h2 className="text-3xl font-bold mb-4 text-center underline">Get Involved!</h2>
 					<p className="text-xl my-4 text-center font-semibold w-[80%] mx-auto">
 						We’re always looking to expand our team for a variety of needs including, but not limited to: Visitation (In-Person & Virtual),  Fundraising, Translation, Administrative Assistance, Special Events

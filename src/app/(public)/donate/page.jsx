@@ -82,8 +82,8 @@ export default async function Donate() {
 				<h2 className="text-3xl font-bold">Where the Money Goes</h2>
 			</div>
 
-			<div className="bg-blue text-white p-6 rounded shadow flex flex-col md:flex-row items-start justify-between gap-6 text-md text-center ">
-				<div className="flex flex-col items-center w-1/3">
+			<div className="bg-blue text-white p-6 rounded shadow grid  grid-cols-1 md:grid-cols-3  items-center justify-between gap-6 text-md text-center ">
+				<div className="flex flex-col items-center col-span-1">
 					<Image
 						src="/donate/Hygiene-Kit.png"
 						alt="Commissary"
@@ -104,7 +104,7 @@ export default async function Donate() {
 					</p>
 				</div>
 
-				<div className="flex flex-col items-center w-1/3">
+				<div className="flex flex-col items-center col-span-1">
 					<Image
 						src="/donate/Inmate-Sales-Icon.png"
 						alt="Virtual Visits"
@@ -120,7 +120,7 @@ export default async function Donate() {
 					</p>
 				</div>
 
-				<div className="flex flex-col items-center w-1/3">
+				<div className="flex flex-col items-center ">
 					<Image
 						src="/donate/Crossword.jpg"
 						alt="Books & Puzzles"

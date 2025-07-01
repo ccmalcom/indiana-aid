@@ -53,7 +53,7 @@ export default function Contact() {
 	};
 
 	return (
-		<div className="viewport min-h-[66vh] max-h-[100vh]  py-8">
+		<div className="viewport min-h-[66vh]  py-8">
 			<div className='w-[50%] m-auto mt-4 text-center text-blue'>
 				<h1 className="text-3xl font-bold text-center my-4">Contact Indiana Aid</h1>
 				<p>
@@ -94,10 +94,8 @@ export default function Contact() {
 					<p>Thanks for reaching out. We'll get back to you soon.</p>
 				</div>
 			) : (
-				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 px-16 w-fit mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
-					<div className="form-header flex flex-col items-center justify-center mb-4">
-						<h1 className="text-2xl">Contact Form</h1>
-					</div>
+				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 px-16 w-[90%] md:w-[70%] lg:w-[55%] mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
+						<h1 className="text-2xl mb-4">Contact Form</h1>
 
 					{error && (
 						<div className="flex flex-col items-center justify-center bg-blue text-white p-4 w-[66%] m-auto mt-4 rounded-lg shadow-lg min-h-[50vh] text-center">
@@ -113,8 +111,8 @@ export default function Contact() {
 					)}
 
 					<form onSubmit={sendEmail}>
-						<div className="form-group flex w-full gap-4 mb-4 i">
-							<div className="flex flex-col flex-1">
+						<div className="form-group flex  mb-4 flex-col sm:flex-row">
+							<div className="flex flex-col sm:mr-2">
 								<label htmlFor="name" className="mb-2 font-semibold">
 									Name:
 								</label>
@@ -127,7 +125,7 @@ export default function Contact() {
 									placeholder="Your name"
 								/>
 							</div>
-							<div className="flex flex-col flex-1">
+							<div className="flex flex-col sm:ml-2">
 								<label htmlFor="email" className="mb-2 font-semibold">
 									Email:
 								</label>
