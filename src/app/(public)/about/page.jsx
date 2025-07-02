@@ -92,7 +92,9 @@ export default async function About() {
 					<p className="text-xl my-4 text-center font-semibold w-[80%] mx-auto">
 						We’re always looking to expand our team for a variety of needs including, but not limited to: Visitation (In-Person & Virtual),  Fundraising, Translation, Administrative Assistance, Special Events
 					</p>
-					<button className='mt-4 p-4 bg-blue text-white rounded-xl font-semibold'>Sign Up to Volunteer</button>
+					<Link href="/volunteer">
+						<button className='mt-4 p-4 bg-blue text-white rounded-xl font-semibold'>Sign Up to Volunteer</button>
+					</Link>
 					</div>
 			</div>
 		</div>
