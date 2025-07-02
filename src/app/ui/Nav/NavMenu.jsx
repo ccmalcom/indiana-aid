@@ -15,7 +15,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 				isMenuOpen
 					? 'fixed top-0 right-0 w-32 h-full z-50 bg-blue text-white flex flex-col pt-24 space-y-6 transition-transform transform translate-x-0'
 					: 'hidden'
-			} text-xl md:block md:relative md:top-0 md:right-0 md:flex md:flex-row md:items-center md:space-x-6 md:pt-0`}>
+			} text-xl lg:block lg:relative lg:top-0 lg:right-0 lg:flex lg:flex-row lg:items-center lg:space-x-6 lg:pt-0`}>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/"
