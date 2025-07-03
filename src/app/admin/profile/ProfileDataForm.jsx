@@ -95,6 +95,7 @@ export default function ProfileDataForm({ data }) {
 							setFormData((prev) => ({ ...prev, [name]: value }))
 						}
 						type="email"
+                        name="email"
 						label="Email"
 						placeholder="Enter your email"
 						className="w-full"
@@ -126,12 +127,11 @@ export default function ProfileDataForm({ data }) {
 					className={`rounded-lg p-2 ${isDirty ? 'bg-blue text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
 					Update Profile
 				</button>
-				<button className="bg-yellow text-black rounded-lg p-2 ml-2">
-					Change Password
-				</button>
-				<button className="bg-red text-white rounded-lg p-2 ml-2">
-					Delete Account
-				</button>
+				
+			</div>
+            <div className="flex items-center mx-auto w-[50%] flex-col">
+				<p>Created at: {new Date(data.created_at).toLocaleDateString()}</p>
+				<p>Last updated at: {new Date(data.updated_at).toLocaleDateString()}</p>
 			</div>
 		</div>
 	);

@@ -53,22 +53,17 @@ export async function getUserDetails(){
     return res;
 }
 
-export async function postUserDetails(userData) {
+export async function updateUserPassword(formData) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.updateUser({
-        data: {
-            display_name: userData.displayName,
-            email: userData.email,
-            phone: userData.phone,
-        }
+        password: formData.get('password'),
     });
-
     if (error) {
-        console.error("Error updating user details:", JSON.stringify(error));
-        return null;
+        console.error("Error updating user password:", JSON.stringify(error));
+        return { success: false, error: error.message };
     }
 
-    return data;
+    return { success: true, data };
 }
 
 export async function getNewsletterInfo(){

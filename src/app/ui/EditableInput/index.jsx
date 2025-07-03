@@ -20,7 +20,7 @@ export default function EditableInput({
 }) {
 	const [isEditing, setIsEditing] = useState(false);
 	const [value, setValue] = useState(initialValue);
-	const [viewSize, setViewSize] = useState('sm');
+	const [viewSize, setViewSize] = useState('');
 
 	const handleEditClick = () => {
 		setIsEditing(true);
