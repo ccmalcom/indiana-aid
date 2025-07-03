@@ -12,8 +12,10 @@ export async function sendPasswordReset(email, pathname) {
 		redirectTo: redirectUrl,
 	});
 	if (error) {
-		console.error('Error resetting password:', error);
+		console.error('Error resetting password:::::', error);
+        return { error: error.message || 'Failed to send password reset link. Please try again later.' };
 	} else {
 		console.log('Password reset email sent successfully');
+        return { success: true, message: 'Password reset email sent successfully.' };
 	}
 }
