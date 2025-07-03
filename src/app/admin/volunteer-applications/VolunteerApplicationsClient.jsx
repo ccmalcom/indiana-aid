@@ -1,53 +1,37 @@
-// src/app/admin/volunteer-applications/VolunteerApplicationsClient.jsx
+// Client component: handles interactivity and state management
+// Child component: VolunteerTable.jsx
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import VolunteerTable from './VolunteerTable';
+import VolunteerApplicationModal from './VolunteerApplicationModal';
 
-export default function VolunteerApplicationsClient({ applications: initialData }) {
-  const [applications, setApplications] = useState(initialData);
+export default function VolunteerApplicationsClient({ applications }) {
+    const [selectedApplication, setSelectedApplication] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Volunteer Applications</h1>
-      {applications.length === 0 ? (
-        <p>No volunteer applications found.</p>
-      ) : (
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Name</th>
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Email</th>
-              <th className='px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700'>Phone</th>
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Languages</th>
-              {/* interest areas */}
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Interest Areas</th>
-              {/* additional info */}
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Additional Info</th>
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Status</th>
-              <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-semibold text-gray-700">Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map((app) => (
-              <tr key={app.id}>
-                <td className="px-6 py-4 border-b border-gray-200">{app.name}</td>
-                <td className="px-6 py-4 border-b border-gray-200">{app.email}</td>
-                <td className="px-6 py-4 border-b border-gray-200">{app.phone}</td>
-                <td className="px-6 py-4 border-b border-gray-200">
-                  {app.languages ? app.languages.join(', ') : 'N/A'}
-                </td>
-                <td className="px-6 py-4 border-b border-gray-200">
-                  {app.interest_areas ? app.interest_areas.join(', ') : 'N/A'}
-                </td>
-                <td className="px-6 py-4 border-b border-gray-200">
-                  {app.additional_info ? app.additional_info : 'N/A'}
-                </td>
-                <td className="px-6 py-4 border-b border-gray-200">{app.status}</td>
-                <td className="px-6 py-4 border-b border-gray-200">{new Date(app.created_at).toLocaleDateString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
+    const handleView = (app) => {
+        console.log("Viewing application:", app);
+        setSelectedApplication(app);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedApplication(null);
+    };
+
+    return (
+        <div className="p-6">
+            <VolunteerTable
+                applications={applications}
+                onView={handleView}
+            />
+            {isModalOpen && (
+                <VolunteerApplicationModal
+                    application={selectedApplication}
+                    onClose={handleCloseModal}
+                />
+            )}
+        </div>
+    );
 }
