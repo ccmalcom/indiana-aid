@@ -10,7 +10,7 @@ export default function VolunteerApplicationsClient({
 	onView,
 }) {
 	// const [applications, setApplications] = useState(initialData);
-	const [statusFilter, setStatusFilter] = useState('All');
+	const [statusFilter, setStatusFilter] = useState('Pending');
 
 	const filteredApps = statusFilter === 'All'
   ? applications
@@ -19,7 +19,7 @@ export default function VolunteerApplicationsClient({
 	return (
 		<div className="p-6">
 			<div className="mb-4 flex space-x-4">
-				{['All', 'Pending', 'Accepted', 'Rejected'].map((status) => (
+				{[ 'Pending', 'Approved', 'Rejected', 'All'].map((status) => (
 					<button
 						key={status}
 						onClick={() => setStatusFilter(status)}

@@ -18,18 +18,45 @@ export async function getVolunteerApplications() {
     return data;
 }
 
-export async function getPendingVolunteerApplications() {
+export async function updateVolunteerApplication(applicationId, status) {
     const supabase = await createClient();
+
     const { data, error } = await supabase
         .from("volunteer-applications")
-        .select("*")
-        .eq("status", "Pending")
-        .order("created_at", { ascending: false });
+        .update({ status })
+        .eq("id", applicationId);
+
     if (error) {
-        console.error("Error fetching pending volunteer applications:", JSON.stringify(error));
-        return [];
+        console.error(`Error updating application ${applicationId}:`, JSON.stringify(error));
+        return { success: false, error: error.message };
     }
-    return data;
+
+    return { success: true, data };
+}
+
+export async function createVolunteerEntry(application) {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("volunteers")
+        .insert([
+            {
+                name: application.name,
+                email: application.email,
+                phone: application.phone,
+                languages: application.languages,
+                areas_of_interest: application.interest_areas,
+                notes: application.additional_info,
+                application_id: application.id, // Link to the original application
+            },
+        ]);
+
+    if (error) {
+        console.error("Error creating volunteer entry:", JSON.stringify(error));
+        return { success: false, error: error.message };
+    }
+
+    return { success: true, data };
 }
 
 export async function logoutUser() {
