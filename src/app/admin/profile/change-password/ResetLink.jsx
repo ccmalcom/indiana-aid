@@ -33,7 +33,6 @@ export default function ResetLink({ data }) {
             setError(error.message || 'Failed to send password reset link. Please try again later.');
             setSuccess(false);
 			console.error('Error in handleChangePassword:', error);
-        
 		} finally {
 			setLoading(false);
 		}

@@ -1,6 +1,6 @@
 import { getUserDetails } from '../actions';
 import ProfileDataForm from './ProfileDataForm';
-import ProfileActions from './ProfileActions';
+// import ProfileActions from './ProfileActions';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
@@ -21,7 +21,14 @@ export default async function Profile() {
 			</div>
 
 			<ProfileDataForm data={user} />
-			<ProfileActions data={user} />
+			<div className="mt-4">
+			<Link className="bg-yellow text-black rounded-lg p-2 ml-2" href="/admin/profile/change-password">
+				Change Password
+			</Link>
+			<Link className="bg-red text-white rounded-lg p-2 ml-2" href="/admin/profile/delete-account">
+				Delete Account
+			</Link>
+		</div>
 
 
 		</div>

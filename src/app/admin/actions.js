@@ -1,20 +1,22 @@
+'use server';
 import { createClient } from '@/app/utils/supabase/server';
+import { revalidatePath, redirect } from 'next/cache';
 
 export async function getVolunteerApplications() {
     const supabase = await createClient();
-    
+
     const { data, error } = await supabase
         .from("volunteer-applications")
         .select("*")
         .order("created_at", { ascending: false });
-    
+
     if (error) {
         console.error("Error fetching volunteer applications:", JSON.stringify(error));
         return [];
     }
-    
+
     return data;
-    }
+}
 
 export async function getPendingVolunteerApplications() {
     const supabase = await createClient();
@@ -30,13 +32,25 @@ export async function getPendingVolunteerApplications() {
     return data;
 }
 
-export async function getUserDetails(){
+export async function logoutUser() {
+    const supabase = await createClient();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+        console.error("Error logging out user:", JSON.stringify(error));
+        return { success: false, error: error.message };
+    }
+    revalidatePath('/', 'layout');
+    redirect('/logout');
+    return { success: true };
+}
+
+export async function getUserDetails() {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
     if (error) {
         console.error("Error fetching user details:", JSON.stringify(error));
         return null;
-    } 
+    }
 
     const res = {
         name: data.user.user_metadata.display_name,
@@ -66,20 +80,20 @@ export async function updateUserPassword(formData) {
     return { success: true, data };
 }
 
-export async function getNewsletterInfo(){
+export async function getNewsletterInfo() {
     const supabase = await createClient();
     const { data, error } = await supabase
         .from("newsletter_issues")
         .select("*")
         .order("created_at", { ascending: false });
-    
-        // console.log('Fetched newsletters:', { data, error });
+
+    // console.log('Fetched newsletters:', { data, error });
     if (error) {
         console.error("Error fetching newsletter issues:", JSON.stringify(error));
         return [];
     }
 
-    const res ={
+    const res = {
         current_issue: data[0].volume || null,
         total_issues: data.length || 0,
         current_issue_date: data[0].date || null,
@@ -88,7 +102,7 @@ export async function getNewsletterInfo(){
     return res;
 }
 
-export async function getNewsletterSubscriberCount(){
+export async function getNewsletterSubscriberCount() {
     const supabase = await createClient();
     const { data, error } = await supabase
         .from("newsletter_subscribers")
@@ -97,7 +111,7 @@ export async function getNewsletterSubscriberCount(){
         console.error("Error fetching newsletter subscribers:", JSON.stringify(error));
         return [];
     }
-    
+
     // console.log(data.length);
     return data.length;
 }
@@ -108,12 +122,12 @@ export async function getMailingListSubscribers() {
         .from("newsletter_subscribers")
         .select("*")
         .order("created_at", { ascending: false });
-    
+
     if (error) {
         console.error("Error fetching mailing list subscribers:", JSON.stringify(error));
         return [];
     }
-    
+
     return data;
 }
 

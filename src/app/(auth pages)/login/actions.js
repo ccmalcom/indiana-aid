@@ -36,7 +36,7 @@ export async function signout() {
 	}
 
 	revalidatePath('/', 'layout');
-	redirect('/');
+	redirect('/logout');
 }
 
 export async function getUser() {

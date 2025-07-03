@@ -20,7 +20,7 @@ export default async function LoginPage() {
 
 	if (!user) {
 	return (
-		<form className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg space-y-4">
+		<form className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg space-y-4 mt-10">
 			<h2 className="text-2xl font-bold text-center">Admin Login</h2>
 
 			<div className="flex flex-col">
