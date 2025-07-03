@@ -4,7 +4,7 @@
 // onClose: function to close the modal
 'use client';
 import { useState } from 'react';
-import { updateVolunteerApplication, createVolunteerEntry } from '../actions';
+import { updateVolunteerApplication, createVolunteerEntry } from '../../actions';
 
 export default function VolunteerApplicationModal({ application, onClose }) {
 	if (!application) return null;

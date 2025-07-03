@@ -12,8 +12,8 @@ export default async function Nav() {
 				<Link href="/admin" className="hover:underline">
 					Home
 				</Link>
-				<Link href="/admin/volunteer-applications" className="hover:underline">
-					Volunteer Apps
+				<Link href="/admin/volunteers" className="hover:underline">
+					Volunteers
 				</Link>
                 <Link href="/admin/newsletters" className="hover:underline">
                     Newsletters

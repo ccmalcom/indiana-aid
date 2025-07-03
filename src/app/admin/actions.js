@@ -34,6 +34,22 @@ export async function updateVolunteerApplication(applicationId, status) {
     return { success: true, data };
 }
 
+export async function getVolunteers() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("volunteers")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Error fetching volunteers:", JSON.stringify(error));
+        return [];
+    }
+
+    return data;
+}
+
 export async function createVolunteerEntry(application) {
     const supabase = await createClient();
 

@@ -2,7 +2,7 @@
 // Child component: VolunteerTable.jsx
 'use client';
 import { useState } from 'react';
-import VolunteerTable from './VolunteerTable';
+import VolunteerApplicationsTable from './VolunteerApplicationsTable';
 import VolunteerApplicationModal from './VolunteerApplicationModal';
 
 export default function VolunteerApplicationsClient({ applications }) {
@@ -22,7 +22,7 @@ export default function VolunteerApplicationsClient({ applications }) {
 
     return (
         <div className="p-6">
-            <VolunteerTable
+            <VolunteerApplicationsTable
                 applications={applications}
                 onView={handleView}
             />

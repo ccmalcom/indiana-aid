@@ -1,7 +1,7 @@
 'use server';
 import { getVolunteerApplications } from '@/app/admin/actions';
 import VolunteerApplicationsClient from './VolunteerApplicationsClient';
-import Header from '../ui/Header';
+import Header from '../../ui/Header';
 
 export default async function VolunteerApplicationsPage() {
   const applications = await getVolunteerApplications();
