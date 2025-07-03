@@ -87,7 +87,7 @@ export default function EditableInput({
 				</div>
 			) : (
 				<>
-					<label htmlFor={label} className="font-semibold col-span-1">
+					<label htmlFor={label} className="font-semibold col-span-1 text-right">
 						{label}:{' '}
 					</label>
 					<input
@@ -95,7 +95,7 @@ export default function EditableInput({
 						value={value}
 						// onChange={handleChange}
 						placeholder={placeholder}
-						className="border-2 border-gray-300 rounded-lg p-2 w-full col-span-3"
+						className={isEditing?`border-2 border-gray-300 rounded-lg p-2 w-full col-span-3`:`rounded-lg p-2 w-full col-span-3`}
 						disabled={!isEditing}
                         onChange={(e) => setValue(e.target.value)}
 					/>
