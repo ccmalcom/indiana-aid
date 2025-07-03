@@ -1,9 +1,7 @@
 import { getUserDetails } from '../actions';
 import ProfileDataForm from './ProfileDataForm';
-// import ProfileActions from './ProfileActions';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import Header from '../ui/Header';
 
 export default async function Profile() {
 	const user = await getUserDetails();
@@ -11,23 +9,15 @@ export default async function Profile() {
 
 	return (
 		<div className="viewport min-h-[66vh] text-center">
-			<div className="header grid grid-cols-4">
-				<Link
-					href="/admin"
-					className="text-blue hover:underline col-span-1 text-left p-4">
-					<FontAwesomeIcon icon={faArrowLeft} className="text-2xl" />
-				</Link>
-				<h1 className="text-2xl font-semibold my-4 col-span-2">Profile</h1>
-			</div>
-
+			<Header heading="Profile" />
 			<ProfileDataForm data={user} />
 			<div className="mt-4">
 			<Link className="bg-yellow text-black rounded-lg p-2 ml-2" href="/admin/profile/change-password">
 				Change Password
 			</Link>
-			<Link className="bg-red text-white rounded-lg p-2 ml-2" href="/admin/profile/delete-account">
+			{/* <Link className="bg-red text-white rounded-lg p-2 ml-2" href="/admin/profile/delete-account">
 				Delete Account
-			</Link>
+			</Link> */}
 		</div>
 
 

@@ -23,6 +23,17 @@ export default function DeleteAccount() {
 				</h1>
 			</div>
             <p className="mb-4">Are you sure you want to delete your account? This action cannot be undone.</p>
+
+            {/* verify password */}
+            <div className="mb-4">
+                <label htmlFor="password" className="block mb-2">Confirm Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    className="border rounded-lg p-2 "
+                    placeholder="Enter your password"
+                />
+            </div>
             <button
                 onClick={handleDeleteAccount}
                 className="bg-red text-white rounded-lg p-2">
