@@ -43,13 +43,32 @@ export async function getUserDetails(){
         email: data.user.email,
         role: data.user.role,
         created_at: data.user.created_at,
-        phone: data.user.phone,
+        updated_at: data.user.updated_at,
+        phone: data.user.user_metadata.phone,
         last_sign_in_at: data.user.last_sign_in_at,
         email_verified: data.user.user_metadata.email_verified,
 
     }
 
     return res;
+}
+
+export async function postUserDetails(userData) {
+    const supabase = await createClient();
+    const { data, error } = await supabase.auth.updateUser({
+        data: {
+            display_name: userData.displayName,
+            email: userData.email,
+            phone: userData.phone,
+        }
+    });
+
+    if (error) {
+        console.error("Error updating user details:", JSON.stringify(error));
+        return null;
+    }
+
+    return data;
 }
 
 export async function getNewsletterInfo(){
