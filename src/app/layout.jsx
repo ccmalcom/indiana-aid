@@ -1,8 +1,9 @@
-import localFont from 'next/font/local';
 import { Inter, Urbanist, Open_Sans } from 'next/font/google';
 import './globals.css';
 import Nav from './ui/Nav';
 import Footer from './ui/Footer';
+import { LanguageProvider } from './context/LanguageContext';
+
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -23,9 +24,11 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<body
 				className={`${openSans.variable} antialiased min-h-[100vh] flex flex-col`}>
+			<LanguageProvider>
 				<Nav />
 				<main className="flex-grow">{children}</main>
 				<Footer />
+			</LanguageProvider>
 			</body>
 		</html>
 	);

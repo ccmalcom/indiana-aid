@@ -3,10 +3,18 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 	const currentRoute = usePathname();
 	const [showDropdown, setShowDropdown] = useState(false);
+	const { language, changeLanguage, loaded } = useLanguage();
+
+	const handleLanguageChange = (e) => {
+		const selectedLang = e.target.value;
+		changeLanguage(selectedLang);
+		console.log(`Switching to: ${selectedLang}`);
+	};
 
 	return (
 						
@@ -75,19 +83,17 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 				Contact
 			</Link>
 			{/* translate dropdown */}
-			<div className="w-full flex p-4 md:p-0 md:pr-4 md:mt-0 md:justify-end">
+			<div className="w-full min-w-32 flex p-4 md:p-0 md:pr-4 md:mt-0 md:justify-end">
+				{loaded && (
 				<select
 					className="bg-white text-blue px-2 py-1 rounded text-sm"
-					defaultValue="en"
-					onChange={(e) => {
-						const selectedLang = e.target.value;
-						alert(`Switching to: ${selectedLang}`);
-					}}>
+					value={language}
+					onChange={handleLanguageChange}>
 					<option value="en">English</option>
 					<option value="es">Español</option>
 					<option value="ar">العربية</option>
 					<option value="fr">Français</option>
-				</select>
+				</select>)}
 			</div>
 		</div>
 	);

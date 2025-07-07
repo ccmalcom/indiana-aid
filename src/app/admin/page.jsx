@@ -1,6 +1,5 @@
 // 'use client';
 
-import Link from 'next/link';
 import ProfileCard from './ui/Cards/ProfileCard';
 import VolunteerCard from './ui/Cards/VolunteerCard';
 import { getUserDetails, getVolunteerApplications, getNewsletterInfo, getNewsletterSubscriberCount, getMailingListSubscribers } from './actions';
