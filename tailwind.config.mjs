@@ -18,6 +18,9 @@ export default {
         'red-dark': '#8C2234',
         'green': '#80BC55',
       },
+       screens: {
+        'xx': '1180px',
+      },
       // fontFamily: {
       //   urbanist: ['var(--font-urbanist)', 'sans-serif'],
       //   heading: ['var(--font-urbanist)', 'sans-serif'],

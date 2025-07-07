@@ -9,15 +9,20 @@ export function LanguageProvider({ children }) {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        // Check localStorage for saved language preference
         const savedLanguage = localStorage.getItem('language');
-        if (savedLanguage && savedLanguage !== language) {
+        if (savedLanguage) {
             console.log('Hydrating language from localStorage:', savedLanguage);
-
             setLanguage(savedLanguage);
-            setLoaded(true);
+        } else {
+            const browserLanguage = navigator.language?.slice(0, 2);
+            console.log('Setting language from browser:', browserLanguage);
+            if (browserLanguage) {
+                setLanguage(browserLanguage);
+                localStorage.setItem('language', browserLanguage);
+            }
         }
-    }, [language]);
+        setLoaded(true);
+    }, []);
 
     const changeLanguage = (lang) => {
         console.log('Changing language to:', lang);

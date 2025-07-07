@@ -23,7 +23,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 				isMenuOpen
 					? 'fixed top-0 right-0 w-32 h-full z-50 bg-blue text-white flex flex-col pt-24 space-y-6 transition-transform transform translate-x-0'
 					: 'hidden'
-			} text-xl lg:block lg:relative lg:top-0 lg:right-0 lg:flex lg:flex-row lg:items-center lg:space-x-6 lg:pt-0`}>
+			} text-xl xx:block xx:relative xx:top-0 xx:right-0 xx:flex xx:flex-row xx:items-center xx:space-x-6 xx:pt-0`}>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/"
@@ -83,7 +83,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 				Contact
 			</Link>
 			{/* translate dropdown */}
-			<div className="w-full min-w-32 flex p-4 md:p-0 md:pr-4 md:mt-0 md:justify-end">
+			<div className="w-full min-w-32 flex p-4 xx:p-0 xx:pr-4 xx:mt-0 xx:justify-end">
 				{loaded && (
 				<select
 					className="bg-white text-blue px-2 py-1 rounded text-sm"

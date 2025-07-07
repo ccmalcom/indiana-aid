@@ -46,7 +46,7 @@ export default function Nav() {
 				/>
 			</Link>
 			<div
-				className="px-4 cursor-pointer pr-8 lg:hidden"
+				className="px-4 cursor-pointer pr-8 xx:hidden"
 				onClick={() => setIsOpen(!isOpen)}>
 				<div className="space-y-1">
 					<span className="block w-6 h-0.5 bg-white"></span>
