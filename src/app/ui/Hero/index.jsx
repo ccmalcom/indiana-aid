@@ -15,12 +15,12 @@ export default function Hero() {
 				id="right-hero"
 				className=" col-span-1 flex lg:flex-col items-center justify-evenly lg:justify-center lg:pr-10">
 				<Link href="/donate">
-					<button className="bg-blue  hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl rounded">
+					<button className="bg-blue  hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl min-w-36 rounded">
 						Donate
 					</button>
 				</Link>
 				<Link href="/volunteer">
-					<button className="bg-blue hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl  rounded">
+					<button className="bg-blue hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl min-w-36 rounded">
 						Volunteer
 					</button>
 				</Link>
