@@ -50,7 +50,13 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 			</Link>
 			<div
 				className="relative inline-block p-4"
-				onMouseEnter={() => setShowDropdown(true)}
+				onMouseEnter={() => {
+					// if mobile view, do not show dropdown
+					if (window.innerWidth < 768) {
+						return;
+					}
+					setShowDropdown(true);
+				}}
 				onMouseLeave={() => setShowDropdown(false)}>
 				<Link
 					onClick={() => setIsMenuOpen(false)}
