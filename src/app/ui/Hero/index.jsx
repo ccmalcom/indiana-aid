@@ -6,7 +6,7 @@ export default function Hero() {
 			<div
 				id="left-hero"
 				className=" col-span-1 lg:col-span-2 flex flex-col items-center justify-center text-center mx-10 lg:mx-20 ">
-				<p className="text-lg font-semibold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white">
+				<p className="text-xl font-semibold  md:text-3xl lg:text-4xl text-white">
 					Providing resources, direct aid, and support to immigrants and
 					their families impacted by ICE detention in Indiana.
 				</p>
