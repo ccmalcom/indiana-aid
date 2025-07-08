@@ -47,9 +47,9 @@ export default async function Home() {
 								Find Help
 							</button>
 						</a>
-						<button className="bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 mt-4 mx-2  rounded ">
-							Know Your Rights
-						</button>
+						<Link href="/resources" className="bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 mt-4 mx-2  rounded ">
+							Resources
+						</Link>
 					</div>
 				</div>
 				<div
