@@ -23,7 +23,7 @@ export default async function Donate() {
 			<div className="grid md:grid-cols-2 gap-6 mb-12">
 				{/* Donate Online */}
 				<div className="bg-blue text-white p-6 rounded shadow text-md">
-					<h2 className="text-2xl font-bold text-orange-300 mb-2">
+					<h2 className="text-2xl font-bold text-yellow mb-2">
 						Donate Online
 					</h2>
 					<ol className="list-decimal pl-5 space-y-1">
@@ -37,10 +37,9 @@ export default async function Donate() {
 						<Link
 							href="https://www.givelify.com/donate/shalom-mennonite-church-indianapolis-in-2j7wy5NTc3NDQ=/donation/amount"
 							target="_blank"
-							rel="noopener noreferrer">
-							<button className="bg-yellow text-white font-semibold px-4 py-2 rounded hover:bg-orange-500 transition">
+							rel="noopener noreferrer"
+							className='bg-yellow text-black font-semibold px-4 py-2 rounded hover:bg-yellow-dark transition w-full text-center text-xl'>
 								Donate
-							</button>
 						</Link>
 					</div>
 					<div className="mt-4">
@@ -55,7 +54,7 @@ export default async function Donate() {
 				</div>
 				{/* Donate by check */}
 				<div className="bg-blue text-white p-6 rounded shadow text-md">
-					<h2 className="text-2xl font-bold text-orange-300 mb-2">
+					<h2 className="text-2xl font-bold text-yellow mb-2">
 						Donate by Check
 					</h2>
 					<p>
