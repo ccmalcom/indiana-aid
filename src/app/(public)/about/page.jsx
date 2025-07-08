@@ -1,9 +1,11 @@
-'use server';
+// 'use server';
 
 import Image from 'next/image';
 import Link from 'next/link';
 // actions get data from supabase website_content table
 import { getOurStory, getHeaderText, getLookingAhead, getAffiliations } from './actions';
+
+export const dynamic = 'force-static';
 
 export default async function About() {
 	const ourStory = await getOurStory();

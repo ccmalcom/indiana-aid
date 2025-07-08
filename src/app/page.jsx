@@ -1,4 +1,4 @@
-'use server';
+// 'use server';
 
 import Hero from './ui/Hero';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Calendar from './ui/Calendar';
 import { getNewsletterCardInfo, getQuickLinksCardInfo, getConnectWithUsCardInfo, getAtAGlanceInfo } from './actions';
 
+export const dynamic = 'force-static';
 
 export default async function Home() {
 	const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;

@@ -2,8 +2,9 @@
 
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
+import { cache } from 'react';
 
-export async function getHeroText() {
+export const getHeroText = cache(async () => {
     const cookieStore = await cookies();
     const language = cookieStore.get('language')?.value || 'en'; // Default to
     const supabase = await createClient();
@@ -29,9 +30,9 @@ export async function getHeroText() {
     }
 
     return { heroText: data.value || 'Welcome to Indiana AID' };
-}
+});
 
-export async function getHeroButtons() {
+export const getHeroButtons = cache(async () => {
     const cookieStore = await cookies();
     const language = cookieStore.get('language')?.value || 'en'; // Default to 'en'
     const supabase = await createClient();
@@ -42,7 +43,6 @@ export async function getHeroButtons() {
         .eq('language', language) // Use the detected language
         .single();
 
-        console.log('heroButtons data:', data.value_json.buttons);
     if (error || !data) {
         const fallback = await supabase
             .from('website_content')
@@ -54,4 +54,4 @@ export async function getHeroButtons() {
     }
 
     return { heroButtons: data.value_json.buttons || [] };
-}
+});

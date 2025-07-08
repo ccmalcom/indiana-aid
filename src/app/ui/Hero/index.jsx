@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { getHeroText, getHeroButtons } from './actions';
 
+export const dynamic = 'force-static';
+
 
 export default async function Hero() {
 	const { heroText } = await getHeroText();
 	const { heroButtons } = await getHeroButtons();
-	console.log('heroButtons:', heroButtons);
 
 	return (
 		<div className="hero mx-auto grid grid-cols-1 lg:grid-cols-3 w-[80vw] h-[40vh] md:h-[400] py-8 sm:p-10 lg:p-0 my-8 bg-cover bg-center">

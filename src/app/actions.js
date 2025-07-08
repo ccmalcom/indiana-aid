@@ -2,6 +2,7 @@
 
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
+import { cache } from 'react';
 
 async function getLanguage() {
     const cookieStore = await cookies();
@@ -9,7 +10,7 @@ async function getLanguage() {
     return language;
 }
 
-export async function getNewsletterCardInfo() {
+export const getNewsletterCardInfo = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: headerText, error } = await supabase
@@ -51,9 +52,9 @@ export async function getNewsletterCardInfo() {
         headerText: finalHeaderText,
         buttons: buttons
     };
-}
+});
 
-export async function getQuickLinksCardInfo() {
+export const getQuickLinksCardInfo = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: headerText, error } = await supabase
@@ -95,9 +96,9 @@ export async function getQuickLinksCardInfo() {
         headerText: finalHeaderText,
         buttons: buttons
     };
-}
+});
 
-export async function getConnectWithUsCardInfo() {
+export const getConnectWithUsCardInfo = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: headerText, error } = await supabase
@@ -139,9 +140,9 @@ export async function getConnectWithUsCardInfo() {
         headerText: finalHeaderText,
         buttons: buttons
     };
-}
+});
 
-export async function getAtAGlanceInfo() {
+export const getAtAGlanceInfo = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: headerText, error } = await supabase
@@ -177,4 +178,4 @@ export async function getAtAGlanceInfo() {
         finalText = fallbackText?.data?.value_list || [];
     }
     return { headerText: finalHeaderText, text: finalText };
-}
+});

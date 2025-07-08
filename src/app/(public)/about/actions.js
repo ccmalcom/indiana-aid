@@ -1,6 +1,7 @@
 'use server';
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from 'next/headers';
+import { cache } from 'react';
 
 async function getLanguage() {
     const cookieStore = await cookies();
@@ -8,7 +9,7 @@ async function getLanguage() {
     return language;
 }
 
-export async function getOurStory() {
+export const getOurStory = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     // console.log('supabase', supabase);
@@ -33,9 +34,9 @@ export async function getOurStory() {
 
     return data?.value_list || []; // Return an empty array if no data found
 
-}
+});
 
-export async function getHeaderText() {
+export const getHeaderText = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: headerText, error } = await supabase
@@ -75,9 +76,9 @@ export async function getHeaderText() {
     }
 
     return { headerText: finalHeaderText, header: finalHeader };
-}
+});
 
-export async function getLookingAhead() {
+export const getLookingAhead = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data: textData, error } = await supabase
@@ -118,9 +119,9 @@ export async function getLookingAhead() {
         console.log('Error fetching looking ahead:', error);
     }
     return { lookingAheadText: finalText, lookingAheadItems: finalItems };
-}
+});
 
-export async function getAffiliations() {
+export const getAffiliations = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -144,4 +145,4 @@ export async function getAffiliations() {
     }
 
     return data.value_json.affiliations || [];
-}
+});
