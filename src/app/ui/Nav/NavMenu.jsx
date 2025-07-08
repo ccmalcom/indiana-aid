@@ -12,8 +12,9 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 
 	const handleLanguageChange = (e) => {
 		const selectedLang = e.target.value;
-		changeLanguage(selectedLang);
 		console.log(`Switching to: ${selectedLang}`);
+		changeLanguage(selectedLang);
+		
 	};
 
 	return (

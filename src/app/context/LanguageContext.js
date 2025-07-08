@@ -24,10 +24,24 @@ export function LanguageProvider({ children }) {
         setLoaded(true);
     }, []);
 
-    const changeLanguage = (lang) => {
+    const changeLanguage = async (lang) => {
         console.log('Changing language to:', lang);
         setLanguage(lang);
         localStorage.setItem('language', lang);
+        try{
+            await fetch('/api/set-language', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ language: lang }),
+            });
+            console.log('Language set in localStorage:', lang);
+        } catch (error) {
+            console.error('Error setting language in localStorage:', error);
+        } finally {
+            window.location.reload(); // Refresh the page to apply the new language
+        }
     };
 
     return (
