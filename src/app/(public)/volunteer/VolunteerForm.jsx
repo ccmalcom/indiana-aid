@@ -20,6 +20,11 @@ export default function Volunteer({ content }) {
 		volunteerFormHeaderText,
 		volunteerFormInstructionsText,
 		formSubmitButtonText,
+		successHeader,
+		successMessage,
+		contactUsLink,
+		errorHeader,
+		errorMessage,
 	} = content;
 
 	const [firstName, setFirstName] = useState('');
@@ -27,7 +32,7 @@ export default function Volunteer({ content }) {
 	const [email, setEmail] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' | 'error'
+	const [submissionStatus, setSubmissionStatus] = useState(null); 
 	const [submissionMessage, setSubmissionMessage] = useState('');
 	const [isLanguagesFilled, setIsLanguagesFilled] = useState(false);
 	const [isInterestsFilled, setIsInterestsFilled] = useState(false);
@@ -146,28 +151,27 @@ export default function Volunteer({ content }) {
 				</div>
 			) : submissionStatus === 'success' ? (
 				<div className="my-20 text-center">
-					<h2 className="text-gree text-xl font-semibold">
-						Thank you for signing up to volunteer with Indiana AID!
+					<h2 className="text-green text-xl font-semibold">
+						{successHeader.value}
 					</h2>
 					<br />
 					<p>
-						We will review your application and get back to you as soon as
-						possible. If you have any questions, please{' '}
+						{successMessage.value}
 						<Link href="/contact" className="underline text-yellow">
-							contact us
+							{contactUsLink.value}
 						</Link>
 					</p>
 				</div>
 			) : submissionStatus === 'error' ? (
 				<div className="my-20 text-center">
 					<h2 className="text-red text-xl text-semibold">
-						Oops! It looks like you have already signed up to volunteer.
+						{errorHeader.value}
 					</h2>
 					<br />
 					<p>
-						If you need to update your information, please{' '}
+						{errorMessage.value}
 						<Link href="/contact" className="underline text-yellow">
-							contact us
+							{contactUsLink.value}
 						</Link>{' '}
 					</p>
 				</div>

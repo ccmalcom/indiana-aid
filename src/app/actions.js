@@ -212,7 +212,6 @@ export const subscribeToMailingList = async (email) => {
     if (error && error.code !== '23505') {
 
         console.log('Error subscribing to mailing list:', error);
-        console.log('Data:', data);
         return { success: false, error: 'error' };
     }
 
@@ -244,7 +243,7 @@ export const getVolunteerPageContent = cache(async () => {
     const language = await getLanguage();
     const { data: volunteerPageData, error } = await supabase
         .from('website_content')
-        .select('value, style, key, value_list')
+        .select('value, style, key, value_list, value_json')
         .eq('page', 'volunteer')
         .eq('language', language);
 

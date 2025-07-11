@@ -23,7 +23,6 @@ export default async function Home() {
 		atAGlanceHeader,
 		atAGlanceText
 	} = homePageContent;
-	console.log('connectWithUsCardText:', connectWithUsCardText);
 
 	return (
 		<div id="fullView" className="min-h-screen w-[90vw] md:w-[80vw] m-auto">
