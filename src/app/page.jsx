@@ -8,7 +8,7 @@ import Calendar from './ui/Calendar';
 import { getNewsletterCardInfo, getQuickLinksCardInfo, getConnectWithUsCardInfo, getAtAGlanceInfo } from './actions';
 
 export const dynamic = 'force-static';
-export const revalidate = 60 * 60; // every hour
+export const revalidate = 3600; // every hour
 
 export default async function Home() {
 	const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;

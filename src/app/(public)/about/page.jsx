@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { getOurStory, getHeaderText, getLookingAhead, getAffiliations } from './actions';
 
 export const dynamic = 'force-static';
-export const revalidate = 60 * 60; // every hour
+export const revalidate = 3600; // every hour
 
 export default async function About() {
 	const ourStory = await getOurStory();
