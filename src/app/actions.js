@@ -273,3 +273,19 @@ export const getAboutPageContent = cache(async () => {
     const content = formatContent(data);
     return content;
 });
+
+export const getDonatePageContent = cache(async () => {
+    const language = await getLanguage();
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from('website_content')
+        .select('key, value, value_list, value_json, style')
+        .eq('page', 'donate')
+        .eq('language', language); // Filter by language
+    if (error) {
+        console.log('Error fetching donate page content:', error);
+    }
+    const content = formatContent(data);
+    return content;
+});
