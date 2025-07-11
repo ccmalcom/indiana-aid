@@ -13,7 +13,7 @@ export default async function Hero() {
 			<div
 				id="left-hero"
 				className=" col-span-1 lg:col-span-2 flex flex-col items-center justify-center text-center mx-10 lg:mx-20 ">
-				<p className="text-lg font-semibold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white">
+				<p className="text-xl font-semibold  md:text-3xl lg:text-4xl text-white">
 					{heroText}
 				</p>
 			</div>
@@ -24,7 +24,7 @@ export default async function Hero() {
 						<Link
 							key={index}
 							href={button.url}
-							className="bg-blue  hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl rounded">
+							className="bg-blue min-w-36 hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl rounded">
 							{button.text}
 						</Link>
 					))}	
