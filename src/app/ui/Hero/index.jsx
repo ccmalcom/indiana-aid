@@ -24,7 +24,7 @@ export default async function Hero() {
 						<Link
 							key={index}
 							href={button.url}
-							className="bg-blue min-w-36 hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl rounded">
+							className="bg-blue min-w-36 hover:text-yellow text-white py-2 px-4 my-2 lg:my-4 text-2xl rounded text-center">
 							{button.text}
 						</Link>
 					))}	
