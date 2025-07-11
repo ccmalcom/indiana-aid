@@ -179,3 +179,34 @@ export const getAtAGlanceInfo = cache(async () => {
     }
     return { headerText: finalHeaderText, text: finalText };
 });
+
+export const subscribeToMailingList = async (email) => {
+    const supabase = await createClient();
+    if (!email) {
+        console.log('Email is required for subscription');
+        return { success: false, error: 'Email is required for subscription' };
+    }
+    // Ensure email is a string
+    if (typeof email !== 'string') {
+        console.log('Email must be a string');
+        return { success: false, error: 'Email must be a string' };
+    }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        console.log('Invalid email format');
+        return { success: false, error: 'Invalid email format' };
+    }
+    const { data, error } = await supabase
+        .from('mailing_list')
+        .insert([{ email: email.trim().toLowerCase() }]);
+
+    if (error && error.code !== '23505') {
+        
+        console.log('Error subscribing to mailing list:', error);
+        console.log('Data:', data);
+        return { success: false, error: 'error' };
+    }
+
+    return { success: true, message: 'Subscription successful' };
+}

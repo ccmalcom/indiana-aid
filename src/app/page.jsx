@@ -6,6 +6,7 @@ import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 import Calendar from './ui/Calendar';
 import { getNewsletterCardInfo, getQuickLinksCardInfo, getConnectWithUsCardInfo, getAtAGlanceInfo } from './actions';
+import ConnectCard from './ui/ConnectCard';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // every hour
@@ -57,7 +58,8 @@ export default async function Home() {
 						))}
 					</div>
 				</div>
-				<div
+				<ConnectCard cardInfo={connectWithUsCardInfo} />
+				{/* <div
 					id="connect-card"
 					className=' bg-blue m-4 p-4 text-white text-center'>
 					<div className="card-header">
@@ -89,7 +91,7 @@ export default async function Home() {
 							</a>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 
 			<div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-4">
