@@ -1,18 +1,16 @@
-import { Inter, Urbanist, Open_Sans } from 'next/font/google';
+import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import Nav from './ui/Nav';
 import Footer from './ui/Footer';
 import { LanguageProvider } from './context/LanguageContext';
+import { Analytics } from '@vercel/analytics/next';
+
 
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
-//using urbanist for now
-const urbanist = Urbanist({ subsets: ['latin'], variable: '--font-urbanist', display: 'swap' });
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans', display: 'swap' }); 
 export const metadata = {
 	title: 'Indiana AID',
@@ -29,6 +27,7 @@ export default function RootLayout({ children }) {
 				<main className="flex-grow">{children}</main>
 				<Footer />
 			</LanguageProvider>
+			<Analytics />
 			</body>
 		</html>
 	);
