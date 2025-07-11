@@ -39,7 +39,7 @@ export default async function Donate() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className='bg-yellow text-black font-semibold px-4 py-2 rounded hover:bg-yellow-dark transition w-full text-center text-xl'>
-								Donate
+							Donate
 						</Link>
 					</div>
 					<div className="mt-4">
