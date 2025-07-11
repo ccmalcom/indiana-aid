@@ -54,8 +54,8 @@ export default function Contact() {
 
 	return (
 		<div className="viewport min-h-[66vh]  py-8">
-			<div className='w-[50%] m-auto mt-4 text-center text-blue'>
-				<h1 className="text-3xl font-bold text-center my-4">Contact Indiana Aid</h1>
+			<div className='w-[80%] lg:w-[50%] m-auto mt-4 text-center text-blue'>
+				<h1 className="text-3xl font-bold text-center my-4">Contact Indiana AID</h1>
 				<p>
 					If you are an immigrant in need of assistance or are reaching out on
 					behalf of one, you can call us at (317) 721-4044 and leave a voicemail
@@ -94,7 +94,7 @@ export default function Contact() {
 					<p>Thanks for reaching out. We'll get back to you soon.</p>
 				</div>
 			) : (
-				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 px-16 w-[90%] md:w-[70%] lg:w-[55%] mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
+				<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 md:px-16 w-[90%] md:w-[70%] lg:w-[55%] xl:w-[40%] mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
 						<h1 className="text-2xl mb-4">Contact Form</h1>
 
 					{error && (
