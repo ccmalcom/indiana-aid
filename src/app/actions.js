@@ -202,7 +202,7 @@ export const subscribeToMailingList = async (email) => {
         .insert([{ email: email.trim().toLowerCase() }]);
 
     if (error && error.code !== '23505') {
-        
+
         console.log('Error subscribing to mailing list:', error);
         console.log('Data:', data);
         return { success: false, error: 'error' };
@@ -210,3 +210,55 @@ export const subscribeToMailingList = async (email) => {
 
     return { success: true, message: 'Subscription successful' };
 }
+
+export const getVolunteerPageContent = cache(async () => {
+
+    const supabase = await createClient();
+    const language = await getLanguage();
+    const { data: volunteerPageData, error } = await supabase
+        .from('website_content')
+        .select('value, style, key, value_list')
+        .eq('page', 'volunteer')
+        .eq('language', language);
+
+    if (error) {
+        console.error(error);
+        throw new Error('Failed to fetch form information');
+    }
+    // [{key, value, style}]
+    // transform to {key: {value, style}, ...}
+    const content = volunteerPageData.reduce((acc, item) => {
+        acc[item.key] = {
+            value: item.value,
+            style: item.style,
+            value_list: item.value_list
+        };
+        return acc;
+    }, {});
+
+    return content;
+});
+
+export const getAboutPageContent = cache(async () => {
+    const language = await getLanguage();
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from('website_content')
+        .select('key, value, value_list, value_json, style')
+        .eq('page', 'about')
+        .eq('language', language); // Filter by language
+    if (error) {
+        console.log('Error fetching about page content:', error);
+    }
+    const content = data.reduce((acc, item) => {
+        acc[item.key] = {
+            value: item.value,
+            value_list: item.value_list,
+            value_json: item.value_json,
+            style: item.style
+        };
+        return acc;
+    }, {});
+    return content;
+});

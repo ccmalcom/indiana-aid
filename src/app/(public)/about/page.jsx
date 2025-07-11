@@ -3,24 +3,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 // actions get data from supabase website_content table
-import { getOurStory, getHeaderText, getLookingAhead, getAffiliations } from './actions';
+import { getAboutPageContent } from '@/app/actions';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // every hour
 
 export default async function About() {
-	const ourStory = await getOurStory();
-	const {headerText, header} = await getHeaderText();
-	const { lookingAheadText, lookingAheadItems } = await getLookingAhead();
-	const affiliations = await getAffiliations();
+
+	const content = await getAboutPageContent();
+	const {
+		headerText,
+		lookingAheadText,
+		lookingAheadItems,
+		affiliations,
+		ourStory,
+		header
+	} = content
+
+
 	return (
 		<div className="viewport w-[80vw] mx-auto">
 			<div className=" mx-auto flex flex-col space-y-16 py-12">
 				<div className="text-center flex flex-col items-center ">
-					{/* <h1 className="text-4xl font-bold mb-4 text-blue">
-						{header}<span className="text-yellow"> Indiana AID</span>
-					</h1> */}
-					{/* Hero Image */}
 					<div className="my-4 mx-auto">
 						<Image
 							src="/WeAreIndianaAID.png"
@@ -33,7 +37,7 @@ export default async function About() {
 
 					{/* We Are Indiana AID Section */}
 					<p className="my-8">
-						{headerText}
+						{headerText.value}
 					</p>
 				</div>
 
@@ -42,7 +46,7 @@ export default async function About() {
 					{/* Right text */}
 					<div className="w-full pl-4">
 						<h2 className="text-3xl font-bold mb-4 text-blue">Our Story</h2>
-						{ourStory.map((paragraph, index) => (
+						{ourStory.value_list.map((paragraph, index) => (
 							<p key={index} className="mb-4">
 								{paragraph}
 							</p>
@@ -54,10 +58,10 @@ export default async function About() {
 				<div className="w-full">
 					<h2 className="text-3xl font-bold mb-4 text-blue">Looking Ahead</h2>
 					<p>
-						{lookingAheadText}
+						{lookingAheadText.value}
 					</p>
 					<ul className="list-disc list-inside space-y-2 mt-4">
-						{lookingAheadItems.map((item, index) => (
+						{lookingAheadItems.value_list.map((item, index) => (
 							<li key={index} className="text-blue-700">
 								{item}
 							</li>
@@ -70,7 +74,7 @@ export default async function About() {
 					<h2 className="text-3xl font-bold mb-4 text-blue">Affiliations</h2>
 					<div className="bg-blue-100 border border-blue-300 rounded p-4 w-full max-w-[935px]">
 						<ul className="list-disc list-inside space-y-2">
-							{affiliations.map((affiliation, index) => (
+							{affiliations.value_json.affiliations.map((affiliation, index) => (
 								<li key={index} className="text-blue-700">
 									{affiliation.url ? (
 										<Link
