@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function VolunteersPage() {
     const volunteers = await getVolunteers();
-    console.log("Volunteers data:", JSON.stringify(volunteers, null, 2));
+    // console.log("Volunteers data:", JSON.stringify(volunteers, null, 2));
     return (
         <div className='viewport min-h-[66vh] p-6 text-center'>
             <Header heading="Volunteers" />

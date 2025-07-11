@@ -21,7 +21,7 @@ export default function ProfileDataForm({ data }) {
 	const handleUpdateProfile = async (e) => {
 		setIsLoading(true);
 		e.preventDefault();
-		console.log('ProfileDataForm data:', JSON.stringify(formData));
+		// console.log('ProfileDataForm data:', JSON.stringify(formData));
 		// Handle profile update logic here
 		// For example, you can call supabase.auth.updateUser() with the new values
 		const updatedData = {
@@ -47,7 +47,7 @@ export default function ProfileDataForm({ data }) {
 			}
 			const result = await response.json();
 			if (result.success) {
-				console.log('Profile updated successfully:', result);
+				// console.log('Profile updated successfully:', result);
 				setSuccess(true);
 			}
 		} catch (error) {

@@ -9,7 +9,7 @@ export async function POST(request) {
             return NextResponse.json({ success: false, error: 'Invalid input data' }, { status: 400 });
         }
         // Log the incoming request body for debugging
-        console.log('Request body:', body);
+        // console.log('Request body:', body);
         const { data, error } = await supabase.auth.updateUser({
             data: {
                 display_name: body.displayName,
@@ -17,7 +17,7 @@ export async function POST(request) {
                 phone: body.phone || null, // Optional field
             },
         });
-        console.log('Update user response:', data);
+        // console.log('Update user response:', data);
         if (error) {
             console.error('Error updating user:', error);
             return NextResponse.json({ success: false, error: error.message }, { status: 500 });

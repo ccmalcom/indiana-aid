@@ -88,7 +88,6 @@ export default function Volunteer() {
 			).map((checkbox) => checkbox.value),
 			additionalInfo: e.target.additional_info.value,
 		};
-		console.log('Form Data:', JSON.stringify(formData));
 
 		setIsSubmitting(true);
 		setSubmissionStatus(null);

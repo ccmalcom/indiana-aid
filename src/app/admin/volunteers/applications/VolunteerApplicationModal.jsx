@@ -16,7 +16,7 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 	const handleApprove = async () => {
 		setIsLoading(true);
 		setStatusMessage(null);
-		console.log('Approving application:', application.id);
+		// console.log('Approving application:', application.id);
 		const updateResult = await updateVolunteerApplication(
 			application.id,
 			'Approved'
@@ -24,8 +24,8 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 		if (updateResult.success) {
 			const createResult = await createVolunteerEntry(application);
 			if (createResult.success) {
-				console.log('Successfully approved application:', application.id);
-                console.log('Created volunteer entry:', createResult.data);
+				// console.log('Successfully approved application:', application.id);
+                // console.log('Created volunteer entry:', createResult.data);
                 application.status = 'Approved'; // Update local state for immediate feedback
 				setStatusMessage('Application approved successfully.');
 			} else {
@@ -46,13 +46,13 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 		setIsLoading(true);
 		setStatusMessage(null);
         
-		console.log('Rejecting application:', application.id);
+		// console.log('Rejecting application:', application.id);
 		const updateResult = await updateVolunteerApplication(
 			application.id,
 			'Rejected'
 		);
 		if (updateResult.success) {
-			console.log('Successfully rejected application:', application.id);
+			// console.log('Successfully rejected application:', application.id);
 			setStatusMessage('Application rejected.');
             application.status = 'Rejected'; // Update local state for immediate feedback
 		} else {

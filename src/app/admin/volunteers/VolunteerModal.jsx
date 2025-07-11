@@ -26,7 +26,7 @@ export default function VolunteerModal({ volunteer, onClose }) {
 	};
 
 	const handleUpdate = async () => {
-		console.log('Updating volunteer:', volunteer.id, formData);
+		// console.log('Updating volunteer:', volunteer.id, formData);
 		setIsLoading(true);
 		setStatusMessage(null);
 		setError(null);

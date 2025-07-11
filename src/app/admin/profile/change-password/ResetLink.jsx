@@ -13,15 +13,15 @@ export default function ResetLink({ data }) {
 	const handleChangePassword = async () => {
 		setLoading(true);
 		console.log('Change password clicked');
-		console.log('pathname:', pathname);
-		console.log('email:', data.email);
+		// console.log('pathname:', pathname);
+		// console.log('email:', data.email);
 		// Use Supabase client-side if needed
 		try {
 			if (!data.email) {
 				throw new Error('Email is required to change password');
 			}
 			const response =  await sendPasswordReset(data.email, pathname);
-            console.log('response:', response);
+            // console.log('response:', response);
 			if (response.error) {
                 setError(response.error);
                 setSuccess(false);

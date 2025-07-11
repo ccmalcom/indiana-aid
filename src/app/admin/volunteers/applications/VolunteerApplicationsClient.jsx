@@ -10,7 +10,7 @@ export default function VolunteerApplicationsClient({ applications }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleView = (app) => {
-        console.log("Viewing application:", app);
+        // console.log("Viewing application:", app);
         setSelectedApplication(app);
         setIsModalOpen(true);
     };

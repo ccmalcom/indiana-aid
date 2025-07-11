@@ -30,7 +30,7 @@ export default function EditableInput({
 		if (onChange) {
 			onChange(value, name);
 		}
-		console.log('Saved value:', value);
+		// console.log('Saved value:', value);
 		setIsEditing(false);
 	};
 

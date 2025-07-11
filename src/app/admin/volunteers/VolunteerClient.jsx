@@ -10,7 +10,7 @@ export default function VolunteerClient({ volunteers, onView }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleView = (vol) => {
-        console.log("Viewing volunteer:", vol);
+        // console.log("Viewing volunteer:", vol);
         setSelectedVolunteer(vol);
         setIsModalOpen(true);
     };

@@ -51,7 +51,6 @@ export const getNewsletters = cache(async() => {
         .from('newsletter_issues')
         .select('id, volume, date, language, image_url, created_at')
         .order('id', { ascending: false });
-    console.log('Fetched newsletters:', { data, error });
     if (error) {
         throw new Error('Failed to fetch newsletters');
     }
