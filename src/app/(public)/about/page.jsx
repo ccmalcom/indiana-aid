@@ -93,9 +93,16 @@ export default async function About() {
 				{/* Get Involved! use yellow bg to pop*/}
 				<div className="w-[100%] lg:w-[70%] mx-auto bg-yellow border border-yellow rounded-xl p-10 flex flex-col items-center text-blue">
 					<h2 className="text-3xl font-bold mb-4 text-center underline">Get Involved!</h2>
-					<p className="text-xl my-4 text-center font-semibold w-[80%] mx-auto">
-						We’re always looking to expand our team for a variety of needs including, but not limited to: Visitation (In-Person & Virtual),  Fundraising, Translation, Administrative Assistance, Special Events
+					<p className="text-xl my-4 text-center font-semibold w-[100%] sm:w-[90%] md:w-[80%] mx-auto">
+						We’re always looking to expand our team for a variety of needs including, but not limited to: 
 					</p>
+					<ul className="list-disc list-inside text-blue text-xl grid grid-cols-1  text-center md:text-left items-center font-semibold">
+						<li className='mr-2'>Visitation - In-Person & Virtual</li>
+						<li className='mr-2'>Fundraising</li>
+						<li className='mr-2'>Translation</li>
+						<li className='mr-2'>Administrative Assistance</li>
+						<li className='mr-2'>Special Events</li>
+					</ul>
 					<Link href="/volunteer">
 						<button className='mt-4 p-4 bg-blue text-white rounded-xl font-semibold'>Sign Up to Volunteer</button>
 					</Link>
