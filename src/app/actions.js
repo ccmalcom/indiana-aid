@@ -3,12 +3,7 @@
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
-
-async function getLanguage() {
-    const cookieStore = await cookies();
-    const language = cookieStore.get('language')?.value || 'en'; // Default to 'en' if no language cookie is set
-    return language;
-}
+import { getLanguage } from '@/app/utils/getLanguage';
 
 export const getNewsletterCardInfo = cache(async () => {
     const language = await getLanguage();
