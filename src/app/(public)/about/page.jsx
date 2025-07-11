@@ -17,13 +17,13 @@ export default async function About() {
 		<div className="viewport w-[80vw] mx-auto">
 			<div className=" mx-auto flex flex-col space-y-16 py-12">
 				<div className="text-center flex flex-col items-center ">
-					<h1 className="text-4xl font-bold mb-4 text-blue">
+					{/* <h1 className="text-4xl font-bold mb-4 text-blue">
 						{header}<span className="text-yellow"> Indiana AID</span>
-					</h1>
+					</h1> */}
 					{/* Hero Image */}
 					<div className="my-4 mx-auto">
 						<Image
-							src="/Dove_Chains.png"
+							src="/WeAreIndianaAID.png"
 							alt="Indiana AID Dove Chain Logo"
 							width={1200}
 							height={200}
