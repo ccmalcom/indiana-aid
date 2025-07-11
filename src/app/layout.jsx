@@ -4,6 +4,7 @@ import Nav from './ui/Nav';
 import Footer from './ui/Footer';
 import { LanguageProvider } from './context/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 
 
@@ -27,6 +28,8 @@ export default function RootLayout({ children }) {
 				<main className="flex-grow">{children}</main>
 				<Footer />
 			</LanguageProvider>
+			<SpeedInsights />
+			{/* Analytics should be placed at the end of the body for performance */}
 			<Analytics />
 			</body>
 		</html>
