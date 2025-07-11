@@ -5,6 +5,19 @@ import { cookies } from 'next/headers';
 import { cache } from 'react';
 import { getLanguage } from '@/app/utils/getLanguage';
 
+const formatContent = async (data) => {
+    const content = data.reduce((acc, item) => {
+        acc[item.key] = {
+            value: item.value,
+            style: item.style,
+            value_list: item.value_list,
+            value_json: item.value_json
+        };
+        return acc;
+    }, {});
+    return content;
+}
+
 export const getNewsletterCardInfo = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
@@ -205,6 +218,25 @@ export const subscribeToMailingList = async (email) => {
 
     return { success: true, message: 'Subscription successful' };
 }
+export const getHomePageContent = cache(async () => {
+    const supabase = await createClient();
+    const language = await getLanguage();
+    const { data: homePageData, error } = await supabase
+        .from('website_content')
+        .select('value, style, key, value_list, value_json')
+        .eq('page', 'home')
+        .eq('language', language);
+
+    if (error) {
+        console.error(error);
+        throw new Error('Failed to fetch home page content');
+    }
+    // [{key, value, style}]
+    // transform to {key: {value, style}, ...}
+    const content = formatContent(homePageData);
+
+    return content;
+});
 
 export const getVolunteerPageContent = cache(async () => {
 
@@ -222,14 +254,7 @@ export const getVolunteerPageContent = cache(async () => {
     }
     // [{key, value, style}]
     // transform to {key: {value, style}, ...}
-    const content = volunteerPageData.reduce((acc, item) => {
-        acc[item.key] = {
-            value: item.value,
-            style: item.style,
-            value_list: item.value_list
-        };
-        return acc;
-    }, {});
+    const content = formatContent(volunteerPageData);
 
     return content;
 });
@@ -246,14 +271,6 @@ export const getAboutPageContent = cache(async () => {
     if (error) {
         console.log('Error fetching about page content:', error);
     }
-    const content = data.reduce((acc, item) => {
-        acc[item.key] = {
-            value: item.value,
-            value_list: item.value_list,
-            value_json: item.value_json,
-            style: item.style
-        };
-        return acc;
-    }, {});
+    const content = formatContent(data);
     return content;
 });

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { subscribeToMailingList } from '@/app/actions';
 
-export default function ConnectCard({ cardInfo }) {
+export default function ConnectCard({ text, buttons }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [email, setEmail] = useState('');
 	const [error, setError] = useState(null);
@@ -44,10 +44,10 @@ export default function ConnectCard({ cardInfo }) {
 	return (
 		<div id="connect-card" className="bg-blue m-4 p-4 text-white text-center">
 			<div className="card-header">
-				<h1 className="text-2xl">{cardInfo.headerText}</h1>
+				<h1 className="text-2xl">{text.value}</h1>
 			</div>
 			<div className="card-buttons flex flex-col items-center justify-center">
-				{cardInfo.buttons.map((button, index) => (
+				{buttons.value_json.buttons.map((button, index) => (
 					<button
 						key={index}
 						onClick={() => handleClick()}
