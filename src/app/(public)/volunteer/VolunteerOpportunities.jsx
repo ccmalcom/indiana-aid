@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-export default function VolunteerOpportunities() {
+export default function VolunteerOpportunities({ content }) {
 	const imageDescriptions = [
 		{
 			title: 'In-Person Visitation',

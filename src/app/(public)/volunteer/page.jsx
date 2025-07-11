@@ -1,32 +1,35 @@
 import VolunteerForm from './VolunteerForm';
 import VolunteerOpportunities from './VolunteerOpportunities';
+import { getVolunteerPageContent } from '@/app/actions';
 
 
 
-export default function Volunteer() {
-	
-	
+export default async function Volunteer() {
+
+
+	const content = await getVolunteerPageContent();
+
+	const {
+		volunteerHeaderText,
+		volunteerSubHeadingText
+	} = content;
+
 
 	return (
 		<div className="viewport ">
 			<div className="volunteer-info my-12 text-center px-4">
-				<h2 className="text-4xl font-heading font-bold text-blue mb-2">
-					Volunteer with Us!
+				<h2 className={volunteerHeaderText.style}>
+					{volunteerHeaderText.value}
 				</h2>
-				<p className="mb-6 font-body text-lg">
-					If you are interested in volunteering with Indiana AID, please fill
-					out our{' '}
-					<a href="#volunteer-form" className="text-blue-700 underline">
-						volunteer sign-up form
-					</a>
-					.
+				<p className={volunteerSubHeadingText.style}>
+					{volunteerSubHeadingText.value}
 				</p>
 			</div>
 			{/* oppty icons */}
-			<VolunteerOpportunities />
+			<VolunteerOpportunities content={content} />
 			{/* volunteer form */}
 
-			<VolunteerForm />
+			<VolunteerForm content={content} />
 		</div>
 	);
 }
