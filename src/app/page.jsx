@@ -12,16 +12,13 @@ export default async function Home() {
 	const CALENDAR_ID = process.env.CALENDAR_ID;
 
 	const homePageContent = await getHomePageContent();
+	// console.log('Home Page Content:', JSON.stringify(homePageContent, null, 2));
 
 	const{
-		newsletterCardText,
-		quickLinksCardText,
-		connectWithUsCardText,
-		newsletterCardButtons,
-		connectWithUsCardButtons,
-		quickLinksCardButtons,
-		atAGlanceHeader,
-		atAGlanceText
+		atAGlanceCard,
+		quickLinksCard,
+		newsletterCard, 
+		connectWithUsCard
 	} = homePageContent;
 
 	return (
@@ -33,10 +30,10 @@ export default async function Home() {
 					id="newsletter-card"
 					className=' bg-blue m-4 p-4 text-white text-center'>
 					<div className="card-header">
-						<h1 className="text-2xl ">{newsletterCardText.value}</h1>
+						<h1 className="text-2xl ">{newsletterCard.value_json.heading}</h1>
 					</div>
 					<div className="card-buttons flex flex-col items-center justify-center mb-4">
-						{newsletterCardButtons.value_json.buttons.map((button, index) => (
+						{newsletterCard.value_json.buttons.map((button, index) => (
 							<Link
 								key={index}
 								href={button.href}
@@ -50,9 +47,9 @@ export default async function Home() {
 				<div
 					id="knowledge-card"
 					className=' bg-blue m-4 p-4 text-white text-center'>
-					<h1 className="text-2xl ">{quickLinksCardText.value}</h1>
+					<h1 className="text-2xl ">{quickLinksCard.value_json.heading}</h1>
 					<div className="flex flex-col items-center justify-center">
-						{quickLinksCardButtons.value_json.buttons.map((button, index) => (
+						{quickLinksCard.value_json.buttons.map((button, index) => (
 							<Link
 								key={index}
 								href={button.href}
@@ -62,14 +59,14 @@ export default async function Home() {
 						))}
 					</div>
 				</div>
-				<ConnectCard text={connectWithUsCardText} buttons={connectWithUsCardButtons} />
+				<ConnectCard data={connectWithUsCard} />
 			</div>
 
 			<div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-4">
 				<div className=" bg-blue m-4 p-12 text-white row-span-1">
-					<h1 className="text-3xl pb-8  text-center">{atAGlanceHeader.value}</h1>
+					<h1 className="text-3xl pb-8  text-center">{atAGlanceCard.value_json.heading}</h1>
 					{/* paragraphs */}
-					{atAGlanceText.value_list.map((paragraph, index) => (
+					{atAGlanceCard.value_json.text.map((paragraph, index) => (
 						<p key={index} className="text-lg mb-4">
 							{paragraph}
 						</p>

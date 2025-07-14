@@ -1,84 +1,86 @@
 {
-    "donateByCheckCard": {
-        "value": null,
-        "style": null,
-        "value_list": null,
-        "value_json": {
-            "steps": [
-                {
-                    "label": "Pay to:",
-                    "value": "Shalom Mennonite Church"
-                },
-                {
-                    "label": "Memo:",
-                    "value": "Indiana AID"
-                },
-                {
-                    "label": "Mail to:",
-                    "value": "6100 E 32nd Street, Indianapolis, IN 46226"
-                }
-            ],
-            "header": "Donate by Check"
+  "newsletterCardText": {
+    "value": "Monthly Newsletter",
+    "style": null,
+    "value_list": null,
+    "value_json": null
+  },
+  "quickLinksCardText": {
+    "value": "Quick Links",
+    "style": null,
+    "value_list": null,
+    "value_json": null
+  },
+  "connectWithUsCardText": {
+    "value": "Connect with Us",
+    "style": null,
+    "value_list": null,
+    "value_json": null
+  },
+  "newsletterCardButtons": {
+    "value": "",
+    "style": null,
+    "value_list": null,
+    "value_json": {
+      "buttons": [
+        {
+          "href": "/resources/newsletter",
+          "text": "Read Latest Release",
+          "style": "bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 my-4  rounded "
+        },
+        {
+          "href": "/resources/newsletter",
+          "text": "Subscribe",
+          "style": "hover:text-yellow text-xl "
         }
-    },
-    "donateHeader": {
-        "value": "Donate",
-        "style": "text-4xl text-blue font-bold mb-2",
-        "value_list": null,
-        "value_json": null
-    },
-    "donateSubHeader": {
-        "value": "Your donations go directly toward supporting the immigrants we serve in the Clay County Jail*",
-        "style": "text-lg font-semibold text-gray-800",
-        "value_list": null,
-        "value_json": null
-    },
-    "donateDisclaimer": {
-        "value": "*Shalom Mennonite Church is our fiscal sponsor; none of the money donated to the Indiana AID fund goes into any other part of the church's budget.",
-        "style": "text-sm italic mt-2 max-w-2xl mx-auto text-gray-600",
-        "value_list": null,
-        "value_json": null
-    },
-    "donationTaxInfo": {
-        "value": "Your donations will be tax deductible and you will get a receipt of your donation from Shalom at the beginning of the next fiscal year.",
-        "style": "text-center text-md text-gray-600 mt-6 max-w-2xl mx-auto",
-        "value_list": null,
-        "value_json": null
-    },
-    "donateOnlineCard": {
-        "value": null,
-        "style": null,
-        "value_list": null,
-        "value_json": {
-            "steps": [
-                "Click the 'Donate' button below",
-                "Select your donation amount",
-                "Select the Indiana AID fund"
-            ],
-            "button": "Donate",
-            "header": "Donate Online"
-        }
-    },
-    "whereTheMoneyGoes": {
-        "value": null,
-        "style": null,
-        "value_list": null,
-        "value_json": {
-            "cards": [
-                {
-                    "text": "Donations fund the purchase of food, medicine, & hygiene items through the jail's commissary. These items are essential to our immigrant partners as these items are often lacking in the jail.",
-                    "header": "Commissary Support"
-                },
-                {
-                    "text": "Donations support weekly virtual visits between our volunteers & our immigrant partners through the jail's for-profit technology platform.",
-                    "header": "Viritual Visits"
-                },
-                {
-                    "text": "Books & puzzles are purchased for our detained partners who have no access to programming or recreation. They provide a healthy source of escapism, personal development, & community building.",
-                    "header": "Books & Puzzles"
-                }
-            ],
-            "header": "Where the Money Goes"
-        }
+      ]
     }
-}
+  },
+  "connectWithUsCardButtons": {
+    "value": null,
+    "style": null,
+    "value_list": null,
+    "value_json": {
+      "buttons": [
+        {
+          "href": "",
+          "text": "Join Mailing List",
+          "style": "bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 my-4 mx-2  rounded "
+        }
+      ]
+    }
+  },
+  "atAGlanceHeader": {
+    "value": "At A Glance...",
+    "style": null,
+    "value_list": null,
+    "value_json": null
+  },
+  "atAGlanceText": {
+    "value": null,
+    "style": null,
+    "value_list": [
+      "Indiana AID (Assistance to Immigrants in Detention) is a volunteer group that supports individuals detained by ICE in Indiana by bearing witness to their experiences through visits, offering information, and providing resources to them and their families.",
+      "We also facilitate connections between immigrants and various service providers in our region, provide commissary support so that the people can buy food and medicine, and offer general updates to the public about developments in immigration detention in our state."
+    ],
+    "value_json": null
+  },
+  "quickLinksCardButtons": {
+    "value": null,
+    "style": null,
+    "value_list": null,
+    "value_json": {
+      "buttons": [
+        {
+          "href": "https://www.immigrationadvocates.org/legaldirectory/",
+          "text": "Find Help",
+          "style": "bg-red hover:bg-red-dark text-white text-xl  py-2 px-4 mt-4 mx-2 rounded"
+        },
+        {
+          "href": "/resources",
+          "text": "Resources",
+          "style": "bg-yellow hover:bg-yellow-dark text-black text-xl  py-2 px-4 mt-4 mx-2  rounded "
+        }
+      ]
+    }
+  
