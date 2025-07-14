@@ -32,6 +32,30 @@ const getFallbackContent = async (supabase, page) => {
     return formatContent(fallbackData);
 }
 
+export const getNavLabels = cache(async () => {
+    const supabase = await createClient();
+    const language = await getLanguage();
+    let data;
+    const { data: navData, error } = await supabase
+        .from('website_content')
+        .select('key, value_json')
+        .eq('page', 'nav')
+        .eq('language', language);
+    data = navData;
+    if (error) {
+        console.error(error);
+        throw new Error('Failed to fetch navigation labels');
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'nav');
+    }
+    // [{key, value, style}]
+    // transform to {key: {value, style}, ...}
+    const content = formatContent(data);  
+    return content;
+});
+
+
 
 export const subscribeToMailingList = async (email) => {
     const supabase = await createClient();
@@ -84,6 +108,29 @@ export const getHomePageContent = cache(async () => {
     // transform to {key: {value, style}, ...}
     const content = formatContent(data);
 
+    return content;
+});
+
+export const getHeroContent = cache(async () => {
+    const supabase = await createClient();
+    const language = await getLanguage();
+    let data;
+    const { data: heroData, error } = await supabase
+        .from('website_content')
+        .select('value, style, key, value_list, value_json')
+        .eq('page', 'hero')
+        .eq('language', language);
+    data = heroData;
+    if (error) {
+        console.error(error);
+        throw new Error('Failed to fetch hero content');
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'hero');
+    }
+    // [{key, value, style}]
+    // transform to {key: {value, style}, ...}
+    const content = formatContent(data);    
     return content;
 });
 

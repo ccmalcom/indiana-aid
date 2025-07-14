@@ -5,6 +5,7 @@ import Footer from './ui/Footer';
 import { LanguageProvider } from './context/LanguageContext';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { getNavLabels } from '@/app/actions';
 
 
 
@@ -18,13 +19,14 @@ export const metadata = {
 	description: 'Providing Advocacy, Resources, and Direct Aid',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+	const navLabels = await getNavLabels();
 	return (
 		<html lang="en">
 			<body
 				className={`${openSans.variable} antialiased min-h-[100vh] flex flex-col`}>
 			<LanguageProvider>
-				<Nav />
+				<Nav navLabels={navLabels}/>
 				<main className="flex-grow">{children}</main>
 				<Footer />
 			</LanguageProvider>

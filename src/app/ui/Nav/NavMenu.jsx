@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useLanguage } from '@/app/context/LanguageContext';
 
-export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
+export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 	const currentRoute = usePathname();
 	const [showDropdown, setShowDropdown] = useState(false);
 	const { language, changeLanguage, loaded } = useLanguage();
@@ -22,32 +22,32 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 		<div
 			className={`${
 				isMenuOpen
-					? 'fixed top-0 right-0 w-32 h-full z-50 bg-blue text-white flex flex-col pt-24 space-y-6 transition-transform transform translate-x-0'
+					? 'fixed top-0 right-0 w-40 h-full z-50 bg-blue text-white flex flex-col pt-24 space-y-6 transition-transform transform translate-x-0 items-start text-left'
 					: 'hidden'
 			} text-xl xx:block xx:relative xx:top-0 xx:right-0 xx:flex xx:flex-row xx:items-center xx:space-x-6 xx:pt-0`}>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/"
-				className={`p-4 ${currentRoute === '/' ? 'text-yellow' : 'hover:text-yellow'}`}>
-				Home
+				className={`p-4 whitespace-nowrap ${currentRoute === '/' ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.Home}
 			</Link>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/about"
-				className={`p-4 ${currentRoute === '/about' ? 'text-yellow' : 'hover:text-yellow'}`}>
-				About
+				className={`p-4 whitespace-nowrap ${currentRoute === '/about' ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.About}
 			</Link>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/volunteer"
-				className={`p-4 ${currentRoute === '/volunteer' ? 'text-yellow' : 'hover:text-yellow'}`}>
-				Volunteer
+				className={`p-4 whitespace-nowrap ${currentRoute === '/volunteer' ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.Volunteer}
 			</Link>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/donate"
-				className={`p-4 ${currentRoute === '/donate' ? 'text-yellow' : 'hover:text-yellow'}`}>
-				Donate
+				className={`p-4 whitespace-nowrap ${currentRoute === '/donate' ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.Donate}
 			</Link>
 			<div
 				className="relative inline-block p-4"
@@ -62,8 +62,8 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 				<Link
 					onClick={() => setIsMenuOpen(false)}
 					href="/resources"
-					className={` ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
-					Resources
+					className={`whitespace-nowrap ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
+					{labels.Resources}
 				</Link>
 
 				{showDropdown && (
@@ -71,13 +71,13 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 						<Link
 							onClick={() => setIsMenuOpen(false)}
 							href="/resources/newsletter"
-							className="block px-4 py-2 hover:text-yellow">
+							className="block px-4 py-2 hover:text-yellow whitespace-nowrap">
 							Newsletter
 						</Link>
 						<Link
 							onClick={() => setIsMenuOpen(false)}
 							href="/resources/volunteer"
-							className="block px-4 py-2 hover:text-yellow">
+							className="block px-4 py-2 hover:text-yellow whitespace-nowrap">
 							Volunteer Resources
 						</Link>
 					</div>
@@ -86,8 +86,8 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen }) {
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/contact"
-				className={`p-4 ${currentRoute === '/contact' ? 'text-yellow' : 'hover:text-yellow'}`}>
-				Contact
+				className={`p-4 whitespace-nowrap ${currentRoute === '/contact' ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.Contact}
 			</Link>
 			{/* translate dropdown */}
 			<div className="w-full min-w-32 flex p-4 xx:p-0 xx:pr-4 xx:mt-0 xx:justify-end">

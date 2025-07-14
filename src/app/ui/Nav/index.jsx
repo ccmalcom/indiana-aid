@@ -13,7 +13,7 @@ import NavMenu from './NavMenu';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-export default function Nav() {
+export default function Nav({ navLabels }) {
 	const [isOpen, setIsOpen] = useState(false);
 	useEffect(() => {
 		if (isOpen) {
@@ -30,7 +30,7 @@ export default function Nav() {
 		window.addEventListener('resize', handleResize);
 	}, [isOpen]);
 
-
+	const labels = navLabels.navLabels.value_json;
 
 	return (
 		<nav
@@ -54,7 +54,7 @@ export default function Nav() {
 					<span className="block w-6 h-0.5 bg-white"></span>
 				</div>
 			</div>
-			<NavMenu isMenuOpen={isOpen} setIsMenuOpen={setIsOpen} />
+			<NavMenu isMenuOpen={isOpen} setIsMenuOpen={setIsOpen} labels={labels} />
 		</nav>
 	);
 }
