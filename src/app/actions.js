@@ -18,6 +18,20 @@ const formatContent = async (data) => {
     return content;
 }
 
+const getFallbackContent = async (supabase, page) => {
+    console.warn(`No content found for language: ${language}, falling back to English`);
+    const { data: fallbackData, error: fallbackError } = await supabase
+        .from('website_content')
+        .select('value, style, key, value_list, value_json')
+        .eq('page', page)
+        .eq('language', 'en'); // Fallback to English
+    if (fallbackError) {
+        console.error('Error fetching fallback content:', fallbackError);
+        throw new Error('Failed to fetch fallback content');
+    }
+    return formatContent(fallbackData);
+}
+
 
 export const subscribeToMailingList = async (email) => {
     const supabase = await createClient();
@@ -51,19 +65,24 @@ export const subscribeToMailingList = async (email) => {
 export const getHomePageContent = cache(async () => {
     const supabase = await createClient();
     const language = await getLanguage();
+    let data;
     const { data: homePageData, error } = await supabase
         .from('website_content')
         .select('value, style, key, value_list, value_json')
         .eq('page', 'home')
         .eq('language', language);
+        data = homePageData;
 
     if (error) {
         console.error(error);
         throw new Error('Failed to fetch home page content');
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'home');
     }
     // [{key, value, style}]
     // transform to {key: {value, style}, ...}
-    const content = formatContent(homePageData);
+    const content = formatContent(data);
 
     return content;
 });
@@ -72,19 +91,24 @@ export const getVolunteerPageContent = cache(async () => {
 
     const supabase = await createClient();
     const language = await getLanguage();
+    let data;
     const { data: volunteerPageData, error } = await supabase
         .from('website_content')
         .select('value, style, key, value_list, value_json')
         .eq('page', 'volunteer')
         .eq('language', language);
+    data = volunteerPageData;
 
     if (error) {
         console.error(error);
         throw new Error('Failed to fetch form information');
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'volunteer');
     }
     // [{key, value, style}]
     // transform to {key: {value, style}, ...}
-    const content = formatContent(volunteerPageData);
+    const content = formatContent(data);
 
     return content;
 });
@@ -92,14 +116,19 @@ export const getVolunteerPageContent = cache(async () => {
 export const getAboutPageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
+    let data;
 
-    const { data, error } = await supabase
+    const { data: aboutPageData, error } = await supabase
         .from('website_content')
         .select('key, value, value_list, value_json, style')
         .eq('page', 'about')
         .eq('language', language); // Filter by language
+    data = aboutPageData;
     if (error) {
         console.log('Error fetching about page content:', error);
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'about');
     }
     const content = formatContent(data);
     return content;
@@ -108,14 +137,19 @@ export const getAboutPageContent = cache(async () => {
 export const getDonatePageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
+    let data;
 
-    const { data, error } = await supabase
+    const { data: donatePageData, error } = await supabase
         .from('website_content')
         .select('key, value, value_list, value_json, style')
         .eq('page', 'donate')
         .eq('language', language); // Filter by language
+    data = donatePageData;
     if (error) {
         console.log('Error fetching donate page content:', error);
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'donate');
     }
     const content = formatContent(data);
     return content;
@@ -124,14 +158,19 @@ export const getDonatePageContent = cache(async () => {
 export const getResourcePageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
+    let data;
 
-    const { data, error } = await supabase
+    const { data: resourcePageData, error } = await supabase
         .from('website_content')
         .select('key, value, value_list, value_json, style')
         .eq('page', 'resources')
         .eq('language', language); // Filter by language
+    data = resourcePageData;
     if (error) {
         console.log('Error fetching resource page content:', error);
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'resources');
     }
     const content = formatContent(data);
     return content;
@@ -140,14 +179,19 @@ export const getResourcePageContent = cache(async () => {
 export const getContactPageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
+    let data;
 
-    const { data, error } = await supabase
+    const { data: contactPageData, error } = await supabase
         .from('website_content')
         .select('key, value_json')
         .eq('page', 'contact')
         .eq('language', language); // Filter by language
+    data = contactPageData;
     if (error) {
         console.log('Error fetching contact page content:', error);
+    } else if (!data || data.length === 0) {
+        // fallback to English if no content is found for the specified language
+        data = await getFallbackContent(supabase, 'contact');
     }
     const content = formatContent(data);
     return content;
