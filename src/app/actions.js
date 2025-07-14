@@ -290,6 +290,22 @@ export const getDonatePageContent = cache(async () => {
     return content;
 });
 
+export const getResourcePageContent = cache(async () => {
+    const language = await getLanguage();
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from('website_content')
+        .select('key, value, value_list, value_json, style')
+        .eq('page', 'resources')
+        .eq('language', language); // Filter by language
+    if (error) {
+        console.log('Error fetching resource page content:', error);
+    }
+    const content = formatContent(data);
+    return content;
+});
+
 export const getContactPageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
