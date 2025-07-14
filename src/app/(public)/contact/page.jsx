@@ -5,7 +5,7 @@ import ContactFormClient from './ContactFormClient';
 export default async function Contact() {
 	const content = await getContactPageContent();
 	const { contactHeader, formData } = content;
-	console.log('Contact Page Content:', JSON.stringify(content, null, 2));
+	// console.log('Contact Page Content:', JSON.stringify(content, null, 2));
 
 
 

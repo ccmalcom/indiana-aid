@@ -19,7 +19,7 @@ export default async function Donate() {
 		donateByCheckCard
 	} = await content;
 
-	console.log('Donate Page Content:', JSON.stringify(content, null, 2));
+	// console.log('Donate Page Content:', JSON.stringify(content, null, 2));
 	return (
 		// donation header
 		<div className="px-4 py-12 max-w-6xl mx-auto">
@@ -70,13 +70,13 @@ export default async function Donate() {
 					<h2 className="text-2xl font-bold text-yellow mb-2">
 						{donateByCheckCard.value_json.header}
 					</h2>
-					<p>
+					<div>
 						{donateByCheckCard.value_json.steps.map((step, index) => (
 							<div key={index} className='mb-2'>
 								<strong>{step.label}</strong> {step.value}
 							</div>
 						))}
-					</p>
+					</div>
 					<div className="mt-12">
 						<Image
 							src="/donate/Check.png"
