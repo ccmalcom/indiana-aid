@@ -4,8 +4,9 @@ import Calendar from './ui/Calendar';
 import { getHomePageContent } from './actions';
 import ConnectCard from './ui/ConnectCard';
 
-export const dynamic = 'force-static';
-export const revalidate = 3600; // every hour
+// export const dynamic = 'force-static';
+// export const revalidate = 3600; // every hour
+// the above messes with cookies, so we are not using it for now
 
 export default async function Home() {
 	const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
