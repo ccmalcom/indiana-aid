@@ -289,3 +289,19 @@ export const getDonatePageContent = cache(async () => {
     const content = formatContent(data);
     return content;
 });
+
+export const getContactPageContent = cache(async () => {
+    const language = await getLanguage();
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from('website_content')
+        .select('key, value_json')
+        .eq('page', 'contact')
+        .eq('language', language); // Filter by language
+    if (error) {
+        console.log('Error fetching contact page content:', error);
+    }
+    const content = formatContent(data);
+    return content;
+});
