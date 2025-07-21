@@ -10,7 +10,7 @@ export default function NewsletterCard({ newsletters, subscriberCount }) {
         <div className="bg-white shadow-md rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4">Newsletters</h2>
             <p className="mb-4">
-                Total Newsletters: <span className="font-bold">{newsletters.total_issues}</span>
+                Total Newsletters: <span className="font-bold">{newsletters.total_issues/2}</span>
             </p>
             <p className="mb-4">
                 Current Issue: <span className="font-bold">{newsletters.current_issue}</span>

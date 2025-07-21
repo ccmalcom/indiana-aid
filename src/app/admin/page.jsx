@@ -2,7 +2,7 @@
 
 import ProfileCard from './ui/Cards/ProfileCard';
 import VolunteerCard from './ui/Cards/VolunteerCard';
-import { getUserDetails, getVolunteerApplications, getNewsletterInfo, getNewsletterSubscriberCount, getMailingListSubscribers } from './actions';
+import { getUserDetails, getVolunteerApplications, getNewsletterCardInfo, getNewsletterSubscriberCount, getMailingListSubscribers } from './actions';
 import NewsletterCard from './ui/Cards/NewsletterCard';
 import EmailListCard from './ui/Cards/EmailListCard';
 //next/navigation is used for client-side navigation
@@ -16,7 +16,7 @@ export default async function Admin() {
         redirect('/login');
     }
     const applications = await getVolunteerApplications();
-    const newsletters = await getNewsletterInfo();
+    const newsletters = await getNewsletterCardInfo();
     const subscriberCount = await getNewsletterSubscriberCount();
     const subscribers = await getMailingListSubscribers();
    
@@ -28,7 +28,7 @@ export default async function Admin() {
         <ProfileCard user={user} />
         <VolunteerCard applications={applications}/>
         <NewsletterCard newsletters={newsletters} subscriberCount={subscriberCount} />
-        <EmailListCard subscribers={subscribers} />
+        {/* <EmailListCard subscribers={subscribers} /> */}
       </div>
     </div>
   );
