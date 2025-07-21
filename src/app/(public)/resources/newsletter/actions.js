@@ -49,7 +49,8 @@ export const getNewsletters = cache(async() => {
 
     const { data, error } = await supabase
         .from('newsletter_issues')
-        .select('id, volume, date, language, image_url, created_at')
+        .select('id, volume, date, language, image_url, created_at, published')
+        .eq('published', true) // only fetch published newsletters
         .order('id', { ascending: false });
     if (error) {
         throw new Error('Failed to fetch newsletters');
