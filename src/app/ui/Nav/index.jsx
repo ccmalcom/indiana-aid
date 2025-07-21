@@ -34,7 +34,7 @@ export default function Nav({ navLabels }) {
 
 	return (
 		<nav
-			className={`sticky top-0 z-50 bg-blue text-white text-xl flex justify-between items-center h-24 transition-shadow shadow-lg`}
+			className='sticky top-0 z-50 bg-blue text-white text-xl flex justify-between items-center h-22 transition-shadow shadow-lg '
 			role="navigation">
 			<Link href="/" className="ml-4">
 				<Image
@@ -42,7 +42,7 @@ export default function Nav({ navLabels }) {
 					alt="logo"
 					width={200}
 					height={200}
-					className="ml-12"
+					className="mb-2 ml-12"
 				/>
 			</Link>
 			<div

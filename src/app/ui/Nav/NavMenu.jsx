@@ -51,7 +51,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/resources"
-				className={`whitespace-nowrap ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
+				className={`p-4 whitespace-nowrap ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
 				{labels.Resources}
 			</Link>
 			<Link
