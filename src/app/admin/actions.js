@@ -130,7 +130,7 @@ export async function getNewsletterCardInfo() {
     const { data, error } = await supabase
         .from("newsletter_issues")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("volume", { ascending: false });
 
     if (error) {
         console.error("Error fetching newsletter issues:", JSON.stringify(error));
