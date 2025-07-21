@@ -123,14 +123,14 @@ export async function updateUserPassword(formData) {
     return { success: true, data };
 }
 
-export async function getNewsletterInfo() {
+// for admin portal quick view
+export async function getNewsletterCardInfo() {
     const supabase = await createClient();
     const { data, error } = await supabase
         .from("newsletter_issues")
         .select("*")
         .order("created_at", { ascending: false });
 
-    // console.log('Fetched newsletters:', { data, error });
     if (error) {
         console.error("Error fetching newsletter issues:", JSON.stringify(error));
         return [];
@@ -143,6 +143,26 @@ export async function getNewsletterInfo() {
         thumbnail: formatThumbnailUrl(data[0]),
     }
     return res;
+}
+
+// for admin portal table (all data)
+export async function getNewsletterInfo() {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("newsletter_issues")
+        .select("*")
+        .order("volume", { ascending: false });
+    if (error) {
+        console.error("Error fetching newsletter issues:", JSON.stringify(error));
+        return [];
+    }
+    // Format the thumbnail URLs
+    const formattedData = data.map(newsletter => ({
+        ...newsletter,
+        thumbnail: formatThumbnailUrl(newsletter),
+    }));
+
+    return formattedData;
 }
 
 export async function getNewsletterSubscriberCount() {
