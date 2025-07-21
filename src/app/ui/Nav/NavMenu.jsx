@@ -14,11 +14,9 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 		const selectedLang = e.target.value;
 		console.log(`Switching to: ${selectedLang}`);
 		changeLanguage(selectedLang);
-		
 	};
 
 	return (
-						
 		<div
 			className={`${
 				isMenuOpen
@@ -49,40 +47,13 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 				className={`p-4 whitespace-nowrap ${currentRoute === '/donate' ? 'text-yellow' : 'hover:text-yellow'}`}>
 				{labels.Donate}
 			</Link>
-			<div
-				className="relative inline-block p-4"
-				onMouseEnter={() => {
-					// if mobile view, do not show dropdown
-					if (window.innerWidth < 768) {
-						return;
-					}
-					setShowDropdown(true);
-				}}
-				onMouseLeave={() => setShowDropdown(false)}>
-				<Link
-					onClick={() => setIsMenuOpen(false)}
-					href="/resources"
-					className={`whitespace-nowrap ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
-					{labels.Resources}
-				</Link>
 
-				{showDropdown && (
-					<div className="absolute bg-blue text-white mt-1 right-0 shadow-lg rounded z-50">
-						<Link
-							onClick={() => setIsMenuOpen(false)}
-							href="/resources/newsletter"
-							className="block px-4 py-2 hover:text-yellow whitespace-nowrap">
-							Newsletter
-						</Link>
-						<Link
-							onClick={() => setIsMenuOpen(false)}
-							href="/resources/volunteer"
-							className="block px-4 py-2 hover:text-yellow whitespace-nowrap">
-							Volunteer Resources
-						</Link>
-					</div>
-				)}
-			</div>
+			<Link
+				onClick={() => setIsMenuOpen(false)}
+				href="/resources"
+				className={`whitespace-nowrap ${currentRoute.startsWith('/resources') ? 'text-yellow' : 'hover:text-yellow'}`}>
+				{labels.Resources}
+			</Link>
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/contact"
@@ -92,15 +63,16 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 			{/* translate dropdown */}
 			<div className="w-full min-w-32 flex p-4 xx:p-0 xx:pr-4 xx:mt-0 xx:justify-end">
 				{loaded && (
-				<select
-					className="bg-white text-blue px-2 py-1 rounded text-sm"
-					value={language}
-					onChange={handleLanguageChange}>
-					<option value="en">English</option>
-					<option value="es">Español</option>
-					<option value="ar">العربية</option>
-					<option value="fr">Français</option>
-				</select>)}
+					<select
+						className="bg-white text-blue px-2 py-1 rounded text-sm"
+						value={language}
+						onChange={handleLanguageChange}>
+						<option value="en">English</option>
+						<option value="es">Español</option>
+						<option value="ar">العربية</option>
+						<option value="fr">Français</option>
+					</select>
+				)}
 			</div>
 		</div>
 	);
