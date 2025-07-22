@@ -1,11 +1,12 @@
 import Nav from "./ui/Nav";
+import { getUserDetails } from './actions';
+import { redirect } from 'next/navigation';
 
-export const metadata = {
-    title: 'Admin Dashboard – Indiana AID',
-    description: 'Admin area for managing Indiana AID resources and applications',
-};
+export default async function AdminLayout({ children }) {
+    const user = await getUserDetails();
+    console.log('AdminLayout user:', user);
+    if (!user) return redirect('/login');
 
-export default function AdminLayout({ children }) {
     return (
         <div className="antialiased  flex flex-col">
             <Nav />

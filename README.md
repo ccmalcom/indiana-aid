@@ -1,20 +1,18 @@
 ## attributions
 
-<a href="https://www.flaticon.com/free-icons/dove" title="dove icons">Dove icons created by Freepik - Flaticon</a>
-
 -next.js
-
--FontAwesome (free)
-
+-FontAwesome 
 -resend (email service)
---(maybe) brevo
-
--Suuprabase (postgres + auth)
-
--The Noun Project (icons)
-
-  ??? commisary and inmate sales
+-Supabase (postgres + auth)
 
   https://github.com/ericz1803/react-google-calendar?tab=readme-ov-file
 
 
+
+
+--admin
+-interests list views
+
+indianaaidcontact@gmail.com
+
+https://www.freedomforimmigrants.org/disclaimer

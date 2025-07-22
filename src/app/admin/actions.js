@@ -1,7 +1,7 @@
 'use server';
 import { createClient } from '@/app/utils/supabase/server';
 import { createServiceClient } from '../utils/supabase/serviceWorker';
-import { revalidatePath, redirect } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function getVolunteerApplications() {
     const supabase = await createClient();
@@ -83,7 +83,7 @@ export async function logoutUser() {
         console.error("Error logging out user:", JSON.stringify(error));
         return { success: false, error: error.message };
     }
-    revalidatePath('/', 'layout');
+    // revalidatePath('/', 'layout');
     redirect('/logout');
     return { success: true };
 }
