@@ -159,6 +159,9 @@ export default function ChangePassword() {
 						</button>
 					</form>
 				)}
+				<Link href="/admin/profile/forgot-password" className="text-blue hover:underline">
+					Forgot Password?
+				</Link>
 			</div>
 		</div>
 	);
