@@ -13,6 +13,26 @@ export default function InvitePage() {
 	const [error, setError] = useState(null);
 	const [settingPassword, setSettingPassword] = useState(false);
 	const [passwordSuccess, setPasswordSuccess] = useState(false);
+    const [passwordRequirements, setPasswordRequirements] = useState({
+        lowercase: false,
+        uppercase: false,
+        number: false,
+        specialChar: false,
+        length: false,
+    });
+
+    const handlePasswordInput = (value) => {
+        setPassword(value);
+        setPasswordRequirements({
+            lowercase: /[a-z]/.test(value),
+            uppercase: /[A-Z]/.test(value),
+            number: /\d/.test(value),
+            specialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value),
+            length: value.length >= 8,
+        });
+    };
+
+    const passwordValid = Object.values(passwordRequirements).every(Boolean);
 
 	useEffect(() => {
 		const hash = window.location.hash;
@@ -60,7 +80,7 @@ export default function InvitePage() {
 			setPasswordSuccess(true);
 			setSettingPassword(false);
 			setTimeout(() => {
-				router.replace('/login?set=success');
+				router.replace('/admin');
 			}, 3000);
 		}
 	};
@@ -79,18 +99,23 @@ export default function InvitePage() {
 					<h1 className="text-xl font-bold mb-4">Welcome!</h1>
 					<p className="">Please set your password to continue.</p>
 					<p className="my-4 text-sm text-gray-500">
-						Password should contain at least one Capital letter, one lowercase
-						letter, one number, and one special character (!@#$%^&amp;*()_+-=[]
-						{};&#39;:&quot;|&lt;&gt;?,./`~).
+						Password should contain at least: 
 					</p>
-					{error && <p className="text-red mb-4">{error}</p>}
+                    <ul className="list-disc list-inside text-left text-sm mb-4">
+                        <li className={`${passwordRequirements.lowercase ? 'text-green' : 'text-red'}`}>One lowercase letter (a-z)</li>
+                        <li className={`${passwordRequirements.uppercase ? 'text-green' : 'text-red'}`}>One uppercase letter (A-Z)</li>
+                        <li className={`${passwordRequirements.number ? 'text-green' : 'text-red'}`}>One number (0-9)</li>
+                        <li className={`${passwordRequirements.specialChar ? 'text-green' : 'text-red'}`}>One special character (!@#$%^&amp;*()_+-=[]
+						{};&#39;:&quot;|&lt;&gt;?,./`~).</li>
+                        <li className={`${passwordRequirements.length ? 'text-green' : 'text-red'}`}>Minimum length of 8 characters</li>
+                    </ul>					{error && <p className="text-red mb-4">{error}</p>}
 					{settingPassword ? (
 						<p>Setting password...</p>
 					) : (
 						<div>
 							{passwordSuccess ? (
 								<p className="text-green mb-4">
-									Password set successfully! Redirecting to login screen...
+									Password set successfully! Redirecting to admin portal...
 								</p>
 							) : (
 								<form onSubmit={handleSubmit} className="space-y-4">
@@ -98,13 +123,15 @@ export default function InvitePage() {
 										type="password"
 										placeholder="New Password"
 										value={password}
-										onChange={(e) => setPassword(e.target.value)}
+										onChange={(e) => handlePasswordInput(e.target.value)}
 										required
 										className="w-full border p-2 rounded"
 									/>
 									<button
 										type="submit"
-										className="bg-blue text-white px-4 py-2 rounded">
+										className={`text-white px-4 py-2 rounded ${passwordValid ? 'bg-blue hover:bg-blue-600' : 'bg-gray-400 cursor-not-allowed'}`}
+										disabled={!passwordValid}
+									>
 										Set Password & Continue
 									</button>
 								</form>
