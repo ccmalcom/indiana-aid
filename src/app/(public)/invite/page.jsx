@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/app/utils/supabase/client';
 import { handlePasswordSet } from './actions';
 
 export default function InvitePage() {
-	const supabase = createClientComponentClient();
+	const supabase = createClient();
 	const router = useRouter();
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(true);
@@ -64,6 +64,10 @@ export default function InvitePage() {
 			}, 3000);
 		}
 	};
+
+    if (error === 'Missing invite token.') {
+            router.replace('/error?message=Missing invite token. Please check your invite link.');
+	}
 
 	// Password should contain at least one character of each: abcdefghijklmnopqrstuvwxyz, ABCDEFGHIJKLMNOPQRSTUVWXYZ, 0123456789, !@#$%^&*()_+-=[]{};':"|<>?,./`~
 	return (

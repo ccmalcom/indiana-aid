@@ -1,10 +1,10 @@
 'use server';
 
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
 
 export async function handlePasswordSet({ password }) {
-    const supabase = await createServerActionClient({ cookies }); // ✅ DO NOT call cookies()
+    const supabase = await createClient();
 
     if (!password) {
         return { error: new Error('Password is required.') };
