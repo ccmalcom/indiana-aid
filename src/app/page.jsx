@@ -31,7 +31,7 @@ export default async function Home() {
 					id="newsletter-card"
 					className=' bg-blue m-4 p-4 text-white text-center'>
 					<div className="card-header">
-						<h1 className="text-2xl ">{newsletterCard.value_json.heading}</h1>
+						<h1 className="text-2xl font-semibold">{newsletterCard.value_json.heading}</h1>
 					</div>
 					<div className="card-buttons flex flex-col items-center justify-center mb-4">
 						{newsletterCard.value_json.buttons.map((button, index) => (
@@ -48,7 +48,7 @@ export default async function Home() {
 				<div
 					id="knowledge-card"
 					className=' bg-blue m-4 p-4 text-white text-center'>
-					<h1 className="text-2xl ">{quickLinksCard.value_json.heading}</h1>
+					<h1 className="text-2xl font-semibold">{quickLinksCard.value_json.heading}</h1>
 					<div className="flex flex-col items-center justify-center">
 						{quickLinksCard.value_json.buttons.map((button, index) => (
 							<Link

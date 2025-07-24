@@ -44,7 +44,7 @@ export default function ConnectCard({ data }) {
 	return (
 		<div id="connect-card" className="bg-blue m-4 p-4 text-white text-center">
 			<div className="card-header">
-				<h1 className="text-2xl">{data.value_json.heading}</h1>
+				<h1 className="text-2xl font-semibold">{data.value_json.heading}</h1>
 			</div>
 			<div className="card-buttons flex flex-col items-center justify-center">
 				{data.value_json.buttons.map((button, index) => (
@@ -58,18 +58,18 @@ export default function ConnectCard({ data }) {
 
 				<div className="social-links flex flex-row mb-4 mt-2">
 					<Link
-						href="https://www.instagram.com/indianaaid/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="mx-2 hover:text-yellow">
-						<FontAwesomeIcon icon={faInstagram} />
-					</Link>
-					<Link
 						href="https://www.facebook.com/indianaAID1"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mx-2 hover:text-yellow">
+						className="mx-2 hover:text-yellow text-3xl">
 						<FontAwesomeIcon icon={faFacebook} />
+					</Link>
+					<Link
+						href="https://www.instagram.com/indianaaid/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="mx-2 hover:text-yellow text-3xl">
+						<FontAwesomeIcon icon={faInstagram} />
 					</Link>
 				</div>
 			</div>
