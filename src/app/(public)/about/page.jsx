@@ -39,7 +39,7 @@ export default async function About() {
 				{/* Our Story Section */}
 				<div className="flex flex-col md:flex-row items-start w-full gap-6">
 					{/* Right text */}
-					<div className="w-full pl-4">
+					<div className="w-full">
 						<h2 className="text-3xl font-bold mb-4 text-blue">Our Story</h2>
 						{ourStory.value_list.map((paragraph, index) => (
 							<p key={index} className="mb-4">
@@ -95,7 +95,7 @@ export default async function About() {
 					<p className="text-xl my-4 text-center font-semibold w-[100%] sm:w-[90%] md:w-[80%] mx-auto">
 						We’re always looking to expand our team for a variety of needs including, but not limited to: 
 					</p>
-					<ul className="list-disc list-inside text-blue text-xl grid grid-cols-1  text-center md:text-left items-center font-semibold">
+					<ul className="list-disc list-inside text-blue text-xl grid grid-cols-1  text-left md:text-left items-center font-semibold">
 						<li className='mr-2'>Visitation - In-Person & Virtual</li>
 						<li className='mr-2'>Fundraising</li>
 						<li className='mr-2'>Translation</li>
