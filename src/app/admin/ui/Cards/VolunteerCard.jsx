@@ -9,6 +9,9 @@ export default function VolunteerCard({ applications }) {
             <p className="mb-4">
                 Total Pending Applications: <span className="font-bold">{pendingApplications.length}</span>
             </p>
+            <p className="mb-4">
+                Total Approved Volunteers: <span className="font-bold">{applications ? applications.filter(app => app.status.toLowerCase() === 'approved').length : 0}</span>
+            </p>
             <div className='card-actions flex flex-col items-center'>
 
             <Link href='/admin/volunteers/applications'><button className='mt-4 bg-blue text-white px-4 py-2 rounded hover:bg-blue-600'>Manage Applications</button></Link>

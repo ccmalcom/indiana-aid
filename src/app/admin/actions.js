@@ -3,6 +3,50 @@ import { createClient } from '@/app/utils/supabase/server';
 import { createServiceClient } from '../utils/supabase/serviceWorker';
 import { redirect } from 'next/navigation';
 
+export async function getSubscribersInfo(){
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("newsletter_subscribers")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Error fetching subscribers:", JSON.stringify(error));
+        return [];
+    }
+
+    return data;
+}
+
+export async function editSubscriberEmail(subscriberId, newEmail) {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("newsletter_subscribers")
+        .update({ email: newEmail })
+        .eq("id", subscriberId);    
+    if (error) {
+        console.error(`Error updating subscriber ${subscriberId}:`, JSON.stringify(error));
+        return { success: false, error: error.message };
+    }
+
+    return { success: true, data };
+}
+
+export async function deleteSubscriber(subscriberId) {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("newsletter_subscribers")
+        .delete()
+        .eq("id", subscriberId);
+
+    if (error) {
+        console.error(`Error deleting subscriber ${subscriberId}:`, JSON.stringify(error));
+        return { success: false, error: error.message };
+    }
+
+    return { success: true, data };
+}
+
 export async function getVolunteerApplications() {
     const supabase = await createClient();
 
