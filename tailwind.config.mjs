@@ -8,6 +8,15 @@ export default {
   ],
   theme: {
     extend: {
+       keyframes: {
+        flipX: {
+          '0%, 100%': { transform: 'perspective(600px) rotateX(0deg)' },
+          '50%':       { transform: 'perspective(600px) rotateX(180deg)' },
+        },
+      },
+      animation: {
+        flipX: 'flipX 3s ease-in-out infinite',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

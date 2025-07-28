@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import HeroSwitcher from '@/app/ui/HeroSwitcher/page';
 // actions get data from supabase website_content table
 import { getAboutPageContent } from '@/app/actions';
 
@@ -26,13 +27,7 @@ export default async function About() {
 			<div className=" mx-auto flex flex-col space-y-16 py-12">
 				<div className="text-center flex flex-col items-center ">
 					<div className="my-4 mx-auto">
-						<Image
-							src="/WeAreIndianaAID.png"
-							alt="Indiana AID Dove Chain Logo"
-							width={1200}
-							height={200}
-							className="mx-auto"
-						/>
+						<HeroSwitcher />
 					</div>
 
 					{/* We Are Indiana AID Section */}
