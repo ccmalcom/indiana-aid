@@ -57,7 +57,7 @@ export default async function About() {
 					</p>
 					<ul className="list-disc list-inside space-y-2 mt-4">
 						{lookingAheadItems.value_list.map((item, index) => (
-							<li key={index} className="text-blue-700">
+							<li key={index} className=" -indent-6 pl-6">
 								{item}
 							</li>
 						))}
@@ -67,14 +67,14 @@ export default async function About() {
 				{/* Affiliations Section */}
 				<div className="w-full">
 					<h2 className="text-3xl font-bold mb-4 text-blue">Affiliations</h2>
-					<div className="bg-blue-100 border border-blue-300 rounded p-4 w-full max-w-[935px]">
+					<div className="w-full max-w-[935px]">
 						<ul className="list-disc list-inside space-y-2">
 							{affiliations.value_json.affiliations.map((affiliation, index) => (
-								<li key={index} className="text-blue-700">
+								<li key={index} className=" -indent-6 pl-6">
 									{affiliation.url ? (
 										<Link
 											href={affiliation.url}
-											className="text-blue hover:underline decoration-yellow hover:decoration-2"
+											className=" hover:underline decoration-yellow hover:decoration-2"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
