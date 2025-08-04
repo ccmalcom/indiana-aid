@@ -12,7 +12,7 @@ export default function VolunteerOpportunities({ content }) {
 			{volunteerOpportunities.value_json.opportunities.map((item, idx) => (
 				<div
 					key={idx}
-					className="text-center grid grid-cols-1 md:grid-rows-3">
+					className="text-center grid grid-cols-1 md:grid-rows-3 mb-8 lg:mb-0">
 					<div className="row-span-2 flex items-center justify-center">
 						<Image
 							src={item.src}
