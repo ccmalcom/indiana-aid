@@ -23,6 +23,12 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 					? 'fixed top-0 right-0 w-40 h-full z-50 bg-blue text-white flex flex-col pt-24 space-y-6 transition-transform transform translate-x-0 items-start text-left'
 					: 'hidden'
 			} text-xl xx:block xx:relative xx:top-0 xx:right-0 xx:flex xx:flex-row xx:items-center xx:space-x-6 xx:pt-0`}>
+				{isMenuOpen && (
+					<div className="px-4 cursor-pointer pr-4" onClick={() => setIsMenuOpen(false)}>
+						<span className="text-3xl">&#8592;</span>
+					</div>
+				)}
+				
 			<Link
 				onClick={() => setIsMenuOpen(false)}
 				href="/"
