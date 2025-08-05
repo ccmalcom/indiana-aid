@@ -17,8 +17,9 @@ export default function Feedback() {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ feedback }),
+				body: JSON.stringify({ message: feedback }),
 			});
+			console.log('Response from server:', JSON.stringify(response));
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			} else {
