@@ -22,6 +22,24 @@ export default function NewIssueModal({ onClose }) {
         setMessage('');
     };
 
+const handleSetPdf = (file) => {
+	if (file && file.type !== 'application/pdf') {
+		alert('Please upload a valid PDF file.');
+		return;
+	}
+
+	if (file.name.includes(' ')) {
+		const renamedFile = new File([file], file.name.replace(/ /g, '_'), {
+			type: file.type,
+			lastModified: file.lastModified,
+		});
+		setPdf(renamedFile);
+	} else {
+		setPdf(file);
+	}
+};
+
+
 	const handleNewIssue = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -50,7 +68,7 @@ export default function NewIssueModal({ onClose }) {
 			})
 			.catch((error) => {
 				console.error('Error creating new issue:', error);
-				setMessage('Error creating new issue. Please try again.');
+				setMessage('Error creating new issue. Please try again or share this error with the admin: ' + error.message);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -139,7 +157,7 @@ export default function NewIssueModal({ onClose }) {
 									type="file"
 									accept="application/pdf"
 									className="w-full p-2 border rounded"
-									onChange={(e) => setPdf(e.target.files[0])}
+									onChange={(e) => handleSetPdf(e.target.files[0])}
 								/>
 							</div>
 							{/* todo: publish checkbox */}

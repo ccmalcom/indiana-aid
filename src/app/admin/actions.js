@@ -132,6 +132,20 @@ export async function logoutUser() {
     return { success: true };
 }
 
+export async function getAllAdminUsers() {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("admin_users")
+        .select("*")
+        .order("created_at", { ascending: false });
+    if (error) {
+        console.error("Error fetching admin users:", JSON.stringify(error));
+        return [];
+    }
+
+    return data;
+}
+
 export async function getUserDetails() {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
@@ -266,7 +280,7 @@ export async function createNewsletterIssue(data) {
         console.error("Error creating newsletter issue:", JSON.stringify(issueError));
         throw issueError;
     }
-    console.log('Newsletter issue created successfully:', JSON.stringify(issueData, null, 2));
+    console.log('Created newsletter issue:', JSON.stringify({ ...issueData, thumbnail: thumbnailUrl, pdf: pdfUrl }, null, 2));
 
     return issueData;
 }
