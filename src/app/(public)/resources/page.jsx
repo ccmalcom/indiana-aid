@@ -4,13 +4,6 @@ import Link from 'next/link';
 import CollapsibleList from '@/app/ui/CollapsibleList';
 import { getResourcePageContent } from '@/app/actions';
 
-export const dynamic = 'force-static';
-export const revalidate = 3600; // every hour
-
-// eventually fetch this from a database or API
-// for now, hardcoded for simplicity
-//? could we add 'location' so we can show on map
-
 
 export default async function ResourcesPage() {
 	const content = await getResourcePageContent();

@@ -2,39 +2,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-// Email
-// First and last name
-// Pronounts (optional)
-// Phone number (optional)
-// Signal handle - for ongoing secure communication (optional)
-// Social media handles (optional)
-// Languages spoken (checkboxes with other option)
-// Tell us a little about yourself (text area)
-// How did you learn about Indiana AID? short answer (optional)
-// 9. Have you ever worked or interned for a federal agency that handles immigration issues, such as ICE, USCIS, or the Department of Justice, a prison, jail, or juvenile hall? (Single choice) (required)
-// 10. Please describe your experience or skills relevant to supporting people in immigration detention, prison, or other places of confinement or isolation; and/or your thoughts on immigration detention. (Long answer)
-// 11. Are you currently working with any immigrants' rights or other activist groups in your area? (Single choice)
-// 12. If yes, please list the groups you are working with. (Short answer)
-// 13. If you have any other specific skills/talents/background that would be helpful to highlight, please do: (Short answer)
-// 14. As of right now, prior to training, what volunteer areas interest you? (Multiple choice)
-// 15. Please provide the name and contact information for a person who can be a reference for you, ideally with their own background/experience in social justice issues. (Short answer)
+
 
 
 
 export default function Volunteer({ content }) {
 	const {
-		formEmailLabel,
-		formFirstNameLabel,
-		formLastNameLabel,
-		formPhoneLabel,
-		formLanguagesLabel,
-		formLanguagesInstructions,
-		formAreasOfInterestValues,
-		formAreasOfInterestLabel,
-		formAreasOfInterestInstruction,
-		formLanguagesValues,
-		formAdditionalInfoLabel,
-		formAdditionalInfoPlaceholder,
+		volunteerForm,
 		volunteerFormHeaderText,
 		volunteerFormInstructionsText,
 		formSubmitButtonText,
@@ -45,16 +19,39 @@ export default function Volunteer({ content }) {
 		errorMessage,
 	} = content;
 
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
+	const AREAS_OF_INTEREST = [
+		'Weekly virtual visits',
+		'Monthly in-person visits',
+		'Accounting-related',
+		'Administrative tasks',
+		'Advocacy/legislative/mezzo-macro focus',
+		'Commissary payment assistance',
+		'Court observation/court accompaniment',
+		'Fundraising',
+		'Partner family support',
+		'Social media',
+		'Transportation',
+		'Volunteer Coordination',
+	];
+
+	const [fullName, setFullName] = useState('');
+	const [pronouns, setPronouns] = useState('');
 	const [email, setEmail] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submissionStatus, setSubmissionStatus] = useState(null); 
-	const [submissionMessage, setSubmissionMessage] = useState('');
+	const [signalHandle, setSignalHandle] = useState('');
+	const [socialHandles, setSocialHandles] = useState('');
+	const [bio, setBio] = useState('');
+	const [referrer, setReferrer] = useState('');
+	const [immigrationHistory, setImmigrationHistory] = useState(''); // 'yes' | 'no'
+	const [relevantSkills, setRelevantSkills] = useState('');
+	const [currentlyWorking, setCurrentlyWorking] = useState(''); // 'yes' | 'no'
+	const [currentlyWorkingExplanation, setCurrentlyWorkingExplanation] = useState('');
+	const [otherSkills, setOtherSkills] = useState('');
 	const [isLanguagesFilled, setIsLanguagesFilled] = useState(false);
 	const [isInterestsFilled, setIsInterestsFilled] = useState(false);
-	const [additionalInfo, setAdditionalInfo] = useState('');
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submissionStatus, setSubmissionStatus] = useState(null);
+	const [submissionMessage, setSubmissionMessage] = useState('');
 
 	const formatPhoneNumber = (value) => {
 		const digits = value.replace(/\D/g, '').substring(0, 10);
@@ -73,9 +70,7 @@ export default function Volunteer({ content }) {
 	};
 
 	const handleLanguagesChange = (e) => {
-		const checkboxes = e.currentTarget.querySelectorAll(
-			'input[name="languages"]'
-		);
+		const checkboxes = e.currentTarget.querySelectorAll('input[name="language"]');
 		const anyChecked = Array.from(checkboxes).some(
 			(checkbox) => checkbox.checked
 		);
@@ -92,30 +87,33 @@ export default function Volunteer({ content }) {
 		setIsInterestsFilled(anyChecked);
 	};
 
-	const handleAdditionalInfoChange = (e) => {
-		setAdditionalInfo(e.target.value);
-	};
-
 	const isFormValid =
-		firstName.trim() &&
-		lastName.trim() &&
 		email.trim() &&
+		fullName.trim() &&
 		isLanguagesFilled &&
 		isInterestsFilled;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = {
-			name: `${firstName} ${lastName}`,
-			email: email,
+			name: fullName,
+			email,
 			phone: phoneNumber,
+			signalHandle,
+			socialMediaHandles: socialHandles,
 			languages: Array.from(
 				e.target.querySelectorAll('input[name="language"]:checked')
 			).map((checkbox) => checkbox.value),
+			bio,
+			referrer,
+			immigrationHistory, // 'yes' or 'no'
+			relevantSkills,
+			currentlyWorking, // 'yes' or 'no'
+			currentlyWorkingExplanation,
 			areasOfInterest: Array.from(
 				e.target.querySelectorAll('input[name="interest"]:checked')
 			).map((checkbox) => checkbox.value),
-			additionalInfo: e.target.additional_info.value,
+			otherSkills,
 		};
 		setIsSubmitting(true);
 		setSubmissionStatus(null);
@@ -136,7 +134,19 @@ export default function Volunteer({ content }) {
 				e.target.reset();
 				setIsLanguagesFilled(false);
 				setIsInterestsFilled(false);
-				setAdditionalInfo('');
+				setFullName('');
+				setPronouns('');
+				setEmail('');
+				setPhoneNumber('');
+				setSignalHandle('');
+				setSocialHandles('');
+				setBio('');
+				setReferrer('');
+				setImmigrationHistory('');
+				setRelevantSkills('');
+				setCurrentlyWorking('');
+				setCurrentlyWorkingExplanation('');
+				setOtherSkills('');
 			} else if ((result.error.code = '23505')) {
 				setSubmissionStatus('error');
 				setSubmissionMessage(
@@ -200,156 +210,184 @@ export default function Volunteer({ content }) {
 					</p>
 
 					<form className="w-full px-8 mt-4" onSubmit={handleSubmit}>
-						<div className="flex flex-col md:flex-row gap-4 mb-4">
-							<div className="form-group w-full md:w-1/4">
-								<label htmlFor="firstName" className={formFirstNameLabel.style}>
-									{formFirstNameLabel.value}:{' '}
-									<span className="text-red font-heading">*</span>
-								</label>
-								<input
-									type="text"
-									id="firstName"
-									name="firstName"
-									required
-									value={firstName}
-									onChange={(e) => setFirstName(e.target.value)}
-									className={`rounded-lg p-2 border-2 ${firstName ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
-									placeholder={formFirstNameLabel.value}
-								/>
-							</div>
+						<div className="mb-4">
+							<label className="block mb-1">{content.emailLabel?.value || 'Email Address'}</label>
+							<input
+								type="email"
+								name="email"
+								placeholder={content.emailPlaeholder?.value || 'email@website.com'}
+								className="w-full p-2 rounded text-black"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</div>
 
-							<div className="form-group w-full md:w-1/4">
-								<label htmlFor="lastName" className={formLastNameLabel.style}>
-									{formLastNameLabel.value}:{' '}
-									<span className="text-red font-heading">*</span>
-								</label>
-								<input
-									type="text"
-									id="lastName"
-									name="lastName"
-									required
-									value={lastName}
-									onChange={(e) => setLastName(e.target.value)}
-									className={`rounded-lg p-2 border-2 ${lastName ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
-									placeholder={formLastNameLabel.value}
-								/>
-							</div>
+						<div className="mb-4">
+							<label className="block mb-1">{content.nameLabel?.value || 'First and Last Name'}</label>
+							<input
+								type="text"
+								name="full_name"
+								placeholder={content.namePlaceholder?.value || 'John Doe'}
+								className="w-full p-2 rounded text-black"
+								value={fullName}
+								onChange={(e) => setFullName(e.target.value)}
+							/>
+						</div>
 
-							<div className="form-group w-full md:w-1/4">
-								<label
-									htmlFor="email"
-									className={formEmailLabel.style}>
-									{formEmailLabel.value}: <span className="text-red">*</span>
-								</label>
-								<input
-									type="email"
-									id="email"
-									name="email"
-									required
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									className={`rounded-lg p-2 border-2 ${email ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
-									placeholder="name@website.com"
-								/>
-							</div>
-							<div className="form-group w-full md:w-1/4">
-								<label
-									htmlFor="phone"
-									className={formPhoneLabel.style}>
-									{formPhoneLabel.value}: <span className="text-gray">(optional)</span>
-								</label>
-								<div className="flex gap-2">
-									<input
-										type="tel"
-										id="phone"
-										name="phone"
-										value={phoneNumber}
-										onChange={(e) => {
-											handlePhoneChange(e);
-											e.target.className = `rounded-lg p-2 border-2 ${e.target.value ? 'border-yellow' : 'border-gray-300'} text-black w-4/5 font-body`;
-										}}
-										className={`rounded-lg p-2 border-2 border-gray-300 text-black w-4/5 font-body`}
-										placeholder="123-456-7890"
-									/>
-								</div>
+						<div className="mb-4">
+							<label className="block mb-1">{content.pronounsLabel?.value || 'Pronouns'}</label>
+							<input
+								type="text"
+								name="pronouns"
+								placeholder={content.pronounsPlaceholder?.value || 'he/him, she/her, they/them, etc.'}
+								className="w-full p-2 rounded text-black"
+								value={pronouns}
+								onChange={(e) => setPronouns(e.target.value)}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.phoneLabel?.value || 'Phone Number'}</label>
+							<input
+								type="text"
+								name="phone"
+								placeholder={content.phonePlaceholder?.value || 'xxx-xxx-xxxx'}
+								className="w-full p-2 rounded text-black"
+								value={phoneNumber}
+								onChange={handlePhoneChange}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.signalLabel?.value || 'Signal handle (if applicable)'}
+							</label>
+							<input
+								type="text"
+								name="signal"
+								className="w-full p-2 rounded text-black"
+								value={signalHandle}
+								onChange={(e) => setSignalHandle(e.target.value)}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.socialMediaHandlesLabel?.value || 'Social media handles'}</label>
+							<input
+								type="text"
+								name="social_handles"
+								className="w-full p-2 rounded text-black"
+								value={socialHandles}
+								onChange={(e) => setSocialHandles(e.target.value)}
+							/>
+						</div>
+
+						{/* Languages (checkbox group) */}
+						<div className="mb-4" onChange={handleLanguagesChange}>
+							<label className="block mb-2">{content.languageLabel?.value || 'Language(s)'}</label>
+							<div className="flex flex-wrap gap-4">
+								<label><input type="checkbox" name="language" value="English" className="mr-2"/>English</label>
+								<label><input type="checkbox" name="language" value="Spanish" className="mr-2"/>Spanish</label>
+								<label><input type="checkbox" name="language" value="French" className="mr-2"/>French</label>
+								<label><input type="checkbox" name="language" value="Other" className="mr-2"/>Other</label>
 							</div>
 						</div>
 
-						{/* languages fieldset */}
-						<fieldset
-							className={`form-group mb-4 border rounded-lg p-4 ${isLanguagesFilled ? 'border-yellow' : 'border-gray-300'}`}
-							onChange={handleLanguagesChange}>
-							<legend className={formLanguagesLabel.style}>
-								{formLanguagesLabel.value}: <span className="text-red">*</span>
-							</legend>
-							<div>
-								{formLanguagesValues.value_list.map((language) => (
-									<div key={language} className="flex items-center mb-2">
-										<input
-											type="checkbox"
-											id={language}
-											name="languages"
-											value={language}
-											className="mr-2"
-										/>
-										<label
-											htmlFor={language}
-											className="text-sm font-semibold text-white">
-											{language}
-										</label>
-									</div>
-								))}
-							</div>
-
-							<p className={formLanguagesInstructions.style}>
-								{formLanguagesInstructions.value}
-							</p>
-						</fieldset>
-
-						{/* interest fieldset */}
-						<fieldset
-							className={`form-group mb-4 border rounded-lg p-4 ${isInterestsFilled ? 'border-yellow' : 'border-gray-300'}`}
-							onChange={handleInterestsChange}>
-							<legend className={formAreasOfInterestLabel.style}>
-								{formAreasOfInterestLabel.value}: <span className="text-red">*</span>
-							</legend>
-							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-								{formAreasOfInterestValues.value_list.map((interest) => (
-									<div key={interest} className="flex items-center">
-										<input
-											type="checkbox"
-											id={interest}
-											name="interest"
-											value={interest}
-											className="mr-2"
-										/>
-										<label
-											htmlFor={interest}
-											className="text-sm font-semibold text-white">
-											{interest}
-										</label>
-									</div>
-								))}
-							</div>
-							<p className={formAreasOfInterestInstruction.style}>
-								{formAreasOfInterestInstruction.value}
-							</p>
-						</fieldset>
-						{/* additional info */}
-						<div className="form-group mb-4">
-							<label
-								htmlFor="additional_info"
-								className={formAdditionalInfoLabel.style}>
-								{formAdditionalInfoLabel.value}
-							</label>
+						<div className="mb-4">
+							<label className="block mb-1">{content.bioLabel?.value || 'Tell us a little about yourself'}</label>
 							<textarea
-								id="additional_info"
-								name="additional_info"
-								value={additionalInfo}
-								onChange={handleAdditionalInfoChange}
-								className={`rounded-lg p-2 border-2 ${additionalInfo ? 'border-yellow' : 'border-gray-300'} text-black w-full font-body`}
-								rows="4"
-								placeholder={formAdditionalInfoPlaceholder.value}></textarea>
+								name="bio"
+								className="w-full p-2 rounded text-black"
+								rows={4}
+								value={bio}
+								onChange={(e) => setBio(e.target.value)}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.referrerLabel?.value || 'How did you learn about Indiana AID?'}</label>
+							<input
+								type="text"
+								name="referrer"
+								className="w-full p-2 rounded text-black"
+								value={referrer}
+								onChange={(e) => setReferrer(e.target.value)}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.immigrationHistoryLabel?.value || 'Have you ever worked or interned for a federal agency...?'}</label>
+							<div className="flex gap-6">
+								<label><input type="radio" name="immigration_history" value="yes" checked={immigrationHistory==='yes'} onChange={(e)=>setImmigrationHistory(e.target.value)} className="mr-2"/>Yes</label>
+								<label><input type="radio" name="immigration_history" value="no" checked={immigrationHistory==='no'} onChange={(e)=>setImmigrationHistory(e.target.value)} className="mr-2"/>No</label>
+							</div>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.relevantSkillsLabel?.value || 'Relevant experience/skills'}</label>
+							<textarea
+								name="relevant_skills"
+								className="w-full p-2 rounded text-black"
+								rows={4}
+								value={relevantSkills}
+								onChange={(e) => setRelevantSkills(e.target.value)}
+							/>
+						</div>
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.currentlyWorkingLabel?.value || 'Are you currently working with any groups?'}</label>
+							<div className="flex gap-6">
+								<label><input type="radio" name="currently_working" value="yes" checked={currentlyWorking==='yes'} onChange={(e)=>setCurrentlyWorking(e.target.value)} className="mr-2"/>Yes</label>
+								<label><input type="radio" name="currently_working" value="no" checked={currentlyWorking==='no'} onChange={(e)=>setCurrentlyWorking(e.target.value)} className="mr-2"/>No</label>
+							</div>
+						</div>
+
+						{currentlyWorking==='yes' && (
+							<div className="mb-4">
+								<label className="block mb-1">{content.currenlyWorkingExplanationLabel?.value || 'If so, which ones?'}</label>
+								<input
+									type="text"
+									name="currently_working_explanation"
+									className="w-full p-2 rounded text-black"
+									value={currentlyWorkingExplanation}
+									onChange={(e)=>setCurrentlyWorkingExplanation(e.target.value)}
+								/>
+							</div>
+						)}
+
+						<div className="mb-4">
+							<label className="block mb-1">{content.skillsLabel?.value || 'Other skills/talents to highlight'}</label>
+							<textarea
+								name="other_skills"
+								className="w-full p-2 rounded text-black"
+								rows={3}
+								value={otherSkills}
+								onChange={(e) => setOtherSkills(e.target.value)}
+							/>
+						</div>
+
+						{/* Areas of Interest (checkbox group) */}
+						<div className="mb-4" onChange={handleInterestsChange}>
+							<label className="block mb-2">{content.areasOfInterestLabel?.value || 'Volunteer areas that interest you'}</label>
+							<div className="flex flex-col gap-2">
+								{AREAS_OF_INTEREST.map((area, index) => (
+									<label key={index} className="block">
+										<input type="checkbox" name="interest" value={area} className="mr-2" />
+										{area}
+									</label>
+								))}
+							</div>
+						</div>
+
+						<div className="mb-6">
+							<label className="block mb-1">{content.referenceLabel?.value || 'Reference'}</label>
+							<textarea
+								name="reference"
+								className="w-full p-2 rounded text-black"
+								rows={3}
+								value={''}
+								onChange={()=>{}}
+								placeholder="Name and contact info for a reference"
+							/>
 						</div>
 
 						<button
