@@ -7,9 +7,6 @@ export default async function Contact() {
 	const { contactHeader, formData } = content;
 	// console.log('Contact Page Content:', JSON.stringify(content, null, 2));
 
-
-
-
 	return (
 		<div className="viewport min-h-[66vh]  py-8">
 			<div className='w-[80%] lg:w-[50%] m-auto mt-4 text-center text-blue'>
