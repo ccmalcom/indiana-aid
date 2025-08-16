@@ -1,6 +1,5 @@
 'use server';
 import { createClient } from '@/app/utils/supabase/server';
-import { createServiceClient } from '../utils/supabase/serviceWorker';
 import { redirect } from 'next/navigation';
 
 export async function getSubscribersInfo(){
@@ -204,86 +203,7 @@ export async function getNewsletterCardInfo() {
     return res;
 }
 
-// for admin portal table (all data)
-export async function getNewsletterInfo() {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-        .from("newsletter_issues")
-        .select("*")
-        .order("volume", { ascending: false });
-    if (error) {
-        console.error("Error fetching newsletter issues:", JSON.stringify(error));
-        return [];
-    }
-    // Format the thumbnail URLs
-    const formattedData = data.map(newsletter => ({
-        ...newsletter,
-        thumbnail: formatThumbnailUrl(newsletter),
-    }));
 
-    return formattedData;
-}
-
-async function uploadThumbnail( supabase, language, volume, thumbnail) {
-    const { data, error } = await supabase.storage
-        .from('newsletters')
-        .upload(`${language}/thumbnails/${volume}.jpg`, thumbnail, {
-            contentType: 'image/jpeg',
-            upsert: true,
-        });
-
-    if (error) {
-        console.error("Error uploading thumbnail:", JSON.stringify(error));
-        throw error;
-    }
-
-    return data.Key; // Return the key of the uploaded file
-
-}
-
-async function uploadPdf(supabase, language, volume, pdf) {
-    const { data, error } = await supabase.storage
-        .from('newsletters')
-        .upload(`${language}/${volume}.pdf`, pdf, {
-            contentType: 'application/pdf',
-            upsert: true,
-        });
-    if (error) {
-        console.error("Error uploading PDF:", JSON.stringify(error));
-        throw error;
-    }
-    return data.Key; // Return the key of the uploaded file
-}
-
-// new newsletter issue creation
-//  will require upload to both database (newsletter_issues table) and storage (newsletters storage bucket)
-// input: { volume, language, date, thumbnail, pdf, published }
-export async function createNewsletterIssue(data) {
-    const supabase = await createServiceClient();
-    // first, upload the thumbnail and PDF to storage
-    // newsletters/{language}/thumbnails/{volume}.jpg
-    // newsletters/{language}/pdfs/{volume}.pdf
-    const thumbnailUrl = await uploadThumbnail(supabase, data.language, data.volume, data.thumbnail);
-    const pdfUrl = await uploadPdf(supabase, data.language, data.volume, data.pdf);
-
-    // then, insert a new record into the newsletter_issues table
-    const { data: issueData, error: issueError } = await supabase
-        .from("newsletter_issues")
-        .insert({
-            volume: data.volume,
-            language: data.language,
-            date: data.date,
-            published: data.published,
-        });
-
-    if (issueError) {
-        console.error("Error creating newsletter issue:", JSON.stringify(issueError));
-        throw issueError;
-    }
-    console.log('Created newsletter issue:', JSON.stringify({ ...issueData, thumbnail: thumbnailUrl, pdf: pdfUrl }, null, 2));
-
-    return issueData;
-}
 
 export async function getNewsletterSubscriberCount() {
     const supabase = await createClient();

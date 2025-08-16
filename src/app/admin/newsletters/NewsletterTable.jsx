@@ -1,40 +1,81 @@
 'use client';
 import Link from 'next/link';
 import NewIssueModal from './NewIssueModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { updateNewsletterIssue, deleteNewsletterIssue } from './actions';
+
 
 export default function NewsletterTable({ newsletters }) {
 	const [selectedNewsletter, setSelectedNewsletter] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [statusFilter, setStatusFilter] = useState('All');
 	const [languageFilter, setLanguageFilter] = useState('All');
-	// const filteredNewsletters =
-	// 	statusFilter === 'All'
-	// 		? newsletters
-	// 		: newsletters.filter((newsletter) => newsletter.published === statusFilter);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedNewsletters, setEditedNewsletters] = useState([]);
+	const [baselineNewsletters, setBaselineNewsletters] = useState([]);
 
-    const filterNewsletters = () =>{
-        // first, filter by language
-        let filtered = languageFilter === 'All'
-            ? newsletters
-            : newsletters.filter((newsletter) => newsletter.language === languageFilter);
+	const filterNewsletters = () => {
+		// first, filter by language
+		let filtered = languageFilter === 'All'
+			? newsletters
+			: newsletters.filter((newsletter) => newsletter.language === languageFilter);
 
-        // then, filter by status
-        filtered = statusFilter === 'All'
-            ? filtered
-            : filtered.filter((newsletter) => newsletter.published === statusFilter);
+		// then, filter by status
+		filtered = statusFilter === 'All'
+			? filtered
+			: filtered.filter((newsletter) => newsletter.published === statusFilter);
 
-        return filtered;
-    }
+		return filtered;
+	}
 
-    const filteredNewsletters = filterNewsletters();
+	const filteredNewsletters = filterNewsletters();
 
-	const openEditModal = (newsletter) => {
-		return () => {
-			setSelectedNewsletter(newsletter);
-			setIsModalOpen(true);
-			console.log('Opening modal for newsletter:', newsletter);
-		};
+	useEffect(() => {
+		const clone = filteredNewsletters.map(nl => ({ ...nl }));
+		setEditedNewsletters(clone);
+		setBaselineNewsletters(filteredNewsletters.map(nl => ({ ...nl })));
+	}, [filteredNewsletters]);
+
+	const handleEdit = async () => {
+		// If we're currently in edit mode, this click is "Save"
+		if (isEditing) {
+			try {
+				// Build a quick lookup for baseline rows by id
+				const baselineById = baselineNewsletters.reduce((acc, nl) => {
+					acc[nl.id] = nl;
+					return acc;
+				}, {});
+
+				// Determine which rows changed (compare only editable fields)
+				const changed = editedNewsletters.filter(nl => {
+					const base = baselineById[nl.id];
+					if (!base) return false;
+					const changedDate = base.date !== nl.date;
+					const changedPublished = !!base.published !== !!nl.published;
+					// Add more comparisons if you later make more fields editable
+					return changedDate || changedPublished;
+				});
+
+				if (changed.length > 0) {
+					await Promise.all(
+						changed
+							.filter(nl => nl.id !== undefined)
+							.map(nl => updateNewsletterIssue(nl))
+					);
+					console.log('Updated newsletters:', changed);
+				} else {
+					console.log('No changes detected; skipping update.');
+				}
+
+				// After saving, refresh the baseline to the latest edited values
+				setBaselineNewsletters(editedNewsletters.map(nl => ({ ...nl })));
+			} catch (error) {
+				console.error('Error updating newsletters:', error);
+			}
+		}
+
+		// Toggle edit mode (enter or exit)
+		setIsEditing(prev => !prev);
 	};
 
 	const openNewIssueModal = () => {
@@ -46,6 +87,33 @@ export default function NewsletterTable({ newsletters }) {
 	const onClose = () => {
 		setIsModalOpen(false);
 		setSelectedNewsletter(null);
+	};
+
+	const handleInputChange = (id, field, value) => {
+		// normalize date to first of month
+		if (field === 'date') {
+			const dt = new Date(value);
+			const y = dt.getFullYear();
+			const m = String(dt.getMonth() + 1).padStart(2, '0');
+			const normalized = `${y}-${m}-01`;
+			value = normalized;
+
+		}
+		setEditedNewsletters(prev =>
+			prev.map(nl => (nl.id === id ? { ...nl, [field]: value } : nl))
+		);
+	};
+
+	const handleDelete = async (id) => {
+		// confirm
+		if (window.confirm("Are you sure you want to delete this newsletter?")) {
+			try {
+				await deleteNewsletterIssue(id);
+			} catch (error) {
+				console.error("Error deleting newsletter:", error);
+			}
+		}
+
 	};
 
 	return (
@@ -66,13 +134,12 @@ export default function NewsletterTable({ newsletters }) {
 						<button
 							key={status}
 							onClick={() => setStatusFilter(
-                                status === 'All' ? 'All' : status === 'Published' ? true : false
-                            )}
-							className={`px-4 py-2 rounded ${
-								statusFilter === status
-									? 'bg-blue text-white'
-									: 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-							}`}>
+								status === 'All' ? 'All' : status === 'Published' ? true : false
+							)}
+							className={`px-4 py-2 rounded ${statusFilter === status
+								? 'bg-blue text-white'
+								: 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+								}`}>
 							{status}
 						</button>
 					))}
@@ -88,7 +155,7 @@ export default function NewsletterTable({ newsletters }) {
 					</select>
 				</div>
 			</div>
-			{filteredNewsletters.length === 0 ? (
+			{editedNewsletters.length === 0 ? (
 				<p>No newsletters found.</p>
 			) : (
 				<table className="min-w-full bg-white">
@@ -102,13 +169,32 @@ export default function NewsletterTable({ newsletters }) {
 							<th className="py-2 px-4 border-b">Actions</th>
 						</tr>
 					</thead>
-					{filteredNewsletters.map((newsletter) => (
+					{editedNewsletters.map((newsletter) => (
 						<tbody key={newsletter.id} className="text-center">
 							<tr>
-								<td className="py-2 px-4 border-b">{newsletter.volume}</td>
-								<td className="py-2 px-4 border-b">{newsletter.language}</td>
 								<td className="py-2 px-4 border-b">
-									{new Date(newsletter.date).toLocaleDateString()}
+									{/* cannot edit volume */}
+									{newsletter.volume}
+								</td>
+								<td className="py-2 px-4 border-b">
+									{/* cannot edit language - must delete and reupload */}
+									{newsletter.language === 'en' ? 'English' : 'Spanish'}
+								</td>
+								<td className="py-2 px-4 border-b">
+									{isEditing ? (
+										<input
+											type="date"
+											value={newsletter.date}
+											onChange={(e) => {
+												const val = e.target.value; // yyyy-mm-dd
+												handleInputChange(newsletter.id, 'date', val);
+											}}
+										/>
+									) : (
+										<span>
+											{newsletter.date}
+										</span>
+									)}
 								</td>
 								<td className="py-2 px-4 border-b flex justify-center items-center">
 									{newsletter.thumbnail ? (
@@ -122,16 +208,32 @@ export default function NewsletterTable({ newsletters }) {
 									)}
 								</td>
 								<td className="py-2 px-4 border-b">
-									{newsletter.published ? 'Yes' : 'No'}
+									{isEditing ? (
+										<select
+											value={newsletter.published ? 'Yes' : 'No'}
+											onChange={(e) =>
+												handleInputChange(
+													newsletter.id,
+													'published',
+													e.target.value === 'Yes'
+												)
+											}
+										>
+											<option value="Yes">Yes</option>
+											<option value="No">No</option>
+										</select>
+									) : (
+										newsletter.published ? 'Yes' : 'No'
+									)}
 								</td>
 								<td className="py-2 px-4 border-b">
 									<button
 										className="text-blue hover:underline"
-										onClick={openEditModal(newsletter)}>
-										Edit
+										onClick={handleEdit}>
+										{isEditing ? 'Save' : 'Edit'}
 									</button>
 									{' | '}
-									<button className="text-red hover:underline">Delete</button>
+									<button className="text-red hover:underline" onClick={() => handleDelete(newsletter.id)}>Delete</button>
 								</td>
 							</tr>
 						</tbody>

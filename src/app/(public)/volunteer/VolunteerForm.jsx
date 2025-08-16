@@ -2,6 +2,24 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+// Email
+// First and last name
+// Pronounts (optional)
+// Phone number (optional)
+// Signal handle - for ongoing secure communication (optional)
+// Social media handles (optional)
+// Languages spoken (checkboxes with other option)
+// Tell us a little about yourself (text area)
+// How did you learn about Indiana AID? short answer (optional)
+// 9. Have you ever worked or interned for a federal agency that handles immigration issues, such as ICE, USCIS, or the Department of Justice, a prison, jail, or juvenile hall? (Single choice) (required)
+// 10. Please describe your experience or skills relevant to supporting people in immigration detention, prison, or other places of confinement or isolation; and/or your thoughts on immigration detention. (Long answer)
+// 11. Are you currently working with any immigrants' rights or other activist groups in your area? (Single choice)
+// 12. If yes, please list the groups you are working with. (Short answer)
+// 13. If you have any other specific skills/talents/background that would be helpful to highlight, please do: (Short answer)
+// 14. As of right now, prior to training, what volunteer areas interest you? (Multiple choice)
+// 15. Please provide the name and contact information for a person who can be a reference for you, ideally with their own background/experience in social justice issues. (Short answer)
+
+
 
 export default function Volunteer({ content }) {
 	const {

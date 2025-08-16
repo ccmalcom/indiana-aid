@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { createNewsletterIssue } from '../actions';
+import { createNewsletterIssue } from './actions';
 
 export default function NewIssueModal({ onClose }) {
 	const [volume, setVolume] = useState('');
