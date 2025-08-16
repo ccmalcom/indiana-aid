@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getDonatePageContent } from '@/app/actions';
 
-export const dynamic = 'force-static'; 
-export const revalidate = 3600; 
 
 export default async function Donate() {
 	const content = await getDonatePageContent();
