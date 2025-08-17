@@ -1,23 +1,23 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-
-
-
-
+import { submitVolunteerForm } from './actions';
 
 export default function Volunteer({ content }) {
+
 	const {
-		volunteerForm,
+		formSubmitButtonText,
 		volunteerFormHeaderText,
 		volunteerFormInstructionsText,
-		formSubmitButtonText,
 		successHeader,
 		successMessage,
 		contactUsLink,
 		errorHeader,
 		errorMessage,
-	} = content;
+		volunteerForm
+	} = content
+
+
 
 	const AREAS_OF_INTEREST = [
 		'Weekly virtual visits',
@@ -47,6 +47,7 @@ export default function Volunteer({ content }) {
 	const [currentlyWorking, setCurrentlyWorking] = useState(''); // 'yes' | 'no'
 	const [currentlyWorkingExplanation, setCurrentlyWorkingExplanation] = useState('');
 	const [otherSkills, setOtherSkills] = useState('');
+	const [reference, setReference] = useState('');
 	const [isLanguagesFilled, setIsLanguagesFilled] = useState(false);
 	const [isInterestsFilled, setIsInterestsFilled] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -87,11 +88,36 @@ export default function Volunteer({ content }) {
 		setIsInterestsFilled(anyChecked);
 	};
 
+	const handleTestButtonClick = () => {
+		console.log('Test button clicked');
+		// set all form values to dummy values
+		setFullName('John Doe');
+		setPronouns('He/Him');
+		setEmail('johndoe@example.com');
+		setPhoneNumber('123-456-7890');
+		setSignalHandle('@johndoe');
+		setSocialHandles('https://twitter.com/johndoe');
+		setBio('I am a passionate volunteer.');
+		setReferrer('Friend');
+		setImmigrationHistory('yes');
+		setRelevantSkills('Communication, Teamwork');
+		setCurrentlyWorking('no');
+		setCurrentlyWorkingExplanation('');
+		setOtherSkills('Photography');
+		setReference('Jane Smith');
+	};
+
 	const isFormValid =
 		email.trim() &&
 		fullName.trim() &&
 		isLanguagesFilled &&
-		isInterestsFilled;
+		isInterestsFilled &&
+		bio.trim() &&
+		immigrationHistory !== '' &&
+		relevantSkills.trim() &&
+		currentlyWorking !== '' &&
+		otherSkills.trim() &&
+		reference.trim();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -99,6 +125,7 @@ export default function Volunteer({ content }) {
 			name: fullName,
 			email,
 			phone: phoneNumber,
+			pronouns,
 			signalHandle,
 			socialMediaHandles: socialHandles,
 			languages: Array.from(
@@ -114,20 +141,13 @@ export default function Volunteer({ content }) {
 				e.target.querySelectorAll('input[name="interest"]:checked')
 			).map((checkbox) => checkbox.value),
 			otherSkills,
+			reference
 		};
 		setIsSubmitting(true);
 		setSubmissionStatus(null);
 		setSubmissionMessage('');
 		try {
-			const res = await fetch('/api/volunteer-signup', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData),
-			});
-
-			const result = await res.json();
+			const result = await submitVolunteerForm(formData);
 			if (result.success) {
 				setSubmissionStatus('success');
 				setSubmissionMessage('Thank you for signing up to volunteer!');
@@ -147,7 +167,7 @@ export default function Volunteer({ content }) {
 				setCurrentlyWorking('');
 				setCurrentlyWorkingExplanation('');
 				setOtherSkills('');
-			} else if ((result.error.code = '23505')) {
+			} else if (result.error.message === 'duplicate key value violates unique constraint') {
 				setSubmissionStatus('error');
 				setSubmissionMessage(
 					'Oops! It looks like you have already signed up to volunteer. If you need to update your information, please contact us'
@@ -208,38 +228,43 @@ export default function Volunteer({ content }) {
 					<p className={volunteerFormInstructionsText.style}>
 						{volunteerFormInstructionsText.value}
 					</p>
+					<button onClick={handleTestButtonClick} className="mt-4 px-4 py-2 bg-yellow text-black rounded">
+						Test
+					</button>
 
 					<form className="w-full px-8 mt-4" onSubmit={handleSubmit}>
 						<div className="mb-4">
-							<label className="block mb-1">{content.emailLabel?.value || 'Email Address'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.emailLabel || 'Email Address'}<span className="text-red">*</span></label>
 							<input
 								type="email"
 								name="email"
-								placeholder={content.emailPlaeholder?.value || 'email@website.com'}
+								placeholder={volunteerForm.value_json.emailPlaeholder || 'email@website.com'}
 								className="w-full p-2 rounded text-black"
 								value={email}
+								required
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.nameLabel?.value || 'First and Last Name'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.nameLabel || 'First and Last Name'}<span className="text-red">*</span></label>
 							<input
 								type="text"
 								name="full_name"
-								placeholder={content.namePlaceholder?.value || 'John Doe'}
+								placeholder={volunteerForm.value_json.namePlaceholder || 'John Doe'}
 								className="w-full p-2 rounded text-black"
 								value={fullName}
+								required
 								onChange={(e) => setFullName(e.target.value)}
 							/>
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.pronounsLabel?.value || 'Pronouns'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.pronounsLabel || 'Pronouns'}</label>
 							<input
 								type="text"
 								name="pronouns"
-								placeholder={content.pronounsPlaceholder?.value || 'he/him, she/her, they/them, etc.'}
+								placeholder={volunteerForm.value_json.pronounsPlaceholder || 'he/him, she/her, they/them, etc.'}
 								className="w-full p-2 rounded text-black"
 								value={pronouns}
 								onChange={(e) => setPronouns(e.target.value)}
@@ -247,11 +272,11 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.phoneLabel?.value || 'Phone Number'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.phoneLabel || 'Phone Number'}</label>
 							<input
 								type="text"
 								name="phone"
-								placeholder={content.phonePlaceholder?.value || 'xxx-xxx-xxxx'}
+								placeholder={volunteerForm.value_json.phonePlaceholder || 'xxx-xxx-xxxx'}
 								className="w-full p-2 rounded text-black"
 								value={phoneNumber}
 								onChange={handlePhoneChange}
@@ -259,7 +284,7 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.signalLabel?.value || 'Signal handle (if applicable)'}
+							<label className="block mb-1">{volunteerForm.value_json.signalLabel || 'Signal handle (if applicable)'}
 							</label>
 							<input
 								type="text"
@@ -271,7 +296,7 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.socialMediaHandlesLabel?.value || 'Social media handles'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.socialMediaHandlesLabel || 'Social media handles'}</label>
 							<input
 								type="text"
 								name="social_handles"
@@ -283,28 +308,29 @@ export default function Volunteer({ content }) {
 
 						{/* Languages (checkbox group) */}
 						<div className="mb-4" onChange={handleLanguagesChange}>
-							<label className="block mb-2">{content.languageLabel?.value || 'Language(s)'}</label>
+							<label className="block mb-2">{volunteerForm.value_json.languageLabel || 'Language(s)'}<span className="text-red">*</span></label>
 							<div className="flex flex-wrap gap-4">
-								<label><input type="checkbox" name="language" value="English" className="mr-2"/>English</label>
-								<label><input type="checkbox" name="language" value="Spanish" className="mr-2"/>Spanish</label>
-								<label><input type="checkbox" name="language" value="French" className="mr-2"/>French</label>
-								<label><input type="checkbox" name="language" value="Other" className="mr-2"/>Other</label>
+								<label><input type="checkbox" name="language" value="English" className="mr-2" />English</label>
+								<label><input type="checkbox" name="language" value="Spanish" className="mr-2" />Spanish</label>
+								<label><input type="checkbox" name="language" value="French" className="mr-2" />French</label>
+								<label><input type="checkbox" name="language" value="Other" className="mr-2" />Other</label>
 							</div>
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.bioLabel?.value || 'Tell us a little about yourself'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.bioLabel || 'Tell us a little about yourself'}<span className="text-red">*</span></label>
 							<textarea
 								name="bio"
 								className="w-full p-2 rounded text-black"
 								rows={4}
 								value={bio}
+								required
 								onChange={(e) => setBio(e.target.value)}
 							/>
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.referrerLabel?.value || 'How did you learn about Indiana AID?'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.referrerLabel || 'How did you learn about Indiana AID?'}</label>
 							<input
 								type="text"
 								name="referrer"
@@ -315,15 +341,15 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.immigrationHistoryLabel?.value || 'Have you ever worked or interned for a federal agency...?'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.immigrationHistoryLabel || 'Have you ever worked or interned for a federal agency...?'}<span className="text-red">*</span></label>
 							<div className="flex gap-6">
-								<label><input type="radio" name="immigration_history" value="yes" checked={immigrationHistory==='yes'} onChange={(e)=>setImmigrationHistory(e.target.value)} className="mr-2"/>Yes</label>
-								<label><input type="radio" name="immigration_history" value="no" checked={immigrationHistory==='no'} onChange={(e)=>setImmigrationHistory(e.target.value)} className="mr-2"/>No</label>
+								<label><input type="radio" name="immigration_history" value="yes" checked={immigrationHistory === 'yes'} onChange={(e) => setImmigrationHistory(e.target.value)} className="mr-2" />Yes</label>
+								<label><input type="radio" name="immigration_history" value="no" checked={immigrationHistory === 'no'} onChange={(e) => setImmigrationHistory(e.target.value)} className="mr-2" />No</label>
 							</div>
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.relevantSkillsLabel?.value || 'Relevant experience/skills'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.relevantSkillsLabel || 'Relevant experience/skills'}<span className="text-red">*</span></label>
 							<textarea
 								name="relevant_skills"
 								className="w-full p-2 rounded text-black"
@@ -334,28 +360,28 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.currentlyWorkingLabel?.value || 'Are you currently working with any groups?'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.currentlyWorkingLabel || 'Are you currently working with any groups?'}<span className="text-red">*</span></label>
 							<div className="flex gap-6">
-								<label><input type="radio" name="currently_working" value="yes" checked={currentlyWorking==='yes'} onChange={(e)=>setCurrentlyWorking(e.target.value)} className="mr-2"/>Yes</label>
-								<label><input type="radio" name="currently_working" value="no" checked={currentlyWorking==='no'} onChange={(e)=>setCurrentlyWorking(e.target.value)} className="mr-2"/>No</label>
+								<label><input type="radio" name="currently_working" value="yes" checked={currentlyWorking === 'yes'} onChange={(e) => setCurrentlyWorking(e.target.value)} className="mr-2" />Yes</label>
+								<label><input type="radio" name="currently_working" value="no" checked={currentlyWorking === 'no'} onChange={(e) => setCurrentlyWorking(e.target.value)} className="mr-2" />No</label>
 							</div>
 						</div>
 
-						{currentlyWorking==='yes' && (
+						{currentlyWorking === 'yes' && (
 							<div className="mb-4">
-								<label className="block mb-1">{content.currenlyWorkingExplanationLabel?.value || 'If so, which ones?'}</label>
+								<label className="block mb-1">{volunteerForm.value_json.currenlyWorkingExplanationLabel || 'If so, which ones?'}</label>
 								<input
 									type="text"
 									name="currently_working_explanation"
 									className="w-full p-2 rounded text-black"
 									value={currentlyWorkingExplanation}
-									onChange={(e)=>setCurrentlyWorkingExplanation(e.target.value)}
+									onChange={(e) => setCurrentlyWorkingExplanation(e.target.value)}
 								/>
 							</div>
 						)}
 
 						<div className="mb-4">
-							<label className="block mb-1">{content.skillsLabel?.value || 'Other skills/talents to highlight'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.skillsLabel || 'Other skills/talents to highlight'}</label>
 							<textarea
 								name="other_skills"
 								className="w-full p-2 rounded text-black"
@@ -367,7 +393,7 @@ export default function Volunteer({ content }) {
 
 						{/* Areas of Interest (checkbox group) */}
 						<div className="mb-4" onChange={handleInterestsChange}>
-							<label className="block mb-2">{content.areasOfInterestLabel?.value || 'Volunteer areas that interest you'}</label>
+							<label className="block mb-2">{volunteerForm.value_json.areasOfInterestLabel || 'Volunteer areas that interest you'}<span className="text-red">*</span></label>
 							<div className="flex flex-col gap-2">
 								{AREAS_OF_INTEREST.map((area, index) => (
 									<label key={index} className="block">
@@ -379,13 +405,13 @@ export default function Volunteer({ content }) {
 						</div>
 
 						<div className="mb-6">
-							<label className="block mb-1">{content.referenceLabel?.value || 'Reference'}</label>
+							<label className="block mb-1">{volunteerForm.value_json.referenceLabel || 'Reference'}<span className="text-red">*</span></label>
 							<textarea
 								name="reference"
 								className="w-full p-2 rounded text-black"
 								rows={3}
-								value={''}
-								onChange={()=>{}}
+								value={reference}
+								onChange={(e) => setReference(e.target.value)}
 								placeholder="Name and contact info for a reference"
 							/>
 						</div>

@@ -14,9 +14,31 @@ export default async function Volunteer() {
 
 	const {
 		volunteerHeaderText,
-		volunteerSubHeadingText
+		volunteerSubHeadingText,
+		formEmailLabel,
+		formFirstNameLabel,
+		formLastNameLabel,
+		formPhoneLabel,
+		formLanguagesLabel,
+		formAreasOfInterestValues,
+		formAreasOfInterestLabel,
+		formAreasOfInterestInstruction,
+		formLanguagesValues,
+		formAdditionalInfoLabel,
+		formAdditionalInfoPlaceholder,
+		formLanguagesInstructions,
+		formSubmitButtonText,
+		volunteerFormHeaderText,
+		volunteerFormInstructionsText,
+		volunteerOpportunitiesText,
+		successHeader,
+		successMessage,
+		contactUsLink,
+		errorHeader,
+		errorMessage,
+		volunteerOpportunities,
+		volunteerForm
 	} = content;
-
 
 	return (
 		<div className="viewport ">
