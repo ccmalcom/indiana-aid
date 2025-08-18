@@ -5,7 +5,6 @@ import { cache } from "react";
 
 export async function subscribe(subscriberData) {
     const supabase = await createClient();
-    console.log('subscriberData: ', JSON.stringify(subscriberData, null, 2));
     if (!subscriberData.email) {
         throw new Error('Email is required for subscription');
     }
