@@ -30,7 +30,7 @@ export default async function RootLayout({ children }) {
 				className={`${openSans.variable} antialiased min-h-[100vh] flex flex-col`}>
 				<LanguageProvider>
 					<Nav navLabels={navLabels} />
-					<Feedback />
+					{/* <Feedback /> */}
 					<main className="flex-grow">{children}</main>
 					<Footer />
 				</LanguageProvider>
