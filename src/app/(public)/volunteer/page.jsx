@@ -2,11 +2,6 @@ import VolunteerForm from './VolunteerForm';
 import VolunteerOpportunities from './VolunteerOpportunities';
 import { getVolunteerPageContent } from '@/app/actions';
 
-export const dynamic = 'force-static';
-export const revalidate = 3600; // every hour
-
-
-
 export default async function Volunteer() {
 
 
