@@ -7,32 +7,32 @@ import 'react-calendar/dist/Calendar.css';
 
 
 
-export default function Calendar({apiKey, calendarId}) {
+export default function Calendar({ apiKey, calendarId }) {
 	const [date, setDate] = useState(new Date());
 	const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 
-    const eventDateSet = useMemo(() => {
-      const s = new Set();
-      for (const ev of events) {
-        const dt = new Date(ev?.start?.dateTime || ev?.start?.date);
-        if (!isNaN(dt)) s.add(dt.toDateString());
-      }
-      return s;
-    }, [events]);
+	const eventDateSet = useMemo(() => {
+		const s = new Set();
+		for (const ev of events) {
+			const dt = new Date(ev?.start?.dateTime || ev?.start?.date);
+			if (!isNaN(dt)) s.add(dt.toDateString());
+		}
+		return s;
+	}, [events]);
 
 	useEffect(() => {
-        setLoading(true);
+		setLoading(true);
 		getCalendarEvents(apiKey, calendarId, date)
-        .then((fetchedEvents) => {
-            setEvents(fetchedEvents);
-        })
-        .catch((error) => {
-            console.error('Error fetching calendar events:', JSON.stringify(error));
-        })
-        .finally(() => {
-            setLoading(false);
-        });
+			.then((fetchedEvents) => {
+				setEvents(fetchedEvents);
+			})
+			.catch((error) => {
+				console.error('Error fetching calendar events:', JSON.stringify(error));
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	}, []);
 
 	const onChange = (newDate) => {
@@ -45,14 +45,14 @@ export default function Calendar({apiKey, calendarId}) {
 	});
 
 	return (
-		<div className="calendar-container">
+		<div className="calendar-container p-4 = flex flex-col items-center">
 			<ReactCalendar
 				onChange={onChange}
 				value={date}
 				className="react-calendar text-black"
 				tileClassName={({ date: tileDate, view }) => {
-				  if (view !== 'month') return null;
-				  return eventDateSet.has(tileDate.toDateString()) ? 'has-event' : null;
+					if (view !== 'month') return null;
+					return eventDateSet.has(tileDate.toDateString()) ? 'has-event' : null;
 				}}
 			/>
 			<div className="selected-date font-bold mt-2">
@@ -65,9 +65,9 @@ export default function Calendar({apiKey, calendarId}) {
 							<strong>{event.summary}</strong> @{' '}
 							{event.start.dateTime
 								? new Date(event.start.dateTime).toLocaleTimeString([], {
-										hour: '2-digit',
-										minute: '2-digit',
-									})
+									hour: '2-digit',
+									minute: '2-digit',
+								})
 								: 'All Day'}
 						</li>
 					))}
@@ -75,7 +75,7 @@ export default function Calendar({apiKey, calendarId}) {
 			) : (
 				<p className="text-gray-500 mt-4">No events on this date.</p>
 			)}
-      <style jsx>{`
+			<style jsx>{`
         /* Add a small dot under the day number for days with events */
         :global(.react-calendar__tile.has-event abbr:after) {
           content: '';
