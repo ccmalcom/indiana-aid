@@ -3,16 +3,22 @@
 import { useState } from 'react';
 import { subscribe } from './actions';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function NewsletterSubscription() {
 	const [email, setEmail] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
 	const [submitted, setSubmitted] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const subscriberData ={
+			first_name: firstName,
+			last_name: lastName,
+			email: email
+		}
 		try {
-			const response = await subscribe(email);
+			const response = await subscribe(subscriberData);
 			if (response.error) {
 				console.error('Error subscribing:', response.error);
 			} else {
@@ -34,17 +40,45 @@ export default function NewsletterSubscription() {
 				immigration policy and Indiana AID’s work, and to read stories submitted
 				by the immigrants held in the Clay County jail.
 			</p>
-			<form onSubmit={handleSubmit} className="flex flex-row items-center mb-4">
-				<label htmlFor="email">Enter your email:</label>
-				<input
-					type="email"
-					placeholder="name@email.com"
-					className="border rounded w-64 mx-2"
-					required
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<button type="submit" className="bg-blue text-white mx-4 p-1 rounded">
+			<form onSubmit={handleSubmit} className="flex flex-col items-start mb-4 gap-1">
+				<div className='flex flex-row gap-2'>
+					<div className='flex flex-col'>
+						<label htmlFor="firstName">First Name:</label>
+						<input
+							type="text"
+							placeholder="John"
+							className="border rounded w-32"
+							value={firstName}
+							onChange={(e) => setFirstName(e.target.value)}
+						/>
+					</div>
+					<div className='flex flex-col'>
+						<label htmlFor="lastName">Last Name:</label>
+						<input
+							type="text"
+							placeholder="Doe"
+							className="border rounded w-32"
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+						/>
+
+					</div>
+				</div>
+				<div className='flex flex-row'>
+					<div className='flex flex-col'>
+
+						<label htmlFor="email">Enter your email:</label>
+						<input
+							type="email"
+							placeholder="name@email.com"
+							className="border rounded w-64 "
+							required
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</div>
+				</div>
+				<button type="submit" className="bg-blue text-white p-1 w-48 rounded">
 					Subscribe
 				</button>
 				{submitted && (

@@ -3,19 +3,24 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { cache } from "react";
 
-export async function subscribe(email) {
+export async function subscribe(subscriberData) {
     const supabase = await createClient();
-    if (!email) {
+    console.log('subscriberData: ', JSON.stringify(subscriberData, null, 2));
+    if (!subscriberData.email) {
         throw new Error('Email is required for subscription');
     }
     // Ensure email is a string
-    if (typeof email !== 'string') {
+    if (typeof subscriberData.email !== 'string') {
         throw new Error('Email must be a string');
     }
     //todo: validate email
     const { data, error } = await supabase
         .from('newsletter_subscribers')
-        .insert([{ email: email.trim().toLowerCase() }]);
+        .insert([{
+            first_name: subscriberData.first_name,
+            last_name: subscriberData.last_name,
+            email: subscriberData.email.trim().toLowerCase()
+        }]);
 
     if (error) {
         throw new Error('Failed to subscribe to newsletter');
