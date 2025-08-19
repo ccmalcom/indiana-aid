@@ -96,6 +96,9 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 								<strong>Name:</strong> {application.name}
 							</p>
 							<p>
+								<strong>Pronouns:</strong> {application.pronouns}
+							</p>
+							<p>
 								<strong>Email:</strong> {application.email}
 							</p>
 							<p>
@@ -131,10 +134,10 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 								<strong>Currently Working with other groups?</strong> {application.currently_working}
 							</p>
 							<p className="">
-								<strong>Relevant Skills:</strong> {application.relevant_skills}
+								<strong>Currently Working – Explanation:</strong> {application.currently_working_explanation ?? 'N/A'}
 							</p>
 							<p className="">
-								<strong>Currently Working – Explanation:</strong> {application.currently_working_explanation ?? 'N/A'}
+								<strong>Relevant Skills:</strong> {application.relevant_skills}
 							</p>
 							<p className="">
 								<strong>Other Skills:</strong> {application.other_skills ?? 'N/A'}
