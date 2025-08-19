@@ -1,5 +1,5 @@
 'use server';
-import { getVolunteerApplications } from '@/app/admin/actions';
+import { getVolunteerApplications } from './actions';
 import VolunteerApplicationsClient from './VolunteerApplicationsClient';
 import Header from '../../ui/Header';
 

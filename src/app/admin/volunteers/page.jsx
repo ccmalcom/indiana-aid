@@ -1,5 +1,5 @@
 'use server';
-import { getVolunteers } from "../actions";
+import { getVolunteers } from "./actions";
 import VolunteerClient from "./VolunteerClient";
 import Header from "../ui/Header";
 import Link from "next/link";

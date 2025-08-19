@@ -17,6 +17,7 @@ export default function VolunteerModal({ volunteer, onClose }) {
 		interest_areas: volunteer?.interest_areas || '',
 		languages: volunteer?.languages || '',
 		notes: volunteer?.notes || '',
+		pronouns: volunteer?.pronouns || '',
 	});
 
 	const isDirty = () => {
@@ -62,6 +63,14 @@ export default function VolunteerModal({ volunteer, onClose }) {
 							setFormData((prev) => ({ ...prev, [name]: value }))
 						}
 						name="name"
+					/>
+					<EditableInput
+						label="Pronouns"
+						initialValue={formData.pronouns}
+						onChange={(value, name) =>
+							setFormData((prev) => ({ ...prev, [name]: value }))
+						}
+						name="pronouns"
 					/>
 					<EditableInput
 						label="Email"
