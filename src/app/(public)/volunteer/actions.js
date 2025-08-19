@@ -1,4 +1,8 @@
 'use server';
+import { Resend } from 'resend';
+import VolunteerEmailTemplate from '@/app/components/contact-email-template';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 import { createClient } from "@/app/utils/supabase/server";
 
@@ -88,10 +92,23 @@ export async function submitVolunteerForm(input) {
         console.log('Error inserting volunteer application:', JSON.stringify(error));
       return { success: false, error };
     }
-
+    await sendEmailNotification(payload);
     return { success: true, data };
   } catch (err) {
     console.error('Error submitting volunteer form:', err);
     return { success: false, error: { message: err?.message || 'Unknown error' } };
+  }
+}
+
+async function sendEmailNotification(applicationData) {
+  try{
+    await resend.emails.send({
+      from: 'noreply@indianaaid.org',
+      to: 'indianaaidcontact@gmail.com',
+      subject: 'New Volunteer Application Submitted',
+      react: VolunteerEmailTemplate(applicationData),
+    });
+  } catch (error) {
+    console.error('Error sending email notification:', error);
   }
 }
