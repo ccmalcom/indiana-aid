@@ -74,7 +74,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 						value={language}
 						onChange={handleLanguageChange}>
 						<option value="en">English</option>
-						<option value="es">Español</option>
+						<option disabled value="es">Español</option>
 						<option disabled value="fr">Français</option>
 					</select>
 				)}
