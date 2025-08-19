@@ -65,6 +65,7 @@ export async function submitVolunteerForm(input) {
       name: body.name,
       email: body.email,
       phone: body.phone || null,
+      pronouns: body.pronouns || null,
       signal_handle: body.signalHandle || null,
       social_media_handles: body.socialMediaHandles || null,
       languages: toArray(body.languages),
