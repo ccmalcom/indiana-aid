@@ -13,6 +13,8 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 	const [statusMessage, setStatusMessage] = useState(null);
     const [error, setError] = useState(null);
 
+	
+
 	const handleApprove = async () => {
 		setIsLoading(true);
 		setStatusMessage(null);
@@ -109,6 +111,33 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 							<p>
 								<strong>Additional Info:</strong>{' '}
 								{application.additional_info || 'N/A'}
+							</p>
+							<p>
+								<strong>Signal Handle:</strong> {application.signal_handle}
+							</p>
+							<p>
+								<strong>Social Media Handles:</strong> {application.social_media_handles}
+							</p>
+							<p className="">
+								<strong>Bio:</strong> {application.bio ?? 'N/A'}
+							</p>
+							<p>
+								<strong>Referrer:</strong> {application.referrer ?? 'N/A'}
+							</p>
+							<p className="">
+								<strong>Previously worked with US Immigration Agency?</strong> {application.immigration_history}
+							</p>
+							<p>
+								<strong>Currently Working with other groups?</strong> {application.currently_working}
+							</p>
+							<p className="">
+								<strong>Relevant Skills:</strong> {application.relevant_skills}
+							</p>
+							<p className="">
+								<strong>Currently Working – Explanation:</strong> {application.currently_working_explanation ?? 'N/A'}
+							</p>
+							<p className="">
+								<strong>Other Skills:</strong> {application.other_skills ?? 'N/A'}
 							</p>
 						</div>
 						<div className="modal-actions mt-6 flex justify-center">
