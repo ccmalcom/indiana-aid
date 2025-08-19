@@ -76,6 +76,7 @@ export default function NavMenu({ isMenuOpen, setIsMenuOpen, labels }) {
 						<option value="en">English</option>
 						<option disabled value="es">Español</option>
 						<option disabled value="fr">Français</option>
+						<option disabled value='na'>(coming soon)</option>
 					</select>
 				)}
 			</div>
