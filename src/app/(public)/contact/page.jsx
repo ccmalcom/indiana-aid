@@ -26,7 +26,18 @@ export default async function Contact() {
 						</a>
 					</p>
 			</div>
-			<ContactFormClient formData={formData}  />
+			{/* <ContactFormClient formData={formData}  /> */}
+			<div className="contact-form flex flex-col items-center justify-center bg-blue text-white p-4 md:px-16 w-[90%] md:w-[70%] lg:w-[55%] xl:w-[40%] mx-auto mt-4 rounded-lg shadow-lg min-h-[50vh]">
+				{/* contact form is down for maintenance, please email indianaaidcontact@gmail.com */}
+				<p className="text-center">
+					Contact form is down for maintenance, please email{' '}
+					<a
+						href="mailto:indianaaidcontact@gmail.com"
+						className="text-yellow underline">
+						indianaaidcontact@gmail.com
+					</a>
+				</p>
+			</div>
 		</div>
 	);
 }

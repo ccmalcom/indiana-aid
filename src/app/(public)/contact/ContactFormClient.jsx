@@ -34,6 +34,7 @@ export default function ContactFormClient({ formData }) {
 
 			if (result.success) {
 				setSuccess(true);
+				console.log('Email sent successfully:', result.data);
 				e.target.reset();
 			} else {
 				setError(result.error || 'Unknown error occurred.');
