@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import EditableInput from '@/app/ui/EditableInput';
 // import { updateVolunteer, createVolunteer, deleteVolunteer } from '../../actions';
+import { getVolunteerApplicationById } from './actions';
 
 export default function VolunteerModal({ volunteer, onClose }) {
 	if (!volunteer) return null;
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [statusMessage, setStatusMessage] = useState(null);
 	const [error, setError] = useState(null);
@@ -19,12 +21,26 @@ export default function VolunteerModal({ volunteer, onClose }) {
 		notes: volunteer?.notes || '',
 		pronouns: volunteer?.pronouns || '',
 	});
+	const [appData, setAppData] = useState(null);
+	const [showAppData, setShowAppData] = useState(false);
 
 	const isDirty = () => {
 		return Object.keys(formData).some((key) => {
 			return formData[key] !== volunteer[key];
 		});
 	};
+
+	const handleGetApplication = async () => {
+		setShowAppData(true);
+		getVolunteerApplicationById(volunteer.application_id)
+			.then((data) => {
+				setAppData(data);
+			})
+			.catch((error) => {
+				console.error('Error fetching application:', error);
+			});
+	};
+
 
 	const handleUpdate = async () => {
 		// console.log('Updating volunteer:', volunteer.id, formData);
@@ -130,22 +146,64 @@ export default function VolunteerModal({ volunteer, onClose }) {
 						type="textarea"
 					/>
 				</div>
-				<div className="modal-footer mt-6 flex justify-center">
-					<button
-						className={
-							isDirty()
-								? `bg-blue text-white px-4 py-2 rounded mx-2 `
-								: `bg-gray text-white px-4 py-2 rounded mx-2 opacity-50 cursor-not-allowed`
-						}
-						disabled={!isDirty()}
-						onClick={handleUpdate}>
-						Submit Updates
-					</button>
-					<button className="bg-red text-white px-4 py-2 rounded mx-2">
-						Delete Volunteer
-					</button>
+				<div className="modal-footer mt-6 flex flex-col items-center">
+					{(!showAppData) ?
+						
+						<button
+							className="bg-blue text-gray-100 px-4 py-2 rounded mx-2 hover:bg-blue-dark w-64"
+							onClick={handleGetApplication}
+							disabled={!volunteer.application_id}
+						>
+							View Application Data
+						</button>
+						:
+						<button
+							className="bg-blue text-gray-100 px-4 py-2 rounded mx-2 hover:bg-blue-dark"
+							onClick={() => setShowAppData(false)}
+						>
+							Hide Application Data
+						</button>
+					}
+					{ !volunteer.application_id && (
+						<p>No applicationId for volunteer</p>
+					)}
 				</div>
-				{isLoading && <p className="text-blue-500">Loading...</p>}
+				{(appData && showAppData) &&
+					<div>
+						<p>
+							<strong>Additional Info:</strong>{' '}
+							{appData.additional_info || 'N/A'}
+						</p>
+						<p>
+							<strong>Signal Handle:</strong> {appData.signal_handle}
+						</p>
+						<p>
+							<strong>Social Media Handles:</strong> {appData.social_media_handles}
+						</p>
+						<p className="">
+							<strong>Bio:</strong> {appData.bio ?? 'N/A'}
+						</p>
+						<p>
+							<strong>Referrer:</strong> {appData.referrer ?? 'N/A'}
+						</p>
+						<p className="">
+							<strong>Previously worked with US Immigration Agency?</strong> {appData.immigration_history}
+						</p>
+						<p>
+							<strong>Currently Working with other groups?</strong> {appData.currently_working}
+						</p>
+						<p className="">
+							<strong>Currently Working – Explanation:</strong> {appData.currently_working_explanation ?? 'N/A'}
+						</p>
+						<p className="">
+							<strong>Relevant Skills:</strong> {appData.relevant_skills}
+						</p>
+						<p className="">
+							<strong>Other Skills:</strong> {appData.other_skills ?? 'N/A'}
+						</p>
+					</div>
+				}
+
 			</div>
 		</div>
 	);

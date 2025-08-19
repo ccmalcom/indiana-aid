@@ -19,3 +19,20 @@ export async function getVolunteers() {
     return data;
 }
 
+export async function getVolunteerApplicationById(applicationId) {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("volunteer-applications")
+        .select("*")
+        .eq("id", applicationId)
+        .single();
+
+    if (error) {
+        console.error(`Error fetching application ${applicationId}:`, JSON.stringify(error));
+        return null;
+    }
+
+    return data;
+}
+
