@@ -105,7 +105,7 @@ export async function createVolunteerEntry(application) {
                 email: application.email,
                 phone: application.phone,
                 languages: application.languages,
-                areas_of_interest: application.interest_areas,
+                interest_areas: application.interest_areas,
                 notes: application.additional_info,
                 application_id: application.id, // Link to the original application
             },

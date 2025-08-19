@@ -14,7 +14,7 @@ export default function VolunteerModal({ volunteer, onClose }) {
 		nickname: volunteer?.nickname || '',
 		email: volunteer?.email || '',
 		phone: volunteer?.phone || '',
-		areas_of_interest: volunteer?.areas_of_interest || '',
+		interest_areas: volunteer?.interest_areas || '',
 		languages: volunteer?.languages || '',
 		notes: volunteer?.notes || '',
 	});
@@ -94,11 +94,11 @@ export default function VolunteerModal({ volunteer, onClose }) {
 					/>
 					<EditableInput
 						label="Areas of Interest"
-						initialValue={formData.areas_of_interest}
+						initialValue={formData.interest_areas}
 						onChange={(value, name) =>
 							setFormData((prev) => ({ ...prev, [name]: value }))
 						}
-						name="areas_of_interest"
+						name="interest_areas"
 						className="w-full"
 					/>
 					<EditableInput
