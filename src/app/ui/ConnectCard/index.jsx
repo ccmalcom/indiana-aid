@@ -58,7 +58,7 @@ export default function ConnectCard({ data }) {
 
 				<div className="social-links flex flex-row mb-4 mt-2">
 					<Link
-						href="https://www.facebook.com/indianaAID1"
+						href="https://www.facebook.com/indianaAID"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="mx-2 hover:text-yellow text-3xl">
