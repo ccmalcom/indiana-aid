@@ -9,9 +9,9 @@ export async function POST(request) {
 
     try {
         const data = await resend.emails.send({
-            from: 'Website Contact Form <onboarding@resend.dev>', // Custom verified email
+            from: 'Website Contact Form <noreply@indianaaid.org>', // Custom verified email
             to: 'indianaaidcontact@gmail.com',
-            // to: 'chasecmalcom@gmail.com',
+            // to: 'cmalcom2016@gmail.com',
             subject: `New Contact Form Submission - ${name}`,
             reply_to: email,
             react: ContactEmailTemplate({ name, email, message }),
