@@ -113,10 +113,8 @@ export default function Volunteer({ content }) {
 		isLanguagesFilled &&
 		isInterestsFilled &&
 		bio.trim() &&
-		immigrationHistory !== '' &&
 		relevantSkills.trim() &&
 		currentlyWorking !== '' &&
-		otherSkills.trim() &&
 		reference.trim();
 
 	const handleSubmit = async (e) => {
