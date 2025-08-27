@@ -1,11 +1,23 @@
+/**
+ * @file Application server actions for fetching localized content and handling user interactions.
+ * @description
+ *   These actions read localized page content from the `website_content` table in Supabase,
+ *   fall back to English when a requested language is missing, and provide simple utilities
+ *   like subscribing to the mailing list. Many actions are wrapped with React's `cache` to
+ *   enable request-level memoization in Next.js.
+ */
 'use server';
 
 import { createClient } from '@/app/utils/supabase/server';
-import { cookies } from 'next/headers';
 import { cache } from 'react';
 import { getLanguage } from '@/app/utils/getLanguage';
 
-const formatContent = async (data) => {
+/**
+ * Normalize raw rows from `website_content` into a keyed object.
+ * @param {Array<{key:string, value?:string, style?:string, value_list?:string[]|null, value_json?:any}>} data
+ * @returns {Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>}
+ */
+const formatContent = (data) => {
     const content = data.reduce((acc, item) => {
         acc[item.key] = {
             value: item.value,
@@ -18,8 +30,15 @@ const formatContent = async (data) => {
     return content;
 }
 
+/**
+ * Fetch English-language content as a fallback when localized content is unavailable.
+ * @param {import('@supabase/supabase-js').SupabaseClient} supabase - Supabase client instance.
+ * @param {string} page - Page key (e.g., 'home', 'about', 'nav').
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ * @throws {Error} When the fallback query fails.
+ */
 const getFallbackContent = async (supabase, page) => {
-    console.warn(`No content found for language: ${language}, falling back to English`);
+    console.warn(`No localized content found for page "${page}". Falling back to English ('en').`);
     const { data: fallbackData, error: fallbackError } = await supabase
         .from('website_content')
         .select('value, style, key, value_list, value_json')
@@ -32,6 +51,11 @@ const getFallbackContent = async (supabase, page) => {
     return formatContent(fallbackData);
 }
 
+/**
+ * Get localized navigation labels for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getNavLabels = cache(async () => {
     const supabase = await createClient();
     const language = await getLanguage();
@@ -55,8 +79,12 @@ export const getNavLabels = cache(async () => {
     return content;
 });
 
-
-
+/**
+ * Subscribe an email address to the mailing list.
+ * Validates basic format and normalizes to lowercase.
+ * @param {string} email
+ * @returns {Promise<{success: true, message: string} | {success: false, error: string}>}
+ */
 export const subscribeToMailingList = async (email) => {
     const supabase = await createClient();
     if (!email) {
@@ -86,6 +114,12 @@ export const subscribeToMailingList = async (email) => {
 
     return { success: true, message: 'Subscription successful' };
 }
+
+/**
+ * Get localized home page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getHomePageContent = cache(async () => {
     const supabase = await createClient();
     const language = await getLanguage();
@@ -111,6 +145,11 @@ export const getHomePageContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized hero section content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getHeroContent = cache(async () => {
     const supabase = await createClient();
     const language = await getLanguage();
@@ -134,6 +173,11 @@ export const getHeroContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized volunteer page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getVolunteerPageContent = cache(async () => {
 
     const supabase = await createClient();
@@ -160,6 +204,11 @@ export const getVolunteerPageContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized about page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getAboutPageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
@@ -181,6 +230,11 @@ export const getAboutPageContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized donate page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getDonatePageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
@@ -202,6 +256,11 @@ export const getDonatePageContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized resources page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getResourcePageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
@@ -223,6 +282,11 @@ export const getResourcePageContent = cache(async () => {
     return content;
 });
 
+/**
+ * Get localized contact page content for the current user language.
+ * Falls back to English if the requested language has no entries.
+ * @returns {Promise<Record<string, {value?:string, style?:string, value_list?:string[]|null, value_json?:any}>>}
+ */
 export const getContactPageContent = cache(async () => {
     const language = await getLanguage();
     const supabase = await createClient();
