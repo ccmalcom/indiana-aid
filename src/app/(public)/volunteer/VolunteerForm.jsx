@@ -170,7 +170,7 @@ export default function Volunteer({ content }) {
 				);
 			} else if (result.error) {
 				setSubmissionStatus('error');
-				console.log('Error:', JSON.stringify(result.error));
+				// console.log('Error:', JSON.stringify(result.error));
 				setSubmissionMessage('An error occurred. Please try again.');
 			}
 		} catch (error) {
@@ -224,9 +224,9 @@ export default function Volunteer({ content }) {
 					<p className={volunteerFormInstructionsText.style}>
 						{volunteerFormInstructionsText.value}
 					</p>
-					<button onClick={handleTestButtonClick} className="mt-4 px-4 py-2 bg-yellow text-black rounded">
+					{/* <button onClick={handleTestButtonClick} className="mt-4 px-4 py-2 bg-yellow text-black rounded">
 						Test
-					</button>
+					</button> */}
 
 					<form className="w-full px-8 mt-4" onSubmit={handleSubmit}>
 						<div className="mb-4">
