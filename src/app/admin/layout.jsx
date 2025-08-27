@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 
 export default async function AdminLayout({ children }) {
     const user = await getUserDetails();
-    console.log('AdminLayout user:', user);
+    // console.log('AdminLayout user:', user);
     if (!user) return redirect('/login');
 
     return (

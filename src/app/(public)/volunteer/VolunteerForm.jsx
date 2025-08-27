@@ -17,8 +17,6 @@ export default function Volunteer({ content }) {
 		volunteerForm
 	} = content
 
-
-
 	const AREAS_OF_INTEREST = [
 		'Weekly virtual visits',
 		'Monthly in-person visits',
@@ -165,14 +163,14 @@ export default function Volunteer({ content }) {
 				setCurrentlyWorking('');
 				setCurrentlyWorkingExplanation('');
 				setOtherSkills('');
-			} else if (result.error.message === 'duplicate key value violates unique constraint') {
+			} else if (result.error.message === 'Duplicate application detected.') {
 				setSubmissionStatus('error');
 				setSubmissionMessage(
 					'Oops! It looks like you have already signed up to volunteer. If you need to update your information, please contact us'
 				);
 			} else if (result.error) {
 				setSubmissionStatus('error');
-				console.log('Error:', JSON.stringify(result.error));
+				// console.log('Error:', JSON.stringify(result.error));
 				setSubmissionMessage('An error occurred. Please try again.');
 			}
 		} catch (error) {

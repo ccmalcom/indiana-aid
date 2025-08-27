@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { PuffLoader } from 'react-spinners';
+import { logError } from '@/app/utils/errorLogger';
 
 export default function ContactFormClient({ formData }) {
 
@@ -34,13 +35,35 @@ export default function ContactFormClient({ formData }) {
 
 			if (result.success) {
 				setSuccess(true);
-				console.log('Email sent successfully:', result.data);
+				// console.log('Email sent successfully:', result.data);
 				e.target.reset();
 			} else {
 				setError(result.error || 'Unknown error occurred.');
+				await logError({
+					page: 'contact',
+					component: 'ContactFormClient',
+					action: 'sendEmail',
+					error_stack: result.error?.stack || null,
+					error_details: result.error?.details || null,
+					error_code: result.error?.code || null,
+					error_message: result.error?.message || null,
+					status: 'unresolved',
+					resolution_details: null
+				});
 			}
 		} catch (fetchError) {
 			console.error(fetchError);
+			await logError({
+				page: 'contact',
+				component: 'ContactFormClient',
+				action: 'sendEmail',
+				error_stack: fetchError?.stack || null,
+				error_details: fetchError?.details || null,
+				error_code: fetchError?.code || null,
+				error_message: fetchError?.message || null,
+				status: 'unresolved',
+				resolution_details: null
+			});
 			setError('Network error. Please try again later.');
 		} finally {
 			setIsLoading(false);

@@ -62,7 +62,7 @@ export default function NewsletterTable({ newsletters }) {
 							.filter(nl => nl.id !== undefined)
 							.map(nl => updateNewsletterIssue(nl))
 					);
-					console.log('Updated newsletters:', changed);
+					// console.log('Updated newsletters:', changed);
 				} else {
 					console.log('No changes detected; skipping update.');
 				}

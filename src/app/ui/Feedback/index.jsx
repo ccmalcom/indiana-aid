@@ -19,7 +19,7 @@ export default function Feedback() {
 				},
 				body: JSON.stringify({ message: feedback }),
 			});
-			console.log('Response from server:', JSON.stringify(response));
+			// console.log('Response from server:', JSON.stringify(response));
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			} else {
@@ -29,7 +29,7 @@ export default function Feedback() {
 					throw new Error('Failed to send feedback');
 				}
 				setSuccess(true);
-				console.log('Feedback submitted successfully:', feedback);
+				// console.log('Feedback submitted successfully:', feedback);
 			}
 			// Reset feedback state
 		} catch (error) {

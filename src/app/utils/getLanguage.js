@@ -1,3 +1,17 @@
+/****
+ * Utility functions for language detection.
+ * 
+ * This module provides a function to retrieve the user's language preference
+ * from cookies in a Next.js server environment.
+ */
+
+/**
+ * Retrieves the user's language preference from cookies.
+ * 
+ * @returns {Promise<string>} The language code from the 'language' cookie, or 'en' if not set.
+ * Defaults to 'en' when no language cookie is found.
+ */
+
 'use server';
 import { cookies } from 'next/headers';
 
