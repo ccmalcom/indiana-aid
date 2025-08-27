@@ -91,8 +91,8 @@ export async function submitVolunteerForm(input) {
       .select();
 
     if (error) {
-      console.log('Error inserting volunteer application:', JSON.stringify(error));
-      console.log('error message:', error.message);
+      // console.log('Error inserting volunteer application:', JSON.stringify(error));
+      // console.log('error message:', error.message);
       if (error.message === `duplicate key value violates unique constraint "volunteer-applications_email_key"`) {
         return { success: false, error: { message: 'Duplicate application detected.' } };
       }

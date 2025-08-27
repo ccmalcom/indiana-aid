@@ -63,7 +63,7 @@ const handleSetPdf = (file) => {
 		createNewsletterIssue(data)
 			.then((issue) => {
 				newIssue = issue;
-				console.log('New issue created:', JSON.stringify(newIssue, null, 2));
+				// console.log('New issue created:', JSON.stringify(newIssue, null, 2));
 				setMessage('New issue created successfully!');
 			})
 			.catch((error) => {
