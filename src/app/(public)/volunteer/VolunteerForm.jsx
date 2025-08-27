@@ -17,8 +17,6 @@ export default function Volunteer({ content }) {
 		volunteerForm
 	} = content
 
-
-
 	const AREAS_OF_INTEREST = [
 		'Weekly virtual visits',
 		'Monthly in-person visits',
@@ -165,7 +163,7 @@ export default function Volunteer({ content }) {
 				setCurrentlyWorking('');
 				setCurrentlyWorkingExplanation('');
 				setOtherSkills('');
-			} else if (result.error.message === 'duplicate key value violates unique constraint') {
+			} else if (result.error.message === 'Duplicate application detected.') {
 				setSubmissionStatus('error');
 				setSubmissionMessage(
 					'Oops! It looks like you have already signed up to volunteer. If you need to update your information, please contact us'
@@ -226,9 +224,9 @@ export default function Volunteer({ content }) {
 					<p className={volunteerFormInstructionsText.style}>
 						{volunteerFormInstructionsText.value}
 					</p>
-					{/* <button onClick={handleTestButtonClick} className="mt-4 px-4 py-2 bg-yellow text-black rounded">
+					<button onClick={handleTestButtonClick} className="mt-4 px-4 py-2 bg-yellow text-black rounded">
 						Test
-					</button> */}
+					</button>
 
 					<form className="w-full px-8 mt-4" onSubmit={handleSubmit}>
 						<div className="mb-4">

@@ -1,6 +1,7 @@
 'use server';
 import { Resend } from 'resend';
 import VolunteerEmailTemplate from '@/app/components/contact-email-template';
+import { logError } from '@/app/utils/errorLogger';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -30,6 +31,7 @@ export async function submitVolunteerForm(input) {
         name: get('name') || get('full_name'),
         email: get('email'),
         phone: get('phone'),
+        pronouns: get('pronouns'),
         signalHandle: get('signal') || get('signalHandle'),
         socialMediaHandles: get('social_handles') || get('socialMediaHandles'),
         languages: getAllChecked('language'),
@@ -62,8 +64,8 @@ export async function submitVolunteerForm(input) {
     const toArray = (v) => (Array.isArray(v)
       ? v
       : typeof v === 'string' && v.trim()
-      ? v.split(',').map((s) => s.trim()).filter(Boolean)
-      : []);
+        ? v.split(',').map((s) => s.trim()).filter(Boolean)
+        : []);
 
     const payload = {
       name: body.name,
@@ -89,19 +91,49 @@ export async function submitVolunteerForm(input) {
       .select();
 
     if (error) {
-        console.log('Error inserting volunteer application:', JSON.stringify(error));
-      return { success: false, error };
+      console.log('Error inserting volunteer application:', JSON.stringify(error));
+      console.log('error message:', error.message);
+      if (error.message === `duplicate key value violates unique constraint "volunteer-applications_email_key"`) {
+        return { success: false, error: { message: 'Duplicate application detected.' } };
+      }
+      else {
+        await logError({
+          page: 'volunteer',
+          component: 'VolunteerForm',
+          action: 'submitVolunteerForm',
+          error_stack: error?.stack || null,
+          error_details: error?.details || null,
+          error_code: error?.code || null,
+          error_message: error?.message || null,
+          status: 'unresolved',
+          resolution_details: null
+        });
+
+        return { success: false, error };
+      }
     }
+
     await sendEmailNotification(payload);
     return { success: true, data };
   } catch (err) {
     console.error('Error submitting volunteer form:', err);
+    await logError({
+      page: 'volunteer',
+      component: 'VolunteerForm',
+      action: 'submitVolunteerForm',
+      error_stack: err?.stack || null,
+      error_details: err?.details || null,
+      error_code: err?.code || err?.name || null,
+      error_message: err?.message || String(err),
+      status: 'unresolved',
+      resolution_details: null
+    });
     return { success: false, error: { message: err?.message || 'Unknown error' } };
   }
 }
 
 async function sendEmailNotification(applicationData) {
-  try{
+  try {
     await resend.emails.send({
       from: 'noreply@indianaaid.org',
       to: 'indianaaidcontact@gmail.com',
@@ -109,6 +141,17 @@ async function sendEmailNotification(applicationData) {
       react: VolunteerEmailTemplate(applicationData),
     });
   } catch (error) {
+    await logError({
+      page: 'volunteer',
+      component: 'VolunteerForm',
+      action: 'sendEmailNotification',
+      error_stack: error?.stack || null,
+      error_details: error?.details || null,
+      error_code: error?.code || error?.name || null,
+      error_message: error?.message || String(error),
+      status: 'unresolved',
+      resolution_details: null
+    });
     console.error('Error sending email notification:', error);
   }
 }
