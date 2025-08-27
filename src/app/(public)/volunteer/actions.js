@@ -1,6 +1,6 @@
 'use server';
 import { Resend } from 'resend';
-import VolunteerEmailTemplate from '@/app/components/contact-email-template';
+import VolunteerEmailTemplate from '@/app/components/volunteer-email-template';
 import { logError } from '@/app/utils/errorLogger';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -135,9 +135,10 @@ export async function submitVolunteerForm(input) {
 async function sendEmailNotification(applicationData) {
   try {
     await resend.emails.send({
-      from: 'noreply@indianaaid.org',
+      from: 'Website Volunteer Form <noreply@indianaaid.org>',
       to: 'indianaaidcontact@gmail.com',
-      subject: 'New Volunteer Application Submitted',
+      // to: 'chasecmalcom@gmail.com',
+      subject: `New Volunteer Application Submitted - ${applicationData.name}`,
       react: VolunteerEmailTemplate(applicationData),
     });
   } catch (error) {

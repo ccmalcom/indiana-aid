@@ -1,7 +1,7 @@
 export default function VolunteerEmailTemplate(application) {
 	return (
 		<div className="bg-white p-6 rounded-lg shadow-md">
-			<h1 className="text-2xl font-bold mb-4">New Volunteer Form Submission</h1>
+			<h1 className="text-2xl font-bold mb-4">New Volunteer Form Submission - {application.name}</h1>
 			<h2 className="text-xl font-semibold mb-2">Full Details Below - <a href="www.indianaaid.org/admin/volunteers/applications">View On Website</a></h2>
 			<div className="modal-content grid grid-cols-2 gap-4">
 				<p>
