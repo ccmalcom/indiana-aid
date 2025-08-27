@@ -21,7 +21,7 @@ A web application designed to support and empower immigrants by providing resour
 1. Clone the repository:
 
    ```
-   git clone <repository-url>
+   git clone <https://github.com/ccmalcom/indiana-aid.git>
    ```
 
 2. Install dependencies:
