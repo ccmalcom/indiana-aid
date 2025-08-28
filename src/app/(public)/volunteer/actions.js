@@ -88,7 +88,7 @@ export async function submitVolunteerForm(input) {
     const { data, error } = await supabase
       .from('volunteer-applications')
       .insert(payload)
-      .select();
+      // .select();
 
     if (error) {
       // console.log('Error inserting volunteer application:', JSON.stringify(error));
