@@ -5,6 +5,7 @@ import Link from 'next/link';
 export default function NewsletterCard({ newsletters, subscriberCount }) {
 	// console.log('NewsletterCard data:', JSON.stringify(newsletters, null, 2));
 
+
 	return (
 		<div className="bg-white shadow-md rounded-lg p-6">
 			<h2 className="text-xl font-semibold mb-4">Newsletters</h2>
@@ -36,6 +37,7 @@ export default function NewsletterCard({ newsletters, subscriberCount }) {
 						Manage Subscribers
 					</button>
 				</Link>
+				
 			</div>
 		</div>
 	);

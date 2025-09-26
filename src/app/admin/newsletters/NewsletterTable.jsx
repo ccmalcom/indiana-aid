@@ -14,6 +14,31 @@ export default function NewsletterTable({ newsletters }) {
 	const [editedNewsletters, setEditedNewsletters] = useState([]);
 	const [baselineNewsletters, setBaselineNewsletters] = useState([]);
 
+		async function sendEmail(){
+		const emailData = {
+			issue: 16,
+			message: 'This is the main content of the newsletter.',
+			mensaje: 'Este es el contenido principal del boletín informativo.'
+		};
+
+		// Send the email using api route
+		const response = await fetch('/api/send-newsletter-email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(emailData),
+		});
+
+		if (response.ok) {
+			console.log('Newsletter email sent successfully');
+			console.log(await response.json());
+		} else {
+			console.error('Error sending newsletter email');
+		}
+		
+	}
+
 	const filterNewsletters = () => {
 		// first, filter by language
 		let filtered = languageFilter === 'All'
@@ -121,6 +146,10 @@ export default function NewsletterTable({ newsletters }) {
 			{/* modify below (taken from application table) 
                 will need to have language filter(selector en or es), published filter (yes or no)
                 */}
+				 {/* placeholder */}
+				<button onClick={sendEmail} className="mt-4 bg-green text-white px-4 py-2 rounded hover:bg-green-600">
+					Send Newsletter Email
+				</button>
 			<span className="flex justify-end">
 				<button
 					className="mb-2 px-4 pb-2 text-blue rounded"
