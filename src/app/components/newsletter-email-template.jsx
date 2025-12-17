@@ -4,7 +4,7 @@
 // donation request
 
 
-export default function NewsletterEmailTemplate({ issue, message, mensaje }) {
+export default function NewsletterEmailTemplate({ message, mensaje }) {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md">
            
