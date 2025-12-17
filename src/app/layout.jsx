@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getNavLabels } from '@/app/actions';
 import Feedback from './ui/Feedback';
+import MaintenanceBanner from './ui/MaintenanceBanner';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -24,12 +25,19 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 	const navLabels = await getNavLabels();
+	const MaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 	return (
 		<html lang="en">
 			<body
 				className={`${openSans.variable} antialiased min-h-[100vh] flex flex-col`}>
 				<LanguageProvider>
 					<Nav navLabels={navLabels} />
+					{MaintenanceMode && (
+						<MaintenanceBanner 
+							startTime={process.env.NEXT_PUBLIC_MAINTENANCE_START}
+							endTime={process.env.NEXT_PUBLIC_MAINTENANCE_END}
+						/>
+					)}
 					{/* <Feedback /> */}
 					<main className="flex-grow">{children}</main>
 					<Footer />
