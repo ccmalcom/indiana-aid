@@ -50,20 +50,20 @@ export default function Calendar({ apiKey, calendarId }) {
 				onChange={onChange}
 				value={date}
 				className="react-calendar text-black"
-				
+
 				tileClassName={({ date: tileDate, view }) => {
 					if (view !== 'month') return null;
 					return eventDateSet.has(tileDate.toDateString()) ? 'has-event' : null;
 				}}
 				calendarType='gregory'
 			/>
-			<div className="selected-date font-bold mt-2">
+			<div className="selected-date font-bold mt-2" suppressHydrationWarning>
 				Selected date: {date.toDateString()}
 			</div>
 			{eventsForSelectedDate.length > 0 ? (
 				<ul className="mt-4">
 					{eventsForSelectedDate.map((event, index) => (
-						<li key={index}>
+						<li key={index} suppressHydrationWarning>
 							<strong>{event.summary}</strong> @{' '}
 							{event.start.dateTime
 								? new Date(event.start.dateTime).toLocaleTimeString([], {
