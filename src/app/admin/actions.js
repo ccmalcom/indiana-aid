@@ -76,19 +76,23 @@ export async function logoutUser() {
     return { success: true };
 }
 
-export async function getAllAdminUsers() {
+
+async function checkUserRoles(id){
     const supabase = await createClient();
     const { data, error } = await supabase
         .from("admin_users")
-        .select("*")
-        .order("created_at", { ascending: false });
+        .select("roles")
+        .eq("id", id)
+        .single();
     if (error) {
-        console.error("Error fetching admin users:", JSON.stringify(error));
+        console.error("Error fetching user roles:", JSON.stringify(error));
         return [];
     }
 
-    return data;
+    return data.roles;
 }
+
+
 
 export async function getUserDetails() {
     const supabase = await createClient();
@@ -97,16 +101,19 @@ export async function getUserDetails() {
         console.error("Error fetching user details:", JSON.stringify(error));
         return null;
     }
+    const roles = await checkUserRoles(data.user.id);
+
 
     const res = {
         name: data.user.user_metadata.display_name,
         email: data.user.email,
-        role: data.user.role,
+        role: roles,
         created_at: data.user.created_at,
         updated_at: data.user.updated_at,
         phone: data.user.user_metadata.phone,
         last_sign_in_at: data.user.last_sign_in_at,
         email_verified: data.user.user_metadata.email_verified,
+        isSuperAdmin: roles.includes('super-admin'),
 
     }
 

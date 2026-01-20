@@ -5,4 +5,7 @@ module.exports = {
             bodySizeLimit: '10mb',
         },
     },
+    turbopack: {
+        root: '/Users/chasemalcom/Documents/code/indiana-aid',
+    },
 }
