@@ -24,11 +24,13 @@ export default function ProfileCard({ user }) {
 						Update Profile
 					</button>
 				</Link>
+				{user.isSuperAdmin &&
 				<Link href="/admin/users">
 					<button className="mt-4 bg-blue text-white px-4 py-2 rounded hover:bg-blue-600">
 						Manage Admin Users
 					</button>
 				</Link>
+				}
 			</div>
 		</div>
 	);
