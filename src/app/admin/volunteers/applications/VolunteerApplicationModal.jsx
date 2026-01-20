@@ -68,9 +68,9 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 	};
 
 	return (
-		<div className="modal-viewport fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-			<div className="modal bg-white rounded-lg shadow-lg w-full max-w-3xl p-6 relative">
-						<div className="modal-header mb-4 flex justify-between items-center text-center">
+		<div className="modal-viewport fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
+			<div className="modal bg-white rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] flex flex-col relative overflow-hidden">
+						<div className="modal-header mb-4 flex justify-between items-center text-center p-6 pb-0 flex-shrink-0">
 							<h2 className="text-xl font-bold flex-grow">
 								Volunteer Application #{application.id}
 							</h2>
@@ -80,7 +80,7 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 								✕
 							</button>
 						</div>
-						<div className="modal-subtitle mb-4 text-center">
+						<div className="modal-subtitle mb-4 text-center px-6 flex-shrink-0">
 							<h2 className="text-lg font-semibold">
 								Submitted: {new Date(application.created_at).toLocaleString()}
 							</h2>
@@ -91,7 +91,8 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 				{!isLoading && !statusMessage ? (
 					<>
 						{/* Info grid for readability */}
-						<div className="modal-content grid grid-cols-2 gap-4">
+						<div className="modal-content overflow-y-auto flex-1 min-h-0 px-6">
+							<div className="grid grid-cols-2 gap-4">
 							<p>
 								<strong>Name:</strong> {application.name}
 							</p>
@@ -142,8 +143,9 @@ export default function VolunteerApplicationModal({ application, onClose }) {
 							<p className="">
 								<strong>Other Skills:</strong> {application.other_skills ?? 'N/A'}
 							</p>
+							</div>
 						</div>
-						<div className="modal-actions mt-6 flex justify-center">
+						<div className="modal-actions mt-6 flex justify-center p-6 pt-0 flex-shrink-0">
 							<button
 								className="bg-green text-white px-4 py-2 rounded mx-2"
 								onClick={handleApprove}>
