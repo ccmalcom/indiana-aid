@@ -76,19 +76,7 @@ export async function logoutUser() {
     return { success: true };
 }
 
-export async function getAllAdminUsers() {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-        .from("admin_users")
-        .select("*")
-        .order("created_at", { ascending: false });
-    if (error) {
-        console.error("Error fetching admin users:", JSON.stringify(error));
-        return [];
-    }
 
-    return data;
-}
 
 export async function getUserDetails() {
     const supabase = await createClient();
