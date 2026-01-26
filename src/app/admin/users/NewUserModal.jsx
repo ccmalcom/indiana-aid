@@ -127,6 +127,7 @@ export default function NewUserModal({ onClose }) {
                                         value={roles}
                                         onChange={(e) => setRoles(Array.from(e.target.selectedOptions, option => option.value))}
                                         multiple
+                                        required
                                     >
                                         <option value="admin">Admin</option>
                                         <option value="super-admin">Super Admin</option>
