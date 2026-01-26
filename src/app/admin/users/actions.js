@@ -20,20 +20,21 @@ import { createServiceClient } from '@/app/utils/supabase/serviceWorker';
 export async function inviteNewUser({ email, name, roles }) {
     const serviceSupabase = await createServiceClient();
 
-    // first, ensure user submitting form has super-admin role in admin_users table
-    const { data: currentUser, error: currentUserError } = await serviceSupabase.auth.getUser();
+    const supabase = await createClient();
+    const { data: currentUser, error: currentUserError } = await supabase.auth.getUser();
+
     if (currentUserError || !currentUser.user) {
-        return { error: {message: 'Unauthorized', status: 401} };
+        return { error: { message: 'Unauthorized', status: 401 } };
     }
 
-    const { data: adminUser, error: adminUserError } = await serviceSupabase
+    const { data: adminUser, error: adminUserError } = await supabase
         .from('admin_users')
         .select('roles')
         .eq('id', currentUser.user.id)
         .single();
 
     if (adminUserError || !adminUser || !adminUser.roles.includes('super-admin')) {
-        return { error: {message: 'Forbidden', status: 403} };
+        return { error: { message: 'Forbidden', status: 403 } };
     }
 
     // Invite user via Supabase Auth - sends email with magic link
@@ -51,7 +52,6 @@ export async function inviteNewUser({ email, name, roles }) {
     }
 
     // Also insert into admin_users table
-    const supabase = await createClient();
     const { error: dbError } = await supabase
         .from('admin_users')
         .insert({
