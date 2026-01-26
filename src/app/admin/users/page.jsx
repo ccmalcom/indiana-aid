@@ -15,6 +15,7 @@ export default async function Users() {
         <div className="viewport min-h-[66vh] text-center">
             <Header heading="Admin Users" />
             <p className="mb-6">Manage your admin users here.</p>
+            
             <UsersTable users={users} />
         </div>
     );
