@@ -14,3 +14,57 @@ export async function getAllAdminUsers() {
 
     return data;
 }
+
+import { createServiceClient } from '@/app/utils/supabase/serviceWorker';
+
+export async function inviteNewUser({ email, name, roles }) {
+    const serviceSupabase = await createServiceClient();
+
+    // first, ensure user submitting form has super-admin role in admin_users table
+    const { data: currentUser, error: currentUserError } = await serviceSupabase.auth.getUser();
+    if (currentUserError || !currentUser.user) {
+        return { error: {message: 'Unauthorized', status: 401} };
+    }
+
+    const { data: adminUser, error: adminUserError } = await serviceSupabase
+        .from('admin_users')
+        .select('roles')
+        .eq('id', currentUser.user.id)
+        .single();
+
+    if (adminUserError || !adminUser || !adminUser.roles.includes('super-admin')) {
+        return { error: {message: 'Forbidden', status: 403} };
+    }
+
+    // Invite user via Supabase Auth - sends email with magic link
+    const { data: authData, error: authError } = await serviceSupabase.auth.admin.inviteUserByEmail(email, {
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/invite`,
+        data: {
+            name: name,
+            roles: roles,
+        }
+    });
+
+    if (authError) {
+        console.error('Error inviting user:', authError);
+        return { error: {message: authError.message, status: authError.status} };
+    }
+
+    // Also insert into admin_users table
+    const supabase = await createClient();
+    const { error: dbError } = await supabase
+        .from('admin_users')
+        .insert({
+            id: authData.user.id,
+            user_email: email,
+            name: name,
+            roles,
+        });
+
+    if (dbError) {
+        console.error('Error inserting admin user:', dbError);
+        return { error: {message: dbError.message, status: dbError.status} };
+    }
+
+    return { success: true, user: authData.user };
+}
