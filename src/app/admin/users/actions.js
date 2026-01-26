@@ -18,7 +18,7 @@ export async function getAllAdminUsers() {
 import { createServiceClient } from '@/app/utils/supabase/serviceWorker';
 
 export async function inviteNewUser({ email, name, roles }) {
-    const serviceSupabase = createServiceClient();
+    const serviceSupabase = await createServiceClient();
 
     // Invite user via Supabase Auth - sends email with magic link
     const { data: authData, error: authError } = await serviceSupabase.auth.admin.inviteUserByEmail(email, {
