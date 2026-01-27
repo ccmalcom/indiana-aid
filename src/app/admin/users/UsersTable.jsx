@@ -38,6 +38,8 @@ export default function UsersTable({ users }) {
                         <th className="py-2 px-4 border-b">Created At</th>
                         <th className="py-2 px-4 border-b">Last Login</th>
                         <th className="py-2 px-4 border-b">Roles</th>
+                        <th className="py-2 px-4 border-b">Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,9 @@ export default function UsersTable({ users }) {
                             <td className="py-2 px-4 border-b">{new Date(user.created_at).toLocaleString() || ''}</td>
                             <td className="py-2 px-4 border-b">{user.last_login ? new Date(user.last_login).toLocaleString() : 'never'}</td>
                             <td className="py-2 px-4 border-b">{user.roles.join(', ') || ''}</td>
+                            <td className="py-2 px-4 border-b">
+                                {/* Add action buttons here */}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
