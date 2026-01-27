@@ -7,7 +7,6 @@ export default async function NewslettersPage() {
 
     const data = await getSubscribersInfo();
 
-    console.log('data: ', JSON.stringify(data));
     return (
         <div className="p-6 bg-white shadow rounded-lg">
             <Header heading="Subscribers" />
